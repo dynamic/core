@@ -42,6 +42,8 @@ class Page_Controller extends ContentController {
 		        $this->ThemeDir() . '/css/base.css',
 		        $this->ThemeDir() . '/css/skeleton.css',
 		        $this->ThemeDir() . '/css/layout.css',
+		        $this->ThemeDir() . '/css/form.css',
+		        $this->ThemeDir() . '/css/typography.css'
 		        //'flexslider/thirdparty/flexslider/flexslider.css',
 		    )
 		);
