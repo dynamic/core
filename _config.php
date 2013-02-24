@@ -65,6 +65,6 @@ Object::add_extension('SiteConfig', 'CompanyConfig');
 //Object::add_extension('CalendarDateTime', 'Geocodable');
 
 // Slideshow
-Object::add_extension('BlogEntry', 'FlexSlider');
+//Object::add_extension('BlogEntry', 'FlexSlider');
 Object::add_extension('HomePage', 'FlexSlider');
 Object::add_extension('SlidePage', 'FlexSlider');
