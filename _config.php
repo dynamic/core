@@ -49,6 +49,7 @@ Authenticator::set_default_authenticator('FacebookAuthenticator');
 // Comments
 Commenting::add('SiteTree');
 Commenting::set_config_value('SiteTree', 'require_login', true);
+BlogEntry::$defaults["ProvideComments"] = false;
 
 // Header Config
 Object::add_extension('SiteConfig', 'HeaderConfig');
