@@ -1,33 +1,6 @@
 <?php
 
-global $project;
-$project = 'app';
 
-// Use _ss_environment.php file for configuration
-require_once("conf/ConfigureFromEnv.php");
-
-MySQLDatabase::set_connection_charset('utf8');
-
-// Set the current theme. More themes can be downloaded from
-// http://www.silverstripe.org/themes/
-SSViewer::set_theme('simple');
-
-// Set the site locale
-i18n::set_locale('en_US');
-
-// Enable nested URLs for this site (e.g. page/sub-page/)
-if (class_exists('SiteTree')) SiteTree::enable_nested_urls();
-
-// Google Analytics
-//GoogleLogger::activate('SiteConfig');
-//GoogleAnalyzer::activate('SiteConfig');
-//GoogleLogger::set_event_tracking_enabled(true);
-
-// set Admin email
-Email::setAdminEmail('debug@dynamicdoes.com');
-
-// debug
-SS_Log::add_writer(new SS_LogEmailWriter('debug@dynamicdoes.com'), SS_Log::WARN, '<=');
 
 // SPAM protection
 /*
@@ -69,3 +42,4 @@ Object::add_extension('SiteConfig', 'CompanyConfig');
 Object::add_extension('HomePage', 'FlexSlider');
 Object::add_extension('SlidePage', 'FlexSlider');
 Object::add_extension('LandingPage', 'FlexSlider');
+
