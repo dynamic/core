@@ -2,7 +2,7 @@
 
 class HomePage extends Page {
 	
-	
+	static $description = 'Site homepage, includes image slider';
 	
 }
 

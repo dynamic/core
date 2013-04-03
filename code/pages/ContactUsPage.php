@@ -2,7 +2,7 @@
 
 class ContactUsPage extends UserDefinedForm {
 	
-	
+	static $description = 'Contact form with address and map';
 	
 }
 

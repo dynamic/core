@@ -2,7 +2,7 @@
 
 class LandingPage extends Page {
 	
-	
+	static $description = 'Page that displays a list of subpages';
 	
 }
 

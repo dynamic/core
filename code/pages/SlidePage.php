@@ -2,7 +2,7 @@
 
 class SlidePage extends Page {
 	
-	
+	static $description = 'Page with image slider';
 	
 }
 
