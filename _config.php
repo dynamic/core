@@ -15,7 +15,7 @@ if (class_exists('Commenting')) {
 }
 
 // Header Config
-Object::add_extension('SiteConfig', 'HeaderConfig');
+if (class_exists('HeaderConfig')) Object::add_extension('SiteConfig', 'HeaderConfig');
 
 // Company Info - add Addressable to SiteConfig
 if (class_exists('Addressable')) {
@@ -30,3 +30,6 @@ if (class_exists('FlexSlider')) {
 	Object::add_extension('SlidePage', 'FlexSlider');
 	Object::add_extension('LandingPage', 'FlexSlider');
 }
+
+// Homepage Spiffs
+if (class_exists('Spiff')) Object::add_extension('HomePage', 'SpiffManager');
