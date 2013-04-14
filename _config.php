@@ -30,6 +30,3 @@ if (class_exists('FlexSlider')) {
 	Object::add_extension('SlidePage', 'FlexSlider');
 	Object::add_extension('LandingPage', 'FlexSlider');
 }
-
-// Homepage Spiffs
-if (class_exists('Spiff')) Object::add_extension('HomePage', 'SpiffManager');
