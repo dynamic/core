@@ -1,12 +1,5 @@
 {
     "name": "dynamic/webbuildr",
     "description": "The Dynamic WebBuildr Module",
-    "type": "silverstripe-module",
-    "require": {
-	    "dynamic/dynamic-tools": "*"
-    },
-    "repositories": {
-        "type": "vcs",
-        "url":  "git@github.com:dynamic/dynamic-tools.git"
-    }
+    "type": "silverstripe-module"
 }
