@@ -7,6 +7,7 @@
     "require": {
     	"silverstripe/framework": ">=3.0",
     	"silverstripe/dashboard": "*",
+    	"unclecheese/eventcalendar": "dev-master",
     	"silverstripe-labs/googleanalytics": "1.1.*@dev",
     	"silverstripe/googlesitemaps": "1.1.*@dev",
     	"colymba/gridfield-bulk-editing-tools": "dev-ss-3.0",
