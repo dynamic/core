@@ -1,5 +1,8 @@
 {
     "name": "dynamic/webbuildr",
     "description": "The Dynamic WebBuildr Module",
-    "type": "silverstripe-module"
+    "type": "silverstripe-module",
+    "require": {
+	    "ajshort/silverstripe-addressable": "1.0.0"
+    }
 }
