@@ -1,0 +1,5 @@
+{
+    "name": "dynamic/webbuildr",
+    "description": "The Dynamic WebBuildr Module",
+    "type": "silverstripe-module"
+}
