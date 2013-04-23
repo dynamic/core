@@ -8,7 +8,11 @@
     	"silverstripe/framework": ">=3.0",
     	"silverstripe/dashboard": "*",
     	"silverstripe-labs/googleanalytics": "1.1.*@dev",
-    	"silverstripe/googlesitemaps": "1.1.*@dev"
+    	"silverstripe/googlesitemaps": "1.1.*@dev",
+    	"colymba/gridfield-bulk-editing-tools": "dev-ss-3.0",
+    	"undefinedoffset/sortablegridfield": "0.1.1",
+    	"rywa/silverstripe-minicart": "dev-master",
+    	"silverstripe/userforms": "1.0.*@dev"
     },
    
     "authors": [
