@@ -1,0 +1,25 @@
+{
+    "name": "dynamic/webbuilder",
+    "description": "The Dynamic WebBuilder Module",
+    "keywords": ["silverstripe", "theme"],
+    "license": "BSD-3-Clause",
+    "type": "silverstripe-module",
+    "require": {
+    	"silverstripe/framework": ">=3.0",
+    	"silverstripe/dashboard": "*",
+    	"unclecheese/eventcalendar": "dev-master",
+    	"silverstripe-labs/googleanalytics": "1.1.*@dev",
+    	"silverstripe/googlesitemaps": "1.1.*@dev",
+    	"silverstripe/userforms": "1.0.*@dev"
+    },
+   
+    "authors": [
+        {
+            "name": "Dynamic Inc",
+            "homepage": "http://dynamicdoes.com"
+        }
+    ],
+	"extra": {
+		"installer-name": "webbuilder"
+	}
+}
