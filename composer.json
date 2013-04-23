@@ -6,9 +6,7 @@
 	    "dynamic/dynamic-tools": "*"
     },
     "repositories": {
-	    {
-            "type": "vcs",
-            "url":  "git@github.com:dynamic/dynamic-tools.git"
-        }
+        "type": "vcs",
+        "url":  "git@github.com:dynamic/dynamic-tools.git"
     }
 }
