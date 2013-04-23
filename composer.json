@@ -5,7 +5,10 @@
     "license": "BSD-3-Clause",
     "type": "silverstripe-module",
     "require": {
-    	"silverstripe/framework": ">=3.0"
+    	"silverstripe/framework": ">=3.0",
+    	"silverstripe/dashboard": "*",
+    	"silverstripe-labs/googleanalytics": "1.1.*@dev",
+    	"silverstripe/googlesitemaps": "1.1.*@dev"
     },
    
     "authors": [
