@@ -7,12 +7,14 @@ RecaptchaField::$private_api_key = '6LeBWQkAAAAAABMjw5QgyAOegJdUv9NJUWsxrOX9';
 SpamProtectorManager::set_spam_protector("RecaptchaProtector");
 */
 
+/*
 // Comments
 if (class_exists('Commenting')) {
 	Commenting::add('SiteTree');
 	Commenting::set_config_value('SiteTree', 'require_login', true);
 	BlogEntry::$defaults["ProvideComments"] = false;
 }
+*/
 
 // Header Config
 if (class_exists('HeaderConfig')) Object::add_extension('SiteConfig', 'HeaderConfig');
