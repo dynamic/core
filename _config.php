@@ -26,9 +26,13 @@ if (class_exists('Addressable')) {
 	Object::add_extension('SiteConfig', 'CompanyConfig');
 }
 
+// Spiffs
+Object::add_extension('DynamicHomePage', 'SpiffManager');
+
 // Slideshow
 if (class_exists('FlexSlider')) {
-	Object::add_extension('HomePage', 'FlexSlider');
+	Object::add_extension('DynamicHomePage', 'FlexSlider');
 	Object::add_extension('SlidePage', 'FlexSlider');
 	Object::add_extension('LandingPage', 'FlexSlider');
 }
+

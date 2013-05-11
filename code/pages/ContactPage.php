@@ -10,7 +10,7 @@ class ContactPage extends UserDefinedForm {
 	
 }
 
-class ContactUsPage_Controller extends UserDefinedForm_Controller {
+class ContactPage_Controller extends UserDefinedForm_Controller {
 	
 	
 	
