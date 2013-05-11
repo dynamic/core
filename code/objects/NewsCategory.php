@@ -11,7 +11,7 @@ class NewsCategory extends DataObject {
 	);
 
 	public function getLink() {
-		$newsHolder = NewsLandingPage::get_one('NewsHolder');
+		$newsHolder = NewsLandingPage::get_one('NewsLandingPage');
 		if ($newsHolder) {
 			return $newsHolder->Link() . '?category=' . $this->ID;
 		}
