@@ -1,8 +1,12 @@
 <?php
 
 class SlidePage extends Page {
+
+	static $singular_name = "Image Carousel Page";
 	
-	static $description = 'Page with image slider';
+	static $plural_name = "Image Carousel Pages";
+	
+	static $description = 'Page with image carousel';
 	
 }
 

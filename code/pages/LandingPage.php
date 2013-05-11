@@ -1,8 +1,12 @@
 <?php
 
 class LandingPage extends Page {
+
+	static $singluar_name = "Landing Page";
 	
-	static $description = 'Page that displays a list of subpages';
+	static $plural_name = "Landing Pages";
+	
+	static $description = 'Section Landing Page, displays list of subpages';
 	
 }
 

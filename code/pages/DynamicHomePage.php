@@ -2,7 +2,7 @@
 
 class DynamicHomePage extends Page {
 	
-	static $description = 'Website homepage, includes image slider and spiffs';
+	static $description = 'Website homepage, includes image carousel and spiffs';
 	
 }
 
