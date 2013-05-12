@@ -18,6 +18,10 @@ class NewsPage extends Page {
 	static $has_one = array(
 		'Category' => 'NewsCategory'
 	);
+	
+	static $defaults = array(
+		'ShowInMenus' => 0
+	);
 
 	/**
 	 * Add the default for the Date being the current day.
@@ -45,6 +49,20 @@ class NewsPage extends Page {
 
 		return $fields;
 	}
+	
+	public function getThumbnail() {
+		if (class_exists('FlexSlider')) {
+			if ($this->Slides()) {
+				return $this->Slides()->First()->Image();
+			}
+		}
+		return false;
+	}
+	
+	// News Archive Grouping
+	public function getMonthCreated() {
+        return date('F Y', strtotime($this->owner->Date));
+    }
 	
 }
 

@@ -53,4 +53,9 @@ class NewsLandingPage_Controller extends Page_Controller {
 		return $rss->outputToBrowser();
 	}
 	
+	// News Archives
+	public function getNewsArchive() {
+		return GroupedList::create(NewsPage::get()->sort('Date DESC'));
+	}
+	
 }

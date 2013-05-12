@@ -1,17 +1,15 @@
 <?php
 
-// Page Init
-//Object::add_extension('Page_Controller', 'CorePageExtension');
+Object::add_extension('SiteTree', 'CoreSiteTree');
+Object::add_extension('ContentController', 'CoreSiteTree_Controller');
+Object::add_extension('SiteConfig', 'CompanyConfig');
+Object::add_extension('SiteConfig', 'TemplateConfig');
+Object::add_extension('SiteConfig', 'SettingsConfig');
 
-// Header Config
-if (class_exists('TemplateConfig')) Object::add_extension('SiteConfig', 'TemplateConfig');
-
-// Company Info - add Addressable to SiteConfig
-
+// add Addressable to SiteConfig
 if (class_exists('Addressable')) {
 	Object::add_extension('SiteConfig', 'Addressable');
 	Object::add_extension('SiteConfig', 'Geocodable');
-	Object::add_extension('SiteConfig', 'CompanyConfig');
 }
 
 // Spiffs
@@ -23,6 +21,7 @@ if (class_exists('FlexSlider')) {
 	Object::add_extension('DynamicHomePage', 'FlexSlider');
 	Object::add_extension('SlidePage', 'FlexSlider');
 	Object::add_extension('LandingPage', 'FlexSlider');
+	Object::add_extension('NewsPage', 'FlexSlider');
 }
 
 // SPAM protection

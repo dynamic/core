@@ -3,13 +3,12 @@
 class SettingsConfig extends DataExtension {
 	
 	static $db = array(
-		'FacebookLogin' => 'Boolean'
+		'AddThisProfileID' => 'Varchar(255)'
 	);
 	
 	public function updateCMSFields(FieldList $fields) {
-		$fields->addFieldsToTab('Root.Social', array(
-			CheckboxField::create('FacebookLogin', 'Enable Facebook Login by visitors?')
-		));
+		$fields->addFieldToTab('Root.SocialMedia', $addThisID = new TextField('AddThisProfileID', 'AddThis Profile ID'));
+		$addThisID->setRightTitle('Profile ID to be used all across the site (in the format <strong>ra-XXXXXXXXXXXXXXXX</strong>)');
 	}
 	
 }
