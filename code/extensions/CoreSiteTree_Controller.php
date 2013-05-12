@@ -11,12 +11,18 @@ class CoreSiteTree_Controller extends Extension {
 		$themeDir = SSViewer::get_theme_folder();
 		$config = SiteConfig::current_site_config(); 
 		
+		// clear
+		Requirements::clear('userforms/thirdparty/jquery-validate/jquery.validate.js');
+		Requirements::clear('userforms/javascript/UserForm_frontend.js');
+		
 		$scripts = array(
 			'framework/thirdparty/jquery/jquery.min.js',
 			'flexslider/thirdparty/flexslider/jquery.flexslider-min.js',
 			$themeDir . '/javascript/jquery.lazyload.min.js',
 			$themeDir . '/javascript/lazy_init.js',
-			$themeDir . '/javascript/meanMenu/jquery.meanmenu.2.0.min.js'
+			$themeDir . '/javascript/meanMenu/jquery.meanmenu.2.0.min.js',
+			'userforms/thirdparty/jquery-validate/jquery.validate.js',
+			'userforms/javascript/UserForm_frontend.js'
 		);
 			
 		Requirements::combine_files('scripts.js', $scripts);

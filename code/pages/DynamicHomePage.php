@@ -2,6 +2,10 @@
 
 class DynamicHomePage extends Page {
 
+	static $defaults = array(
+		'ShowInMenus' => 0
+	);
+
 	static $singular_name = "Home Page";
 	
 	static $plural_name = "Home Pages";
