@@ -53,6 +53,15 @@ class TemplateConfig extends DataExtension {
 	    ));
 		        		
     }
+    
+    public function getSiteLogo() {
+    	$gd = $this->owner->Logo();
+	    if ($gd->getHeight() > 80 || $gd->getWidth() > 280) {
+    		return $gd->resizeRatio(280,80);
+    	} else {
+    		return $gd;
+    	}
+    }
 
     public function getFooterLinkList() {
 	    return $this->owner->FooterLinks()->sort('SortOrder');
