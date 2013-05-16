@@ -14,7 +14,7 @@ class DynamicHomePage extends Page {
 	
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
-		$fields->removeByName('Content');
+		//$fields->removeByName('Content');
 		return $fields;
 	}
 	
