@@ -51,11 +51,11 @@ class CoreSiteTree_Controller extends Extension {
 		//Requirements::block('flexslider/thirdparty/flexslider/flexslider.css');
 		
 		// meanMenu plugin
-		Requirements::customScript("
-			jQuery(document).ready(function () {
-		    	jQuery('.header nav').meanmenu();
-		    });
-		");
+		//Requirements::customScript("
+		//	jQuery(document).ready(function () {
+		//    	jQuery('.header nav').meanmenu();
+		//    });
+		//");
 		
 		// AddThis social sharing
 		Requirements::customScript('
