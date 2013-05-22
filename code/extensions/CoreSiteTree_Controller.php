@@ -33,12 +33,12 @@ class CoreSiteTree_Controller extends Extension {
 		// Add the combined styles.
 		$styles = array(
 			$themeDir . '/css/base.css',
-			$themeDir . '/css/skeleton.css',
 			'flexslider/thirdparty/flexslider/flexslider.css',
 			$themeDir . '/css/layout.css',
 			$themeDir . '/css/typography.css',
 			$themeDir . '/css/form.css',
-			$themeDir . '/javascript/meanMenu/meanmenu.css'
+			$themeDir . '/javascript/meanMenu/meanmenu.css',
+			$themeDir . '/css/skeleton.css',
 		);
 
 		Requirements::combine_files('styles.css', $styles);
