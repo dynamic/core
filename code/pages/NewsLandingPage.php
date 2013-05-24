@@ -3,59 +3,107 @@
 class NewsLandingPage extends Page {
 
 	static $singular_name = "News Page";
-	static $plural_name = "News Pages";	
+	static $plural_name = "News Pages";
 	static $description = "News Landing Page";
-	
-	static $allowed_children = array('NewsPage');
-	static $default_child = 'NewsPage';
-	
+
+	static $allowed_children = array('NewsArticle');
+	static $default_child = 'NewsArticle';
+
 	// exclude child pages from Menu
 	public function MenuChildren() {
-		return parent::MenuChildren()->exclude('ClassName', 'NewsPage');
+		return parent::MenuChildren()->exclude('ClassName', 'NewsArticle');
 	}
-	
+
 	public function getCategories() {
-		return NewsCategory::get()->sort('Title', 'DESC');
+		
+		$hit = NewsCategory::get()
+			->filter(array(
+				'NewsItems.ID:GreaterThan'=>0,
+				'NewsItems.ID.ParentID' => $this->ID))
+			->sort('Title', 'DESC');
+		if($hit->Count()==0){
+			$hit = false;
+		}
+		return $hit;
 	}
 
 	public function getDefaultRSSLink() {
 		return $this->Link('rss');
 	}
-	
+
+	public function getArticles(){
+		$articles = NewsArticle::get()
+			->filter(array('ParentID' => $this->ID))->sort('Date','DESC')->limit(2);
+		return $articles;
+	}
+
 }
 
 class NewsLandingPage_Controller extends Page_Controller {
-	
-	public function init() {
-		parent::init();
 
-		RSSFeed::linkToFeed($this->Link() . 'rss', SiteConfig::current_site_config()->Title . ' news');
+	public function init() {
+		RSSFeed::linkToFeed($this->Link('rss'), $this->Data()->Title.' news feed');
+		parent::init();
 	}
 
 	public function getNewsItems($pageSize = 10) {
-		$items = DataObject::get('NewsPage', "ParentID = $this->ID")->sort('Date', 'DESC');
-		$category = $this->getCategory();
-		if ($category) $items = $items->filter('CategoryID', $category->ID);
-		$list = new PaginatedList($items, $this->request);
-		$list->setPageLength($pageSize);
-		return $list;
-	}
-
-	public function getCategory() {
-		$categoryID = $this->request->getVar('category');
-		if (!is_null($categoryID)) {
-			return NewsCategory::get_by_id('NewsCategory', $categoryID);
+		$request = $this->request;
+		$params = $request->allParams();
+		
+		$data = Controller::curr()->Data();
+		if(!$Content = $data->Content){
+			$Content = false;
 		}
+		
+		$action = $params['Action'];
+		switch($action){
+			case 'Archive':
+				$year = $params['ID'];
+				$month = $params['OtherID'];
+
+				$from = date('Y-m-d H:i:s', strtotime($year.'-'.$month.'-01 00:00:00'));
+				$monthName = date('F',strtotime($from));
+				$toDate = date('Y-m-d', strtotime("last day of $monthName, $year"));
+				$to = date('Y-m-d H:i:s', strtotime($toDate." 23:59:59"));
+				
+				$articles = NewsArticle::get()
+					->filter(array(
+						'ParentID' => $data->ID,
+						'DateAuthored:GreaterThan' => $from,
+						'DateAuthored:LessThan' => $to))
+					->sort('DateAuthored','DESC');
+			break;
+			case 'Category':
+				$categoryID = $params['ID'];
+				$articles = NewsArticle::get()
+					->filter(array(
+						'ParentID' => $data->ID,
+						'Categories.ID' => $categoryID));
+				if($articles->Count()==0){
+					$articles = false;
+				}
+			break;
+			default:
+				$articles = NewsArticle::get()
+					->filter(array(
+						"ParentID"=>$this->ID))
+					->sort('Date', 'DESC');
+		}
+		$hit = new PaginatedList($articles, $request);
+		$hit->setPageLength($pageSize);
+		
+		return $hit;
 	}
 
 	public function rss() {
-		$rss = new RSSFeed($this->Children(), $this->Link, SiteConfig::current_site_config()->Title . ' news');
+		$title = $this->Data()->Title;
+		$description = "$title news feed";
+		$rss = new RSSFeed(
+			$this->getNewsArticles(),
+			$this->Link('rss'),
+			$this->Data()->Title,
+			$description);
 		return $rss->outputToBrowser();
 	}
-	
-	// News Archives
-	public function getNewsArchive() {
-		return GroupedList::create(NewsPage::get()->sort('Date DESC'));
-	}
-	
+
 }

@@ -1,9 +1,9 @@
 <?php
 
 class NewsCategory extends DataObject {
-	
-	static $has_many = array(
-		'NewsItems' => 'NewsPage'
+
+	static $belongs_many_many = array(
+		'NewsItems' => 'NewsArticle'
 	);
 
 	static $db = array(
@@ -11,10 +11,8 @@ class NewsCategory extends DataObject {
 	);
 
 	public function getLink() {
-		$newsHolder = NewsLandingPage::get_one('NewsLandingPage');
-		if ($newsHolder) {
-			return $newsHolder->Link() . '?category=' . $this->ID;
-		}
+		$controller = Controller::curr();
+		return $controller->join_links($controller->Link('Category'),$this->ID);
 	}
-	
+
 }
