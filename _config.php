@@ -21,7 +21,7 @@ if (class_exists('FlexSlider')) {
 	Object::add_extension('DynamicHomePage', 'FlexSlider');
 	Object::add_extension('SlidePage', 'FlexSlider');
 	Object::add_extension('LandingPage', 'FlexSlider');
-	Object::add_extension('NewsPage', 'FlexSlider');
+	Object::add_extension('NewsArticle', 'FlexSlider');
 }
 
 // SPAM protection
