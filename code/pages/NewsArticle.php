@@ -27,7 +27,7 @@ class NewsArticle extends Page {
 	);
 	
 	static $default_sort = array(
-		'Date' => 'DESC');
+		'DateAuthored' => 'DESC');
 
 	/**
 	 * Add the default for the Date being the current day.
