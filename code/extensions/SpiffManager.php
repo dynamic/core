@@ -31,5 +31,13 @@ class SpiffManager extends DataExtension {
 	    ));
 		
 	}
+	
+	public static function SideBarSpiff(){
+		$className = Controller::curr()->Data()->ClassName;
+		if($className=='DynamicHomePage'){
+			return false;
+		}
+		return true;
+	}
 		
 }

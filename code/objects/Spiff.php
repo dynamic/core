@@ -5,7 +5,6 @@ class Spiff extends DataObject {
 	static $db = array(
 		'Name' => 'Varchar',
 		'Headline' => 'Varchar',
-		'SideBarSpiff' => 'Boolean',
 		'Description' => 'HTMLText'
 	);
 	
@@ -55,11 +54,14 @@ class Spiff extends DataObject {
 			new HTMLEditorField('Description')
 		));
 		$fields->addFieldsToTab('Root.Image', array(
-			new CheckboxField('SideBarSpiff','Crop for Sidebar placement'),
 			$ImageField
 		));
          
         return $fields;
+	}
+	
+	public function SideBarSpiff(){
+		return SpiffManager::SideBarSpiff();
 	}
 	
 	// return Spiff View
