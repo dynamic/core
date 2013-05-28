@@ -5,7 +5,7 @@ class Spiff extends DataObject {
 	static $db = array(
 		'Name' => 'Varchar',
 		'Headline' => 'Varchar',
-		'CropSquare' => 'Boolean',
+		'SideBarSpiff' => 'Boolean',
 		'Description' => 'HTMLText'
 	);
 	
@@ -55,7 +55,7 @@ class Spiff extends DataObject {
 			new HTMLEditorField('Description')
 		));
 		$fields->addFieldsToTab('Root.Image', array(
-			new CheckboxField('CropSquare','Crop image as square'),
+			new CheckboxField('SideBarSpiff','Crop for Sidebar placement'),
 			$ImageField
 		));
          
