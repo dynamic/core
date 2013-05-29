@@ -12,7 +12,11 @@ class NewsCategory extends DataObject {
 
 	public function getLink() {
 		$controller = Controller::curr();
-		return $controller->join_links($controller->Link('Category'),$this->ID);
+		if($controller->Data()->ClassName=='NewsArticle'){
+			return $controller->Data()->Parent()->URLSegment."/Category/".$this->ID;
+		}else{
+			return $controller->join_links($controller->Link('Category'),$this->ID);
+		}
 	}
 
 }

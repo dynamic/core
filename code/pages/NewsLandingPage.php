@@ -45,7 +45,20 @@ class NewsLandingPage_Controller extends Page_Controller {
 		RSSFeed::linkToFeed($this->Link('rss'), $this->Data()->Title.' news feed');
 		parent::init();
 	}
-
+	
+	public static $allowded_actions = array(
+		'Category' => true,
+		'Archive' => true
+	);
+	
+	public function Category(){
+		return array();
+	}
+	
+	public function Archive(){
+		return array();
+	}
+			
 	public function getNewsItems($pageSize = 10) {
 		$request = $this->request;
 		$params = $request->allParams();
@@ -56,14 +69,15 @@ class NewsLandingPage_Controller extends Page_Controller {
 		}
 		
 		$action = $params['Action'];
+
 		switch($action){
 			case 'Archive':
 				$year = $params['ID'];
 				$month = $params['OtherID'];
-
+				
 				$from = date('Y-m-d H:i:s', strtotime($year.'-'.$month.'-01 00:00:00'));
 				$monthName = date('F',strtotime($from));
-				$toDate = date('Y-m-d', strtotime("last day of $monthName, $year"));
+				$toDate = date('Y-m-d', strtotime("last day of $monthName $year"));
 				$to = date('Y-m-d H:i:s', strtotime($toDate." 23:59:59"));
 				
 				$articles = NewsArticle::get()
@@ -78,7 +92,8 @@ class NewsLandingPage_Controller extends Page_Controller {
 				$articles = NewsArticle::get()
 					->filter(array(
 						'ParentID' => $data->ID,
-						'Categories.ID' => $categoryID));
+						'Categories.ID' => $categoryID))
+					->sort('DateAuthored', 'DESC');
 				if($articles->Count()==0){
 					$articles = false;
 				}
@@ -86,13 +101,20 @@ class NewsLandingPage_Controller extends Page_Controller {
 			default:
 				$articles = NewsArticle::get()
 					->filter(array(
-						"ParentID"=>$this->ID))
-					->sort('Date', 'DESC');
+						"ParentID"=>$data->ID))
+					->sort('DateAuthored', 'DESC');
 		}
 		$hit = new PaginatedList($articles, $request);
 		$hit->setPageLength($pageSize);
 		
 		return $hit;
+	}
+	
+	// News Archives
+	public function getNewsArchive() {
+		return GroupedList::create(NewsArticle::get()
+			->filter(array('ParentID'=>$this->Data()->ID))
+			->sort('DateAuthored', 'DESC'));
 	}
 
 	public function rss() {
