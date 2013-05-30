@@ -1,8 +1,12 @@
 <?php
 class TemplateConfig extends DataExtension {
-
+	
+	//Todo: Add checkbox for LogoWidth/LogoHeight on/off override
 	static $db = array(
-		'TitleLogo' => 'enum("Logo, Title")'
+		'TitleLogo' => 'enum("Logo, Title")',
+		'LogoDimensionOverride' => 'Boolean',
+		'LogoWidth' => 'Int',
+		'LogoHeight' => 'Int'
 	);
 	
 	static $has_one = array(
@@ -35,9 +39,11 @@ class TemplateConfig extends DataExtension {
 		
 		$fields->addFieldsToTab('Root.Header', array(
 			OptionsetField::create('TitleLogo', 'Branding', $logoOptions),
-			$ImageField//,
+			$ImageField,
+			CheckboxField::create('LogoDimensionOverride')->setTitle('Logo Dimension Override'),
+			NumericField::create('LogoWidth')->setTitle('Logo Width'),
+			NumericField::create('LogoHeight')->setTitle('Logo Height')
    			//HeaderField::create('DisplayOptions', 'Display Options'),
-   			
 		));
 		
 		$config = GridFieldConfig_RelationEditor::create();	
@@ -56,8 +62,13 @@ class TemplateConfig extends DataExtension {
     
     public function getSiteLogo() {
     	$gd = $this->owner->Logo();
-	    if ($gd->getHeight() > 80 || $gd->getWidth() > 280) {
-    		return $gd->setRatioSize(280,80);
+    	$data = $this->owner->Data();
+	    if ($data->LogoDimensionOverride==true&&$data->LogoWidth!=0&&$data->LogoHeight!=0) {
+	    	if(($gd->getWidth()==$data->LogoWidth&&$gd->getHeight()==$data->LogoHeight)||($gd->getWidth()<$data->LogoWidth&&$gd->getHeight()<$data->LogoHeight)){
+	    		return $gd;
+	    	}else{
+	    		return $gd->setRatioSize($data->LogoWidth,$data->LogoHeight);
+	    	}
     	} else {
     		return $gd;
     	}
