@@ -5,7 +5,8 @@ class Spiff extends DataObject {
 	static $db = array(
 		'Name' => 'Varchar',
 		'Headline' => 'Varchar',
-		'Description' => 'HTMLText'
+		'Description' => 'HTMLText',
+		'ShowSpiffLink' => 'Boolean'
 	);
 	
 	static $has_one = array(
@@ -30,6 +31,11 @@ class Spiff extends DataObject {
 		return $this->obj('Description')->Summary(40);
 	}
 	
+	
+	/***
+	  **@Todo: Hide TreeDropdownField if ShowSpiffLink
+	  **isn't checked.
+	***/
 	public function getCMSFields() {
 	
 		$categories = DataObject::get('SpiffCategory');
@@ -49,6 +55,7 @@ class Spiff extends DataObject {
 		$fields->addFieldsToTab('Root.Main', array(
 			new TextField('Name'),
 			new TextField('Headline'),
+			new CheckboxField('ShowSpiffLink','Show Spiff Link'),
 			new TreeDropdownField("PageLinkID", "Page to link to", "SiteTree"),
 			new DropdownField('CategoryID', 'Category', $categoryList),
 			new HTMLEditorField('Description')
