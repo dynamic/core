@@ -3,7 +3,7 @@ class TemplateConfig extends DataExtension {
 	
 	//Todo: Add checkbox for LogoWidth/LogoHeight on/off override
 	static $db = array(
-		'TitleLogo' => 'enum("Logo, Title")',
+		'TitleLogo' => 'enum("Logo, Title", "Title")',
 		'LogoDimensionOverride' => 'Boolean',
 		'LogoWidth' => 'Int',
 		'LogoHeight' => 'Int'
