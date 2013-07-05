@@ -44,7 +44,7 @@ class CoreSiteTree_Controller extends Extension {
 		Requirements::combine_files('styles.css', $styles);
 		
 		// print css
-		Requirements::css($path . 'css/print.css', 'print');
+		Requirements::css($themeDir . '/css/print.css', 'print');
 		
 		// blocked
 		Requirements::block('framework/thirdparty/jquery/jquery.js');
