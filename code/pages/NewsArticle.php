@@ -60,7 +60,7 @@ class NewsArticle extends Page {
 	
 	public function getThumbnail() {
 		if (class_exists('FlexSlider')) {
-			if ($this->Slides()) {
+			if ($this->Slides()->First()) {
 				return $this->Slides()->First()->Image();
 			}
 		}
