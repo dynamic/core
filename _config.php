@@ -37,3 +37,6 @@ if (class_exists('Commenting')) {
 	Commenting::set_config_value('SiteTree', 'require_login', true);
 	BlogEntry::$defaults["ProvideComments"] = false;
 }
+
+// SPAM protection
+SpamProtectorManager::set_spam_protector("MathSpamProtector");
