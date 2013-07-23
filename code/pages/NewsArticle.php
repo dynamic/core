@@ -46,12 +46,15 @@ class NewsArticle extends Page {
 		$fields->addFieldToTab('Root.Main', $dateTimeField = new DatetimeField('DateAuthored'), 'Content');
 		$dateTimeField->getDateField()->setConfig('showcalendar', true);
 		//$fields->addFieldToTab('Root.Main', new CheckboxField('Featured','Featured Story'),'Content');
+		
+		$fields->addFieldToTab('Root.Main', TagField::create('Tags', null, null, 'Page'), 'Content');
+		
 		$categories = new GridField(
 			'Categories',
 			'NewsCategory',
 			$this->Categories(),
 			GridFieldConfig_RelationEditor::create());
-		$fields->addFieldToTab('Root.Main', $categories, 'Content');
+		//$fields->addFieldToTab('Root.Main', $categories, 'Content');
 		//$fields->addFieldToTab('Root.Main', new CheckboxField('AbstractFirstParagraph','Use first paragraph as abstract'),'Content');
 		$fields->addFieldToTab('Root.Main', new TextareaField('Abstract'), 'Content');
 

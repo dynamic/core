@@ -24,6 +24,9 @@ if (class_exists('FlexSlider')) {
 	Object::add_extension('NewsArticle', 'FlexSlider');
 }
 
+// Tags
+Object::add_extension('Page', 'TagExtension');
+
 // SPAM protection
 /*
 RecaptchaField::$public_api_key = '6LeBWQkAAAAAAFmcDDLRDLUANd4GRFTcHhXYmSqS';

@@ -26,6 +26,19 @@ class NewsLandingPage extends Page {
 		}
 		return $hit;
 	}
+	
+	public function getTags() {
+		
+		$hit = Tag::get()
+			->filter(array(
+				'Pages.ID:GreaterThan'=>0,
+				'Pages.ID.ParentID' => $this->ID))
+			->sort('Title', 'DESC');
+		if($hit->Count()==0){
+			$hit = false;
+		}
+		return $hit;
+	}
 
 	public function getDefaultRSSLink() {
 		return $this->Link('rss');
@@ -46,12 +59,18 @@ class NewsLandingPage_Controller extends Page_Controller {
 		parent::init();
 	}
 	
-	public static $allowded_actions = array(
-		'Category' => true,
-		'Archive' => true
+	private static $allowed_actions = array(
+		'Category',
+		'Tag',
+		'Archive',
+		'rss'
 	);
 	
 	public function Category(){
+		return array();
+	}
+	
+	public function Tag() {
 		return array();
 	}
 	
@@ -98,6 +117,17 @@ class NewsLandingPage_Controller extends Page_Controller {
 					$articles = false;
 				}
 			break;
+			case 'Tag':
+				$categoryID = $params['ID'];
+				$articles = NewsArticle::get()
+					->filter(array(
+						'ParentID' => $data->ID,
+						'Tags.ID' => $categoryID))
+					->sort('DateAuthored', 'DESC');
+				if($articles->Count()==0){
+					$articles = false;
+				}
+			break;
 			default:
 				$articles = NewsArticle::get()
 					->filter(array(
@@ -121,7 +151,7 @@ class NewsLandingPage_Controller extends Page_Controller {
 		$title = $this->Data()->Title;
 		$description = "$title news feed";
 		$rss = new RSSFeed(
-			$this->getNewsArticles(),
+			$this->getNewsItems(),
 			$this->Link('rss'),
 			$this->Data()->Title,
 			$description);
