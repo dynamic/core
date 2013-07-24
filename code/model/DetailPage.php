@@ -14,6 +14,12 @@ class DetailPage extends Page {
 		'Image' => 'CoreImage'
 	);
 	
+	public static $searchable_fields = array(
+		'Title',
+		//'Tags.Title',
+		//'ParentID'
+	);
+	
 	// getters for Thumbnail Previews
 	public function getPreviewTitle() {
 		if ($this->PreviewTitle) {

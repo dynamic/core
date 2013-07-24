@@ -28,6 +28,9 @@
 </div>
 <div class="four columns sidebar omega">
 	<aside>
+	
+		$AdvSearchForm
+	
 		<% include SideBar %>
 		
 		<% include TagList %>

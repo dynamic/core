@@ -53,6 +53,11 @@ class NewsArticle extends DetailPage {
 	public function getMonthCreated() {
         return date('F Y', strtotime($this->DateAuthored));
     }
+    
+    // summary
+    public function getSummary() {
+	    return $this->renderWith('NewsSummary');
+    }
 	
 }
 
