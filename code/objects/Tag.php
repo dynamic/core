@@ -19,9 +19,9 @@ class Tag extends DataObject {
     public function getLink() {
 		$controller = Controller::curr();
 		if($controller->Data()->ClassName=='Page'){
-			return $controller->Data()->Parent()->URLSegment."/Tag/".$this->ID;
+			return $controller->Data()->Parent()->URLSegment."/tag/".$this->Title;
 		}else{
-			return $controller->join_links($controller->Link('Tag'),$this->ID);
+			return $controller->join_links($controller->Link('tag'),$this->Title);
 		}
 	}
     

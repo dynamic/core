@@ -1,6 +1,6 @@
 <?php
 
-class NewsArticle extends Page {
+class NewsArticle extends DetailPage {
 
 	static $singular_name = "News Article";
 	static $plural_name = "News Articles";	
@@ -11,9 +11,7 @@ class NewsArticle extends Page {
 	
 	static $db = array(
 		'DateAuthored' => 'SS_Datetime',
-		'Abstract' => 'Text',
 		'Author' => 'Varchar(255)',
-		'AbstractFirstParagraph' => 'Boolean',
 		'Featured' => 'Boolean');
 
 	static $has_one = array();
@@ -45,29 +43,10 @@ class NewsArticle extends Page {
 
 		$fields->addFieldToTab('Root.Main', $dateTimeField = new DatetimeField('DateAuthored'), 'Content');
 		$dateTimeField->getDateField()->setConfig('showcalendar', true);
+		
 		//$fields->addFieldToTab('Root.Main', new CheckboxField('Featured','Featured Story'),'Content');
-		
-		$fields->addFieldToTab('Root.Main', TagField::create('Tags', null, null, 'Page'), 'Content');
-		
-		$categories = new GridField(
-			'Categories',
-			'NewsCategory',
-			$this->Categories(),
-			GridFieldConfig_RelationEditor::create());
-		//$fields->addFieldToTab('Root.Main', $categories, 'Content');
-		//$fields->addFieldToTab('Root.Main', new CheckboxField('AbstractFirstParagraph','Use first paragraph as abstract'),'Content');
-		$fields->addFieldToTab('Root.Main', new TextareaField('Abstract'), 'Content');
 
 		return $fields;
-	}
-	
-	public function getThumbnail() {
-		if (class_exists('FlexSlider')) {
-			if ($this->Slides()->First()) {
-				return $this->Slides()->First()->Image();
-			}
-		}
-		return false;
 	}
 	
 	// News Archive Grouping
@@ -77,7 +56,7 @@ class NewsArticle extends Page {
 	
 }
 
-class NewsArticle_Controller extends Page_Controller {
+class NewsArticle_Controller extends DetailPage_Controller {
 	
 	
 	

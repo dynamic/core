@@ -2,6 +2,7 @@
 
 Object::add_extension('SiteTree', 'CoreSiteTree');
 Object::add_extension('ContentController', 'CoreSiteTree_Controller');
+Object::add_extension('Page', 'PageExtension');
 Object::add_extension('SiteConfig', 'CompanyConfig');
 Object::add_extension('SiteConfig', 'TemplateConfig');
 Object::add_extension('SiteConfig', 'SettingsConfig');

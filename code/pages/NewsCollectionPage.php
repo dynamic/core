@@ -1,10 +1,10 @@
 <?php
 
-class NewsLandingPage extends Page {
+class NewsCollectionPage extends CollectionPage {
 
 	static $singular_name = "News Page";
 	static $plural_name = "News Pages";
-	static $description = "News Landing Page";
+	static $description = "Displays list of News Articles";
 
 	static $allowed_children = array('NewsArticle');
 	static $default_child = 'NewsArticle';
@@ -12,32 +12,6 @@ class NewsLandingPage extends Page {
 	// exclude child pages from Menu
 	public function MenuChildren() {
 		return parent::MenuChildren()->exclude('ClassName', 'NewsArticle');
-	}
-
-	public function getCategories() {
-		
-		$hit = NewsCategory::get()
-			->filter(array(
-				'NewsItems.ID:GreaterThan'=>0,
-				'NewsItems.ID.ParentID' => $this->ID))
-			->sort('Title', 'DESC');
-		if($hit->Count()==0){
-			$hit = false;
-		}
-		return $hit;
-	}
-	
-	public function getTags() {
-		
-		$hit = Tag::get()
-			->filter(array(
-				'Pages.ID:GreaterThan'=>0,
-				'Pages.ID.ParentID' => $this->ID))
-			->sort('Title', 'DESC');
-		if($hit->Count()==0){
-			$hit = false;
-		}
-		return $hit;
 	}
 
 	public function getDefaultRSSLink() {
@@ -52,27 +26,31 @@ class NewsLandingPage extends Page {
 
 }
 
-class NewsLandingPage_Controller extends Page_Controller {
+class NewsCollectionPage_Controller extends CollectionPage_Controller {
 
 	public function init() {
 		RSSFeed::linkToFeed($this->Link('rss'), $this->Data()->Title.' news feed');
 		parent::init();
 	}
 	
+	/*
 	private static $allowed_actions = array(
 		'Category',
 		'Tag',
 		'Archive',
 		'rss'
 	);
+	*/
 	
 	public function Category(){
 		return array();
 	}
 	
+	/*
 	public function Tag() {
 		return array();
 	}
+	*/
 	
 	public function Archive(){
 		return array();
@@ -105,17 +83,6 @@ class NewsLandingPage_Controller extends Page_Controller {
 						'DateAuthored:GreaterThan' => $from,
 						'DateAuthored:LessThan' => $to))
 					->sort('DateAuthored','DESC');
-			break;
-			case 'Category':
-				$categoryID = $params['ID'];
-				$articles = NewsArticle::get()
-					->filter(array(
-						'ParentID' => $data->ID,
-						'Categories.ID' => $categoryID))
-					->sort('DateAuthored', 'DESC');
-				if($articles->Count()==0){
-					$articles = false;
-				}
 			break;
 			case 'Tag':
 				$categoryID = $params['ID'];
