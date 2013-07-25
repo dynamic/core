@@ -4,7 +4,6 @@ class DetailPage extends Page {
 	
 	public static $db = array(
 		'PreviewTitle' => 'Varchar(255)',
-		//'PreviewSubTitle' => 'Varchar(255)',
 		'Abstract' => 'Text',
 		'AbstractFirstParagraph' => 'Boolean',
 	);
@@ -14,27 +13,37 @@ class DetailPage extends Page {
 		'Image' => 'CoreImage'
 	);
 	
-	public static $searchable_fields = array(
-		'Title',
-		//'Tags.Title',
-		//'ParentID'
+	static $many_many = array(
+		'Tags' => 'Tag',
+		'Links' => 'LinkObject'
 	);
 	
-	// getters for Thumbnail Previews
-	public function getPreviewTitle() {
-		if ($this->PreviewTitle) {
-			return $this->PreviewSubTitle;
-		} elseif ($this->Title) {
-			return $this->Title;
-		}
-		return false;
+	public static $many_many_extraFields = array(
+		'Links' => array(
+			'SortOrder' => 'Int'
+		)
+	);
+	
+	public static $searchable_fields = array(
+		'Title',
+		'Tags.ID'
+	);
+	
+	// exclude child pages from Menu
+	public function MenuChildren() {
+		return parent::MenuChildren()->exclude('ClassName', 'NewsArticle');
 	}
+
+	public function getDefaultRSSLink() {
+		return $this->Link('rss');
+	}
+	
 	
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 		
 		// Tag Field
-		$TagField = TagField::create('Tags', null, null, 'Page');
+		$TagField = TagField::create('Tags', null, null, 'DetailPage');
 		$TagField->setSeparator(', ');
 		$fields->addFieldToTab('Root.Main', $TagField, 'Content');
 		
@@ -66,12 +75,32 @@ class DetailPage extends Page {
 	    	CheckboxField::create('AbstractFirstParagraph','Use first paragraph as abstract')
 	    ));
 	    
+	    // Side Bar
+	    // Links
+		$gridFieldConfig = GridFieldConfig_RelationEditor::create();
+		$gridFieldConfig->addComponents(new GridFieldSortableRows('SortOrder'));
+	    $LinksField = GridField::create("Links", "Links", $this->Links()->sort('SortOrder'), $gridFieldConfig);
+	    
+	    $fields->addFieldsToTab('Root.Side Bar', array(
+	    	$LinksField
+	    ));
+	    
 		return $fields;
 	}
 	
 	// summary for collection page
 	public function getSummary() {
 		return $this->renderWith('DetailSummary');
+	}
+	
+	// getters for summary view
+	public function getPreviewTitle() {
+		if ($this->PreviewTitle) {
+			return $this->PreviewSubTitle;
+		} elseif ($this->Title) {
+			return $this->Title;
+		}
+		return false;
 	}
 	
 	// getters for relations
@@ -83,6 +112,20 @@ class DetailPage extends Page {
 
 class DetailPage_Controller extends Page_Controller {
 	
+	public function init() {
+		RSSFeed::linkToFeed($this->Link('rss'), $this->Data()->Title.' rss feed');
+		parent::init();
+	}
 	
+	public function rss() {
+		$title = $this->Data()->Title;
+		$description = "$title rss feed";
+		$rss = new RSSFeed(
+			$this->getItems(),
+			$this->Link('rss'),
+			$this->Data()->Title,
+			$description);
+		return $rss->outputToBrowser();
+	}
 	
 }

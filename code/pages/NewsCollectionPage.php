@@ -9,15 +9,6 @@ class NewsCollectionPage extends CollectionPage {
 	static $allowed_children = array('NewsArticle');
 	static $default_child = 'NewsArticle';
 
-	// exclude child pages from Menu
-	public function MenuChildren() {
-		return parent::MenuChildren()->exclude('ClassName', 'NewsArticle');
-	}
-
-	public function getDefaultRSSLink() {
-		return $this->Link('rss');
-	}
-
 	public function getArticles(){
 		$articles = NewsArticle::get()
 			->filter(array('ParentID' => $this->ID))->sort('Date','DESC')->limit(2);
@@ -27,11 +18,6 @@ class NewsCollectionPage extends CollectionPage {
 }
 
 class NewsCollectionPage_Controller extends CollectionPage_Controller {
-
-	public function init() {
-		RSSFeed::linkToFeed($this->Link('rss'), $this->Data()->Title.' news feed');
-		parent::init();
-	}
 	
 	/*
 	private static $allowed_actions = array(
@@ -112,17 +98,6 @@ class NewsCollectionPage_Controller extends CollectionPage_Controller {
 		return GroupedList::create(NewsArticle::get()
 			->filter(array('ParentID'=>$this->Data()->ID))
 			->sort('DateAuthored', 'DESC'));
-	}
-
-	public function rss() {
-		$title = $this->Data()->Title;
-		$description = "$title news feed";
-		$rss = new RSSFeed(
-			$this->getNewsItems(),
-			$this->Link('rss'),
-			$this->Data()->Title,
-			$description);
-		return $rss->outputToBrowser();
 	}
 
 }

@@ -1,8 +1,9 @@
 <?php
 
+FulltextSearchable::enable();
+
 Object::add_extension('SiteTree', 'CoreSiteTree');
 Object::add_extension('ContentController', 'CoreSiteTree_Controller');
-Object::add_extension('Page', 'PageExtension');
 Object::add_extension('SiteConfig', 'CompanyConfig');
 Object::add_extension('SiteConfig', 'TemplateConfig');
 Object::add_extension('SiteConfig', 'SettingsConfig');
@@ -14,26 +15,15 @@ if (class_exists('Addressable')) {
 }
 
 // Spiffs
-Object::add_extension('DynamicHomePage', 'SpiffManager');
-Object::add_extension('LandingPage', 'SpiffManager');
+Object::add_extension('SectionPage', 'SpiffManager');
+//Object::add_extension('CollectionPage', 'SpiffManager');
 
 // Slideshow
 if (class_exists('FlexSlider')) {
-	Object::add_extension('DynamicHomePage', 'FlexSlider');
-	Object::add_extension('SlidePage', 'FlexSlider');
-	Object::add_extension('LandingPage', 'FlexSlider');
-	Object::add_extension('NewsArticle', 'FlexSlider');
+	Object::add_extension('SectionPage', 'FlexSlider');
+	//Object::add_extension('CollectionPage', 'FlexSlider');
+	Object::add_extension('DetailPage', 'FlexSlider');
 }
-
-// Tags
-Object::add_extension('Page', 'TagExtension');
-
-// SPAM protection
-/*
-RecaptchaField::$public_api_key = '6LeBWQkAAAAAAFmcDDLRDLUANd4GRFTcHhXYmSqS';
-RecaptchaField::$private_api_key = '6LeBWQkAAAAAABMjw5QgyAOegJdUv9NJUWsxrOX9';
-SpamProtectorManager::set_spam_protector("RecaptchaProtector");
-*/
 
 // Comments
 if (class_exists('Commenting')) {

@@ -7,7 +7,7 @@ class Tag extends DataObject {
     );
 
     static $belongs_many_many = array(
-        'Pages' => 'Page'
+        'Pages' => 'DetailPage'
     );
     
     public function getCMSFields() {

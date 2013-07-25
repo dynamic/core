@@ -9,6 +9,8 @@ class NewsArticle extends DetailPage {
 	static $default_parent = 'NewsLandingPage';
 	static $can_be_root = false;
 	
+	static $hide_ancestor = "DetailPage";
+	
 	static $db = array(
 		'DateAuthored' => 'SS_Datetime',
 		'Author' => 'Varchar(255)',

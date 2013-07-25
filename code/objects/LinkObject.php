@@ -12,7 +12,7 @@ class LinkObject extends DataObject {
 	);
 	
 	static $belongs_many_many = array(
-		//'Pages' => 'Page'
+		'Pages' => 'Page'
 	);
 	
 	static $singular_name = 'Link';
