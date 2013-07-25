@@ -28,7 +28,15 @@ class CoreSiteTree_Controller extends Extension {
 		Requirements::combine_files('scripts.js', $scripts);
 		
 		// external scripts
-		Requirements::javascript('//s7.addthis.com/js/300/addthis_widget.js#pubid=' . $config->AddThisProfileID);
+		//Requirements::javascript('//s7.addthis.com/js/300/addthis_widget.js#pubid=' . $config->AddThisProfileID);
+		
+		// sharethis scripts
+		Requirements::insertHeadTags('
+			<script type="text/javascript">var switchTo5x=true;</script>
+			<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+			<script type="text/javascript">stLight.options({publisher: "' . $config->ShareThisPublisherID . '", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+		');
+		
 
 		// Add the combined styles.
 		$styles = array(
@@ -58,6 +66,7 @@ class CoreSiteTree_Controller extends Extension {
 		//");
 		
 		// AddThis social sharing
+		/*
 		Requirements::customScript('
 			//var addthis_config = { "data_track_addressbar":true };
 			
@@ -71,6 +80,7 @@ class CoreSiteTree_Controller extends Extension {
 					bitly : {} 				}
 			};
 		');
+		*/
 		
 		/*
 		// ReCaptcha config

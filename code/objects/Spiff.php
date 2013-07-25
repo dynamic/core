@@ -15,6 +15,10 @@ class Spiff extends DataObject {
 		'Category' => 'SpiffCategory'
 	);
 	
+	static $belongs_many_many = array(
+		'Pages' => 'Page'
+	);
+	
 	static $default_sort = 'Name ASC';
 	
 	// Custom Table Fields
