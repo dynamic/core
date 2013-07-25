@@ -1,9 +1,8 @@
 <h4>Tags</h4>
 <ul>
 	<% loop getTags %>
-		<% if Pages %>
-			<li><a href="$Link" title="View the $Title tag">$Title</a> ($Pages.Count)</li>
+		<% if RelatedPages %>
+			<li><a href="$Link" title="View the $Title tag">$Title</a> ($RelatedPages.Count)</li>
 		<% end_if %>
-		<li>
 	<% end_loop %>
 </ul>

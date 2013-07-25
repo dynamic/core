@@ -94,9 +94,9 @@ class DetailPage extends Page {
 	}
 	
 	// getters for summary view
-	public function getPreviewTitle() {
+	public function getPreviewHeadline() {
 		if ($this->PreviewTitle) {
-			return $this->PreviewSubTitle;
+			return $this->PreviewTitle;
 		} elseif ($this->Title) {
 			return $this->Title;
 		}

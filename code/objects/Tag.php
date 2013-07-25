@@ -18,15 +18,22 @@ class Tag extends DataObject {
     
     public function getLink() {
 		$controller = Controller::curr();
-		
-		//return $controller->Link() . '?Tags__Title=' . $this->getTitle();
-		
-		
 		if($controller->Data()->ClassName=='DetailPage'){
-			return $controller->Data()->Parent()->Link() . '?Tags__Title=' . $this->Title;
-		}else{
-			return $controller->Link() . '?Tags__Title=' . $this->Title;
+			return $controller->Data()->Parent()->URLSegment."/tag/".$this->Title;
+		} else {
+			return $controller->join_links($controller->Link('tag'),$this->Title);
 		}
+		
+	}
+	
+	public function getRelatedPages(){
+		
+		$parentID = Controller::curr()->Data()->ID;
+		
+		$pages = DetailPage::get()
+			->filter(array('Tags.ID'=>$this->ID,'ParentID'=>$parentID));
+		
+		return $pages;
 		
 	}
     
