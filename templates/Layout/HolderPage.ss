@@ -5,23 +5,30 @@
 		<% if $SubTitle %><h3>$SubTitle</h3><% end_if %>
 		
 		<div class="content typography">$Content</div>
+		
+		<header class="row resultsHeader">
+			<% if $Message %><h4>$Message</h4><% end_if %>
+			<!--<p class="pull-right">Displaying $Items.FirstItem - $Items.LastItem of $Items.Count</p>-->
+		</header>
 	
-		<% if Items %>			
-			<header class="resultsHeader">
-				<% if Filter %><h3 class="pull-left">$Filter</h3><% end_if %>
-				<p class="pull-right">Displaying $Items.FirstItem - $Items.LastItem of $Items.Count</p>
-			</header>
+		<% if Items %>	
 		
 			<% loop Items %>
-				<article class="$EvenOdd clearfix half-bottom">
-					$Summary
-				</article>
+				<div class="row $EvenOdd clearfix">
+					<section> 
+						$Summary
+					</section>
+				</div>
 			<% end_loop %>
 
 			<% with Items %>
 				<% include Pagination %>
 			<% end_with %>
 
+		<% else %>
+		
+			<p>No entries</p>
+		
 		<% end_if %>
 		
 	</article>

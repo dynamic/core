@@ -9,16 +9,27 @@ class HolderPage extends Page {
 			->filter(array(
 				'Pages.ID:GreaterThan'=>0,
 				'Pages.ID.ParentID' => $this->ID))
-			->sort('Title', 'DESC');
+			//->sort('RelatedPages', 'DESC')
+			->limit(15);
 		if($hit->Count()==0){
 			$hit = false;
 		}
 		return $hit;
 	}
 	
+	// hide children from menu
+	public function MenuChildren() {
+		return parent::MenuChildren()->exclude('ClassName', 'HolderItem');
+	}
+	
 }
 
 class HolderPage_Controller extends Page_Controller {
+
+	public function init() {
+		RSSFeed::linkToFeed($this->Link('rss'), $this->Data()->Title.' rss feed');
+		parent::init();
+	}
 	
 	private static $allowed_actions = array(
 		'tag'
@@ -46,6 +57,7 @@ class HolderPage_Controller extends Page_Controller {
 			$filter = array('Tags.Title' => $tag);
 		
 			return $this->customise(array(
+				'Message' => 'showing entries tagged "' . $tag . '"',
 				'Items' => $this->Items($filter)
 			));
 		
@@ -53,6 +65,17 @@ class HolderPage_Controller extends Page_Controller {
 		
 		return $this->Items();
 		
+	}
+	
+	public function rss() {
+		$title = $this->Data()->Title;
+		$description = "$title rss feed";
+		$rss = new RSSFeed(
+			$this->getItems(),
+			$this->Link('rss'),
+			$this->Data()->Title,
+			$description);
+		return $rss->outputToBrowser();
 	}
 	
 }

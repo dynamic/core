@@ -103,6 +103,15 @@ class DetailPage extends Page {
 		return false;
 	}
 	
+	public function getPreviewThumb() {
+		if ($this->ThumbnailID) {
+			return $this->Thumbnail();
+		} elseif ($this->ImageID) {
+			return $this->Image();
+		} 
+		return false;
+	}
+	
 	// getters for relations
 	public function getLinkList() {
 		return $this->Links()->sort('SortOrder');
@@ -112,20 +121,6 @@ class DetailPage extends Page {
 
 class DetailPage_Controller extends Page_Controller {
 	
-	public function init() {
-		RSSFeed::linkToFeed($this->Link('rss'), $this->Data()->Title.' rss feed');
-		parent::init();
-	}
 	
-	public function rss() {
-		$title = $this->Data()->Title;
-		$description = "$title rss feed";
-		$rss = new RSSFeed(
-			$this->getItems(),
-			$this->Link('rss'),
-			$this->Data()->Title,
-			$description);
-		return $rss->outputToBrowser();
-	}
 	
 }

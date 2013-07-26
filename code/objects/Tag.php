@@ -18,7 +18,9 @@ class Tag extends DataObject {
     
     public function getLink() {
 		$controller = Controller::curr();
-		if($controller->Data()->ClassName=='DetailPage'){
+		$class = $controller->Data()->ClassName;
+		
+		if($class == 'DetailPage' || is_subclass_of($class, 'DetailPage')) {
 			return $controller->Data()->Parent()->URLSegment."/tag/".$this->Title;
 		} else {
 			return $controller->join_links($controller->Link('tag'),$this->Title);
@@ -27,13 +29,20 @@ class Tag extends DataObject {
 	}
 	
 	public function getRelatedPages(){
+	
+		$controller = Controller::curr();
+		$class = $controller->Data()->ClassName;
 		
-		$parentID = Controller::curr()->Data()->ID;
+		if($class == 'DetailPage' || is_subclass_of($class, 'DetailPage')) {
+			$parentID = $controller->Data()->Parent()->ID;
+		} else {
+			$parentID = $controller->Data()->ID;
+		}
 		
 		$pages = DetailPage::get()
 			->filter(array('Tags.ID'=>$this->ID,'ParentID'=>$parentID));
 		
-		return $pages;
+		return $pages->Count();
 		
 	}
     
