@@ -1,6 +1,8 @@
 <?php
 
 class HolderPage extends Page {
+
+	public static $item_class = 'HolderItem';
 	
 	// tag list for sidebar
 	public function getTags() {
@@ -8,6 +10,7 @@ class HolderPage extends Page {
 		$hit = Tag::get()
 			->filter(array(
 				'Pages.ID:GreaterThan'=>0,
+				'Pages.ClassName' => $this->stat('item_class'),
 				'Pages.ID.ParentID' => $this->ID))
 			//->sort('RelatedPages', 'DESC')
 			->limit(15);
@@ -22,23 +25,31 @@ class HolderPage extends Page {
 		return parent::MenuChildren()->exclude('ClassName', 'HolderItem');
 	}
 	
+	public function getDefaultRSSLink() {
+		return $this->Link('rss');
+	}
+	
 }
 
 class HolderPage_Controller extends Page_Controller {
 
 	public function init() {
-		RSSFeed::linkToFeed($this->Link('rss'), $this->Data()->Title.' rss feed');
+		RSSFeed::linkToFeed($this->Link('rss') . '.xml', $this->Data()->Title.' rss feed');
 		parent::init();
 	}
 	
 	private static $allowed_actions = array(
-		'tag'
+		'tag',
+		'rss'
 	);
 	
 	public function Items($filter = array(), $pageSize = 10) {
 		
 		$filter['ParentID'] = $this->Data()->ID;
-		$items = DetailPage::get()->filter($filter);
+		$class =  $this->Data()->stat('item_class');
+		
+		// get all records from $class using $filter
+		$items = $class::get()->filter($filter);
 						
 		$list = PaginatedList::create($items, $this->request);
 		$list->setPageLength($pageSize);
@@ -71,7 +82,7 @@ class HolderPage_Controller extends Page_Controller {
 		$title = $this->Data()->Title;
 		$description = "$title rss feed";
 		$rss = new RSSFeed(
-			$this->getItems(),
+			$this->Items(),
 			$this->Link('rss'),
 			$this->Data()->Title,
 			$description);

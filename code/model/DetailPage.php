@@ -33,10 +33,6 @@ class DetailPage extends Page {
 	public function MenuChildren() {
 		return parent::MenuChildren()->exclude('ClassName', 'NewsArticle');
 	}
-
-	public function getDefaultRSSLink() {
-		return $this->Link('rss');
-	}
 	
 	
 	public function getCMSFields() {
