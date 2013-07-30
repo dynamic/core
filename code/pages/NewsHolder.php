@@ -11,6 +11,8 @@ class NewsHolder extends HolderPage {
 
 	static $allowed_children = array('NewsArticle');
 	static $default_child = 'NewsArticle';
+	
+	static $hide_ancestor = "HolderPage";
 
 }
 

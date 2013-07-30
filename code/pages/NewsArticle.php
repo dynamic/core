@@ -12,7 +12,7 @@ class NewsArticle extends HolderItem {
 	static $default_parent = 'NewsHolder';
 	static $can_be_root = false;
 	
-	//static $hide_ancestor = "HolderItem";
+	static $hide_ancestor = "HolderItem";
 	
 	static $db = array(
 		'DateAuthored' => 'SS_Datetime',
