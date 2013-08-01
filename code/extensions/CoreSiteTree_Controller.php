@@ -42,6 +42,7 @@ class CoreSiteTree_Controller extends Extension {
 		$styles = array(
 			$themeDir . '/css/base.css',
 			'flexslider/thirdparty/flexslider/flexslider.css',
+			$themeDir . '/css/flexslider.css',
 			$themeDir . '/css/layout.css',
 			$themeDir . '/css/typography.css',
 			$themeDir . '/css/form.css',
