@@ -56,7 +56,7 @@ class CoreSiteTree_Controller extends Extension {
 		
 		// blocked
 		Requirements::block('framework/thirdparty/jquery/jquery.js');
-		//Requirements::block('flexslider/thirdparty/flexslider/flexslider.css');
+		Requirements::block('flexslider/thirdparty/flexslider/flexslider.css');
 		
 		// meanMenu plugin
 		//Requirements::customScript("
