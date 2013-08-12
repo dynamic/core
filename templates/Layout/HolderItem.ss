@@ -1,9 +1,9 @@
-<div class="twelve columns alpha">
-
+<div class="row">
 	$Breadcrumbs
-	<h2>$Title</h2>
-	
+</div>
+<div class="twelve columns alpha">
 	<article>
+		<h2>$Title</h2>
 		
 		<% if Image %><p class="half-bottom">$Image.LargePadded(600,400)</p><% end_if %>
 		
@@ -12,8 +12,6 @@
 		<div class="toolbar">
 			<% include ShareThis %>
 		</div>
-				
-		
 		
 		<div class="typography">
 			$Content

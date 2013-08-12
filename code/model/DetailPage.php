@@ -24,6 +24,11 @@ class DetailPage extends Page {
 		)
 	);
 	
+	
+	static $singular_name = "Detail Page";
+	static $plural_name = "Detail Pages";	
+	static $description = "Rich content page, includes images and slides";
+	
 	public static $searchable_fields = array(
 		'Title',
 		'Tags.ID'
@@ -32,10 +37,6 @@ class DetailPage extends Page {
 	// exclude child pages from Menu
 	public function MenuChildren() {
 		return parent::MenuChildren()->exclude('ClassName', 'NewsArticle');
-	}
-
-	public function getDefaultRSSLink() {
-		return $this->Link('rss');
 	}
 	
 	
@@ -94,12 +95,21 @@ class DetailPage extends Page {
 	}
 	
 	// getters for summary view
-	public function getPreviewTitle() {
+	public function getPreviewHeadline() {
 		if ($this->PreviewTitle) {
-			return $this->PreviewSubTitle;
+			return $this->PreviewTitle;
 		} elseif ($this->Title) {
 			return $this->Title;
 		}
+		return false;
+	}
+	
+	public function getPreviewThumb() {
+		if ($this->ThumbnailID) {
+			return $this->Thumbnail();
+		} elseif ($this->ImageID) {
+			return $this->Image();
+		} 
 		return false;
 	}
 	
@@ -112,20 +122,6 @@ class DetailPage extends Page {
 
 class DetailPage_Controller extends Page_Controller {
 	
-	public function init() {
-		RSSFeed::linkToFeed($this->Link('rss'), $this->Data()->Title.' rss feed');
-		parent::init();
-	}
 	
-	public function rss() {
-		$title = $this->Data()->Title;
-		$description = "$title rss feed";
-		$rss = new RSSFeed(
-			$this->getItems(),
-			$this->Link('rss'),
-			$this->Data()->Title,
-			$description);
-		return $rss->outputToBrowser();
-	}
 	
 }

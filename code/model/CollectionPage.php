@@ -4,7 +4,7 @@ class CollectionPage extends Page {
 	
 	static $singular_name = "Collection Page";
 	static $plural_name = "Collection Pages";
-	static $description = "Displays list of Detail Pages";
+	static $description = "Displays a searchable, paginated list of content";
 
 	static $allowed_children = array('DetailPage');
 	static $default_child = 'DetailPage';
@@ -38,8 +38,8 @@ class CollectionPage_Controller extends Page_Controller {
 		$request = ($this->request) ? $this->request : $this->parentController->getRequest();
 		if(!$searchCriteria) $searchCriteria = $request->requestVars();
 		
-		// filter by current page as Parent
-		$searchCriteria['ParentID'] = $this->ID;
+		// filter by current page as Parent - doesn't work
+		//$searchCriteria['ParentID'] = $this->ID;
 		
 		$start = ($request->getVar('start')) ? (int)$request->getVar('start') : 0;
 		//$sort = ($request->getVar('sort')) ? $request->getVar('sort') : singleton($this->Model)->getCustomSort();

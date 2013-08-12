@@ -3,10 +3,8 @@
 class ContactPage extends UserDefinedForm {
 
 	static $singular_name = "Contact Page";
-	
 	static $plural_name = "Contact Pages";
-	
-	static $description = 'Contact form with address and map';
+	static $description = 'Create a contact form. Includes company contact information and map';
 	
 }
 

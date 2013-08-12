@@ -15,10 +15,6 @@ class Spiff extends DataObject {
 		'Category' => 'SpiffCategory'
 	);
 	
-	static $belongs_many_many = array(
-		'Pages' => 'Page'
-	);
-	
 	static $default_sort = 'Name ASC';
 	
 	// Custom Table Fields
@@ -36,10 +32,6 @@ class Spiff extends DataObject {
 	}
 	
 	
-	/***
-	  **@Todo: Hide TreeDropdownField if ShowSpiffLink
-	  **isn't checked.
-	***/
 	public function getCMSFields() {
 	
 		$categories = DataObject::get('SpiffCategory');
@@ -60,14 +52,17 @@ class Spiff extends DataObject {
 			new TextField('Name'),
 			new TextField('Headline'),
 			new CheckboxField('ShowSpiffLink','Show Spiff Link'),
-			new TreeDropdownField("PageLinkID", "Page to link to", "SiteTree"),
+			$pageLink = new TreeDropdownField("PageLinkID", "Page to link to", "SiteTree"),
 			new DropdownField('CategoryID', 'Category', $categoryList),
 			new HTMLEditorField('Description')
 		));
 		$fields->addFieldsToTab('Root.Image', array(
 			$ImageField
 		));
-         
+		
+		if(class_exists('DisplayLogicFormField')){
+			$pageLink->displayIf('ShowSpiffLink')->isChecked();
+         }
         return $fields;
 	}
 	
