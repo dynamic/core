@@ -13,7 +13,16 @@ class NewsHolder extends HolderPage {
 	static $default_child = 'NewsArticle';
 	
 	static $hide_ancestor = "HolderPage";
-
+	
+	// News Archives
+	public function getNewsArchive() {
+		return GroupedList::create(NewsArticle::get()
+			->filter(array(
+				'ParentID'=>$this->Data()->ID,
+				'DateAuthored:LessThan' => SS_Datetime::now()->Format('Y-m-d')))
+			->sort('DateAuthored', 'DESC'));
+	}
+	
 }
 
 class NewsHolder_Controller extends HolderPage_Controller {
@@ -23,12 +32,42 @@ class NewsHolder_Controller extends HolderPage_Controller {
 		'archive',
 		'rss'
 	);
+	
+	public function archive($request = null){
+		$params = $request->allParams();
 		
-	// News Archives
-	public function getNewsArchive() {
-		return GroupedList::create(NewsArticle::get()
-			->filter(array('ParentID'=>$this->Data()->ID))
-			->sort('DateAuthored', 'DESC'));
+		$filter = array();
+		
+		if($year = $params['ID']){
+			if($month = $params['OtherID']){
+				$start = $year."-".$month;
+				$monthWord = date('F', strtotime($start));
+				$end = date('Y-m-d', strtotime("last day of $monthWord"));
+			}else{
+				$start = "$year-01-01";
+				$end = "$year-12-31";				
+			}
+			$from = SS_Datetime::create();
+			$from->setValue($start);
+			$to = SS_Datetime::create();
+			$to->setValue($end);
+			
+			$filter = array(
+				'ParentID' => $this->Data()->ID,
+				'DateAuthored:GreaterThan' => $from->value,
+				'DateAuthored:LessThan' => $to->value);
+			
+			return $this->customise(array(
+				'Items' => NewsArticle::get()
+				->filter($filter)
+				->sort('DateAuthored', 'DESC')));
+		}
+		
+		$message = "<p>Please use a valid archive url (i.e. ".$this->Link('archive')."/2013/ for a year or ".$this->Link('archive')."/2013/07/ for a year/month</p>";
+		
+		return $this->customise(array(
+			'Items' =>false,
+			'Message' => $message));
 	}
 
 }
