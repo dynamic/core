@@ -5,7 +5,7 @@ class DetailPage extends Page {
 	public static $db = array(
 		'PreviewTitle' => 'Varchar(255)',
 		'Abstract' => 'Text',
-		'AbstractFirstParagraph' => 'Boolean',
+		'AbstractFirstParagraph' => 'Boolean'
 	);
 	
 	public static $has_one = array(
@@ -72,8 +72,8 @@ class DetailPage extends Page {
 	    $fields->addFieldsToTab('Root.Preview', array(
 	    	TextField::create('PreviewTitle', 'Preview Title'),
 	    	//TextField::create('PreviewSubTitle', 'Preview Sub Title'),
-	    	TextareaField::create('Abstract'),
-	    	CheckboxField::create('AbstractFirstParagraph','Use first paragraph as abstract')
+	    	CheckboxField::create('AbstractFirstParagraph','Use first paragraph as abstract'),
+	    	$abstract = TextareaField::create('Abstract')
 	    ));
 	    
 	    // Side Bar
@@ -85,6 +85,10 @@ class DetailPage extends Page {
 	    $fields->addFieldsToTab('Root.Side Bar', array(
 	    	$LinksField
 	    ));
+	    
+	    if(class_exists('DisplayLogicFormField')){
+		    $abstract->displayUnless('AbstractFirstParagraph')->isChecked();
+	    }
 	    
 		return $fields;
 	}
