@@ -63,7 +63,7 @@ class NewsHolder_Controller extends HolderPage_Controller {
 				->sort('DateAuthored', 'DESC')));
 		}
 		
-		$message = "<p>Please use a valid archive url (i.e. ".$this->Link('archive')."/2013/ for a year or ".$this->Link('archive')."/2013/07/ for a year/month</p>";
+		$message = "Please use a valid archive url (i.e. ".$this->Link('archive')."/2013/ for a year or ".$this->Link('archive')."/2013/07/ for a year/month";
 		
 		return $this->customise(array(
 			'Items' =>false,
