@@ -82,7 +82,7 @@ class DetailPage extends Page {
 		$gridFieldConfig->addComponents(new GridFieldSortableRows('SortOrder'));
 	    $LinksField = GridField::create("Links", "Links", $this->Links()->sort('SortOrder'), $gridFieldConfig);
 	    
-	    $fields->addFieldsToTab('Root.Side Bar', array(
+	    $fields->addFieldsToTab('Root.SideBar', array(
 	    	$LinksField
 	    ));
 	    
