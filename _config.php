@@ -1,14 +1,16 @@
 <?php
 
+// enable site search
 FulltextSearchable::enable();
 
+// Core extensions
 Object::add_extension('SiteTree', 'CoreSiteTree');
 //Object::add_extension('ContentController', 'CoreSiteTree_Controller');
+
+// Site Config customization
 Object::add_extension('SiteConfig', 'CompanyConfig');
 Object::add_extension('SiteConfig', 'TemplateConfig');
 Object::add_extension('SiteConfig', 'SettingsConfig');
-
-// add Addressable to SiteConfig
 if (class_exists('Addressable')) {
 	Object::add_extension('SiteConfig', 'Addressable');
 	Object::add_extension('SiteConfig', 'Geocodable');
@@ -18,11 +20,11 @@ if (class_exists('Addressable')) {
 Object::add_extension('SectionPage', 'SpiffManager');
 //Object::add_extension('CollectionPage', 'SpiffManager');
 
-// Slideshow
+// FlexSlider
 if (class_exists('FlexSlider')) {
 	Object::add_extension('SectionPage', 'FlexSlider');
-	//Object::add_extension('CollectionPage', 'FlexSlider');
 	Object::add_extension('DetailPage', 'FlexSlider');
+	//Object::add_extension('CollectionPage', 'FlexSlider');
 }
 
 // Comments
