@@ -4,7 +4,7 @@ class DetailPage extends Page {
 	
 	public static $db = array(
 		'PreviewTitle' => 'Varchar(255)',
-		'Abstract' => 'Text',
+		'Abstract' => 'HTMLText',
 		'AbstractFirstParagraph' => 'Boolean'
 	);
 	
