@@ -2,14 +2,7 @@
 
 class DetailPage extends Page {
 	
-	public static $db = array(
-		'PreviewTitle' => 'Varchar(255)',
-		'Abstract' => 'HTMLText',
-		'AbstractFirstParagraph' => 'Boolean'
-	);
-	
 	public static $has_one = array(
-		'Thumbnail' => 'CoreImage',
 		'Image' => 'CoreImage'
 	);
 	
@@ -23,7 +16,6 @@ class DetailPage extends Page {
 			'SortOrder' => 'Int'
 		)
 	);
-	
 	
 	static $singular_name = "Detail Page";
 	static $plural_name = "Detail Pages";	
@@ -39,7 +31,6 @@ class DetailPage extends Page {
 		return parent::MenuChildren()->exclude('ClassName', 'NewsArticle');
 	}
 	
-	
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 		
@@ -49,7 +40,7 @@ class DetailPage extends Page {
 		$fields->addFieldToTab('Root.Main', $TagField, 'Content');
 		
 		// Images
-		$fields->insertBefore(new Tab('Images'), 'Slides');
+		//$fields->insertBefore(new Tab('Images'), 'Slides');
 		
 		$ImageField = UploadField::create('Image', 'Main Image');
 		$ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
@@ -57,25 +48,10 @@ class DetailPage extends Page {
 		$ImageField->setConfig('allowedMaxFileNumber', 1);
 		$ImageField->setRightTitle('Large image displayed near the top of the page');
 		
-		$ThumbField = UploadField::create('Thumbnail', 'Thumbnail Image');
-		$ThumbField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-		$ThumbField->setFolderName('Uploads/DetailThumb');
-		$ThumbField->setConfig('allowedMaxFileNumber', 1);
-		$ThumbField->setRightTitle('Small image used in summary');
-		
 		$fields->addFieldsToTab('Root.Images', array(
-			$ImageField,
-			$ThumbField
+			$ImageField
 		));
 		
-		// Preview
-	    $fields->addFieldsToTab('Root.Preview', array(
-	    	TextField::create('PreviewTitle', 'Preview Title'),
-	    	//TextField::create('PreviewSubTitle', 'Preview Sub Title'),
-	    	CheckboxField::create('AbstractFirstParagraph','Use first paragraph as abstract'),
-	    	$abstract = TextareaField::create('Abstract')
-	    ));
-	    
 	    // Side Bar
 	    // Links
 		$gridFieldConfig = GridFieldConfig_RelationEditor::create();
@@ -91,35 +67,6 @@ class DetailPage extends Page {
 	    }
 	    
 		return $fields;
-	}
-	
-	// summary for collection page
-	public function getSummary() {
-		return $this->renderWith('DetailSummary');
-	}
-	
-	// getters for summary view
-	public function getPreviewHeadline() {
-		if ($this->PreviewTitle) {
-			return $this->PreviewTitle;
-		} elseif ($this->Title) {
-			return $this->Title;
-		}
-		return false;
-	}
-	
-	public function getPreviewThumb() {
-		if ($this->ThumbnailID) {
-			return $this->Thumbnail();
-		} elseif ($this->ImageID) {
-			return $this->Image();
-		} 
-		return false;
-	}
-	
-	// getters for relations
-	public function getLinkList() {
-		return $this->Links()->sort('SortOrder');
 	}
 	
 }

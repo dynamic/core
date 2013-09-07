@@ -1,0 +1,19 @@
+---
+Name: core
+---
+SiteTree: 
+  extensions: 
+    - CoreSiteTree 
+SiteConfig: 
+  extensions: 
+    - CompanyConfig
+    - TemplateConfig
+    - SettingsConfig
+DetailPage:
+  extensions:
+    - PreviewExtension
+    - FlexSlider
+SectionPage:
+  extensions:
+    - FlexSlider
+    - SpiffManager
