@@ -35,7 +35,7 @@ class PreviewExtension extends DataExtension {
 	
 	// summary for list layout
 	public function getSummary() {
-		return $this->owner->renderWith('DetailSummary');
+		return $this->owner->renderWith('DetailListSummary');
 	}
 	
 	// summary for text grid layout
