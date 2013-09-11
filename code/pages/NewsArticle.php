@@ -58,7 +58,7 @@ class NewsArticle extends HolderItem {
     
     // summary
     public function getSummary() {
-	    return $this->renderWith('NewsSummary');
+	    return $this->renderWith('NewsSummary', 'DetailListSummary');
     }
 	
 }
