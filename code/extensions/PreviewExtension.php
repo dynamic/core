@@ -13,23 +13,20 @@ class PreviewExtension extends DataExtension {
 	);
 
 	public function updateCMSFields(FieldList $fields) {
-
-		// Preview
-	    $fields->addFieldsToTab('Root.Preview', array(
-	    	TextField::create('PreviewTitle', 'Preview Title'),
-	    	CheckboxField::create('AbstractFirstParagraph','Use first paragraph as abstract'),
-	    	$abstract = TextareaField::create('Abstract')
-	    ));
-
+		
 		$ThumbField = UploadField::create('Thumbnail', 'Thumbnail Image');
 		$ThumbField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
 		$ThumbField->setFolderName('Uploads/DetailThumb');
 		$ThumbField->setConfig('allowedMaxFileNumber', 1);
 		$ThumbField->setRightTitle('Small image used in summary');
-
-		$fields->addFieldsToTab('Root.Images', array(
-			$ThumbField
-		));
+		
+		// Preview
+	    $fields->addFieldsToTab('Root.Preview', array(
+	    	TextField::create('PreviewTitle', 'Preview Title'),
+	    	CheckboxField::create('AbstractFirstParagraph','Use first paragraph as abstract'),
+	    	$abstract = TextareaField::create('Abstract'),
+	    	$ThumbField
+	    ));
 
 		if(class_exists('DisplayLogicFormField')){
 		    $abstract->displayUnless('AbstractFirstParagraph')->isChecked();
