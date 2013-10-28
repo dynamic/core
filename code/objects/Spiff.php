@@ -3,20 +3,20 @@
 class Spiff extends DataObject {
 
 	static $db = array(
-		'Name' => 'Varchar',
-		'Headline' => 'Varchar',
+		'Name' => 'Varchar(255)',
+		'Headline' => 'Varchar(255)',
 		'Description' => 'HTMLText',
 		'ShowSpiffLink' => 'Boolean'
 	);
-	
+
 	static $has_one = array(
 		'Image' => 'Image',
 		'PageLink' => 'SiteTree',
 		'Category' => 'SpiffCategory'
 	);
-	
+
 	static $default_sort = 'Name ASC';
-	
+
 	// Custom Table Fields
 	function getTableThumb() {
 		return $this->Image()->CroppedImage(50,40);
@@ -30,24 +30,24 @@ class Spiff extends DataObject {
 	function getTableDescription() {
 		return $this->obj('Description')->Summary(40);
 	}
-	
-	
+
+
 	public function getCMSFields() {
-	
+
 		$categories = DataObject::get('SpiffCategory');
 		if ($categories) {
 			$categoryList = $categories->Map('ID', 'Name');
 		} else {
 			$categoryList = null;
 		};
-		
+
 		$ImageField = new UploadField('Image', 'Image');
 		$ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
 		$ImageField->setFolderName('Uploads/Spiffs');
 		$ImageField->setConfig('allowedMaxFileNumber', 1);
-	
+
 		$fields = parent::getCMSFields();
-		
+
 		$fields->addFieldsToTab('Root.Main', array(
 			new TextField('Name'),
 			new TextField('Headline'),
@@ -59,17 +59,17 @@ class Spiff extends DataObject {
 		$fields->addFieldsToTab('Root.Image', array(
 			$ImageField
 		));
-		
+
 		if(class_exists('DisplayLogicFormField')){
 			$pageLink->displayIf('ShowSpiffLink')->isChecked();
          }
         return $fields;
 	}
-	
+
 	public function SideBarSpiff(){
 		return SpiffManager::SideBarSpiff();
 	}
-	
+
 	// return Spiff View
 	public function forTemplate() {
 		return $this->renderWith('SpiffView');
