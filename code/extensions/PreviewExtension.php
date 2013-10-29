@@ -2,24 +2,18 @@
 
 class PreviewExtension extends DataExtension {
 
-	private static $db = array(
-		'PreviewTitle' => 'HTMLVarchar',
-		'Abstract' => 'HTMLText',
-		'AbstractFirstParagraph' => 'Boolean'
-	);
-
 	private static $has_one = array(
 		'Thumbnail' => 'CoreImage'
 	);
 
 	public function updateCMSFields(FieldList $fields) {
-		
+
 		$ThumbField = UploadField::create('Thumbnail', 'Thumbnail Image');
 		$ThumbField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
 		$ThumbField->setFolderName('Uploads/DetailThumb');
 		$ThumbField->setConfig('allowedMaxFileNumber', 1);
 		$ThumbField->setRightTitle('Small image used in summary');
-		
+
 		// Preview
 	    $fields->addFieldsToTab('Root.Preview', array(
 	    	TextField::create('PreviewTitle', 'Preview Title'),

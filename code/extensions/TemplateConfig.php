@@ -1,42 +1,34 @@
 <?php
 class TemplateConfig extends DataExtension {
-	
-	//Todo: Add checkbox for LogoWidth/LogoHeight on/off override
-	static $db = array(
-		'TitleLogo' => 'enum("Logo, Title", "Title")',
-		'LogoDimensionOverride' => 'Boolean',
-		'LogoWidth' => 'Int',
-		'LogoHeight' => 'Int'
-	);
-	
+
 	static $has_one = array(
 		'Logo' => 'Image'
 	);
-	
+
 	static $many_many = array(
 		'FooterLinks' => 'SiteTree'
 	);
-	
+
 	static $many_many_extraFields = array(
 		'FooterLinks' => array(
 			'SortOrder' => 'Int'
 		)
 	);
-	
+
 	static $defaults = array(
 		'TitleLogo' => 'Title'
 	);
-	
+
     public function updateCMSFields(FieldList $fields) {
-    
+
 		$ImageField = UploadField::create('Logo');
 		$ImageField->getValidator()->allowedExtensions = array('jpg', 'gif', 'png');
 		$ImageField->setFolderName('Uploads/Logo');
 		$ImageField->setConfig('allowedMaxFileNumber', 1);
-		
+
 		// options for logo or title display
 		$logoOptions = array('Title' => 'Display Site Title and Slogan', 'Logo' => 'Display Logo');
-		
+
 		$fields->addFieldsToTab('Root.Header', array(
 			OptionsetField::create('TitleLogo', 'Branding', $logoOptions),
 			$ImageField,
@@ -45,21 +37,21 @@ class TemplateConfig extends DataExtension {
 			NumericField::create('LogoHeight')->setTitle('Logo Height')
    			//HeaderField::create('DisplayOptions', 'Display Options'),
 		));
-		
-		$config = GridFieldConfig_RelationEditor::create();	
+
+		$config = GridFieldConfig_RelationEditor::create();
 		//$config->addComponent(new GridFieldBulkEditingTools());
 		//$config->addComponent(new GridFieldBulkImageUpload('ImageID', array('Name')));
 		$config->addComponent(new GridFieldSortableRows("SortOrder"));
-	    
+
 		$FooterGridField = GridField::create("FooterLinks", "Footer Links", $this->owner->FooterLinks()->sort('SortOrder'), $config);
-	    	    
+
 	    // add FlexSlider, width and height
 	    $fields->addFieldsToTab("Root.Footer", array(
 	    	$FooterGridField
 	    ));
-		        		
+
     }
-    
+
     public function getSiteLogo() {
     	$gd = $this->owner->Logo();
     	$data = $this->owner->Data();
@@ -77,5 +69,5 @@ class TemplateConfig extends DataExtension {
     public function getFooterLinkList() {
 	    return $this->owner->FooterLinks()->sort('SortOrder');
     }
-                  
+
 }

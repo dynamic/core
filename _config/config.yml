@@ -1,15 +1,37 @@
 ---
 Name: core
 ---
-SiteTree: 
-  extensions: 
-    - CoreSiteTree 
-SiteConfig: 
-  extensions: 
+SiteTree:
+  db:
+# Core Site Tree
+    SubTitle: Varchar(255)
+  extensions:
+    - CoreSiteTree
+SiteConfig:
+  db:
+# Company Config
+    CompanyName: Varchar(200)
+    PhoneNumber: Varchar(20)
+    EmailAddress: Varchar(100)
+    ShowDirections: Boolean
+    Hours: Text
+# Settings Config
+    ShareThisPublisherID: Varchar(255)
+# Template Config
+    TitleLogo: enum('Logo, Title', 'Title')
+    LogoDimensionOverride: Boolean
+    LogoWidth: Int
+    LogoHeight: Int
+  extensions:
     - CompanyConfig
     - TemplateConfig
     - SettingsConfig
 DetailPage:
+  db:
+# Preview Extension
+    PreviewTitle: HTMLVarchar
+    Abstract: HTMLText
+    AbstractFirstParagraph: Boolean
   extensions:
     - PreviewExtension
     - FlexSlider
