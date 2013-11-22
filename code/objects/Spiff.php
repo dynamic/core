@@ -63,6 +63,7 @@ class Spiff extends DataObject {
 		if(class_exists('DisplayLogicFormField')){
 			$pageLink->displayIf('ShowSpiffLink')->isChecked();
          }
+        $this->extend('updateCMSFields', $fields);
         return $fields;
 	}
 
