@@ -5,6 +5,8 @@ class CollectionPage extends Page {
 	static $singular_name = "Collection Page";
 	static $plural_name = "Collection Pages";
 	static $description = "Displays a searchable, paginated list of content";
+	
+	static $hide_ancestor = "CollectionPage";
 
 	static $allowed_children = array('DetailPage');
 	static $default_child = 'DetailPage';

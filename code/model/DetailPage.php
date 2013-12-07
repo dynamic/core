@@ -20,6 +20,8 @@ class DetailPage extends Page {
 	static $singular_name = "Detail Page";
 	static $plural_name = "Detail Pages";
 	static $description = "Rich content page, includes images and slides";
+	
+	static $hide_ancestor = "Page";
 
 	public static $searchable_fields = array(
 		'Title',
