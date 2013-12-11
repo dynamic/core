@@ -2,14 +2,14 @@
 
 class ContactPage extends UserDefinedForm {
 
-	static $singular_name = "Contact Page";
-	static $plural_name = "Contact Pages";
-	static $description = 'Create a contact form. Includes company contact information and map';
-	
+	private static $singular_name = "Contact Page";
+	private static $plural_name = "Contact Pages";
+	private static $description = 'Create a contact form. Includes company contact information and map';
+
 }
 
 class ContactPage_Controller extends UserDefinedForm_Controller {
-	
-	
-	
+
+
+
 }

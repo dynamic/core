@@ -2,26 +2,26 @@
 
 class DetailPage extends Page {
 
-	public static $has_one = array(
+	private static $has_one = array(
 		'Image' => 'CoreImage'
 	);
 
-	static $many_many = array(
+	private static $many_many = array(
 		'Tags' => 'Tag',
 		'Links' => 'LinkObject'
 	);
 
-	public static $many_many_extraFields = array(
+	private static $many_many_extraFields = array(
 		'Links' => array(
 			'SortOrder' => 'Int'
 		)
 	);
 
-	static $singular_name = "Detail Page";
-	static $plural_name = "Detail Pages";
-	static $description = "Rich content page, includes images and slides";
-	
-	static $hide_ancestor = "Page";
+	private static $singular_name = "Detail Page";
+	private static $plural_name = "Detail Pages";
+	private static $description = "Rich content page, includes images and slides";
+
+	private static $hide_ancestor = "Page";
 
 	public static $searchable_fields = array(
 		'Title',
