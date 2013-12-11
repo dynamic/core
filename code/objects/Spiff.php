@@ -2,20 +2,20 @@
 
 class Spiff extends DataObject {
 
-	static $db = array(
+	private static $db = array(
 		'Name' => 'Varchar(255)',
 		'Headline' => 'Varchar(255)',
 		'Description' => 'HTMLText',
 		'ShowSpiffLink' => 'Boolean'
 	);
 
-	static $has_one = array(
+	private static $has_one = array(
 		'Image' => 'Image',
 		'PageLink' => 'SiteTree',
 		'Category' => 'SpiffCategory'
 	);
 
-	static $default_sort = 'Name ASC';
+	private static $default_sort = 'Name ASC';
 
 	// Custom Table Fields
 	function getTableThumb() {

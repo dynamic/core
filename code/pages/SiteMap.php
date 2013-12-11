@@ -1,7 +1,11 @@
 <?php
 
 class SiteMap extends Page {
-	
+
+	private static $singular_name = "Site Map";
+	private static $plural_name = "Site Maps";
+	private static $description = "Displays a Site Map from your site's content";
+
 	/**
 	 * @return string
 	 */
@@ -38,11 +42,11 @@ class SiteMap extends Page {
 	public function getRootPages() {
 		return SiteTree::get()->filter(array("ParentID" => 0, "ShowInMenus" => 1));
 	}
-	
+
 }
 
 class SiteMap_Controller extends Page_Controller {
-	
-	
-	
+
+
+
 }

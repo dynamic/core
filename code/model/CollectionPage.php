@@ -2,12 +2,14 @@
 
 class CollectionPage extends Page {
 
-	static $singular_name = "Collection Page";
-	static $plural_name = "Collection Pages";
-	static $description = "Displays a searchable, paginated list of content";
+	private static $singular_name = "Collection Page";
+	private static $plural_name = "Collection Pages";
+	private static $description = "Displays a searchable, paginated list of content";
 
-	static $allowed_children = array('DetailPage');
-	static $default_child = 'DetailPage';
+	private static $hide_ancestor = "CollectionPage";
+
+	private static $allowed_children = array('DetailPage');
+	private static $default_child = 'DetailPage';
 
 	private static $managed_detail = 'DetailPage';
 	private static $page_size = 10;

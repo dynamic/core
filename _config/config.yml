@@ -39,3 +39,9 @@ SectionPage:
   extensions:
     - FlexSlider
     - SpiffManager
+VirtualPage:
+  extensions:
+    - HideExtension
+ErrorPage:
+  extensions:
+    - HideExtension

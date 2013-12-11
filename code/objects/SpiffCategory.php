@@ -2,13 +2,13 @@
 
 class SpiffCategory extends DataObject {
 
-	static $db = array(
+	private static $db = array(
 		'Name' => 'Varchar'
 	);
-	
-	static $singular_name = 'Category';
-	static $plural_name = 'Categories';
-	
-	static $default_sort = "Name ASC";
+
+	private static $singular_name = 'Category';
+	private static $plural_name = 'Categories';
+
+	private static $default_sort = "Name ASC";
 
 }

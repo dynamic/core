@@ -1,43 +1,43 @@
 <?php
 
 class LinkObject extends DataObject {
-	
-	static $db = array(
+
+	private static $db = array(
 		'Name' => 'Varchar(255)',
 		'URL' => 'Varchar(255)'
 	);
-	
-	static $has_one = array(
+
+	private static $has_one = array(
 		'PageLink' => 'SiteTree'
 	);
-	
-	static $belongs_many_many = array(
+
+	private static $belongs_many_many = array(
 		'Pages' => 'Page'
 	);
-	
-	static $singular_name = 'Link';
-	static $plural_name = 'Links';
-	
-	static $default_sort = 'Name';
-	
-	static $summary_fields = array(
+
+	private static $singular_name = 'Link';
+	private static $plural_name = 'Links';
+
+	private static $default_sort = 'Name';
+
+	private static $summary_fields = array(
 		'Name' => 'Name',
 		'PageLink.MenuTitle',
 		'URL' => 'URL'
 	);
-	
+
 	public function getExternal() {
 		if ($url = $this->URL) {
-			if (strstr($url, "http://") == $url || strstr($url, "https://") == $url) { 
+			if (strstr($url, "http://") == $url || strstr($url, "https://") == $url) {
 				return $url;
 			} else {
 				return 'http://' . $url;
 			}
-			
-		} 
+
+		}
 		return false;
 	}
-	
+
 	public function getCMSFields() {
 		$fields = FieldList::create(
 			$tabSet = new TabSet('Root',
@@ -50,14 +50,14 @@ class LinkObject extends DataObject {
 				)
 			)
 		);
-		
+
 		return $fields;
 	}
-	
+
 	// Set permissions, allow all users to access in ModelAdmin
 	function canCreate($member=null) {return true;}
-	function canView($member=null) {return true;} 
-	function canEdit($member=null) {return true;} 
+	function canView($member=null) {return true;}
+	function canEdit($member=null) {return true;}
 	function canDelete($member=null) {return true;}
 
 }
