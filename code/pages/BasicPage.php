@@ -2,11 +2,11 @@
 
 	class BasicPage extends DetailPage{
 
-		static $singular_name = "Basic Page";
-		static $plural_name = "Basic Pages";
-		static $description = "Rich content page, includes large image area";
-		
-		static $hide_ancestor = "DetailPage";
+		private static $singular_name = "Basic Page";
+		private static $plural_name = "Basic Pages";
+		private static $description = "Rich content page, includes large image area";
+
+		private static $hide_ancestor = "DetailPage";
 
 	}
 

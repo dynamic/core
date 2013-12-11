@@ -2,7 +2,7 @@
 
 class TagAdmin extends ModelAdmin {
 
-	public static $url_segment = 'tags';
-	public static $menu_title = 'Tags';
-	public static $managed_models = array('Tag');
+	private static $url_segment = 'tags';
+	private static $menu_title = 'Tags';
+	private static $managed_models = array('Tag');
 }
