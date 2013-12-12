@@ -3,10 +3,6 @@
 class HolderPage extends Page {
 
 	public static $item_class = 'HolderItem';
-	private static $singular_name = 'Group Page';
-	private static $plural_name = 'Group Pages';
-
-	private static $hide_ancestor = "HolderPage";
 
 	// tag list for sidebar
 	public function getTags() {
