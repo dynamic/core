@@ -41,7 +41,7 @@ SectionPage:
     - SpiffManager
 VirtualPage:
   extensions:
-    - HideExtension
+    - VirtualPageExtension
 ErrorPage:
   extensions:
     - HideExtension
