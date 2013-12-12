@@ -6,7 +6,6 @@
 		private static $plural_name = "Basic Pages";
 		private static $description = "Rich content page, includes large image area";
 
-		private static $hide_ancestor = "DetailPage";
 
 	}
 

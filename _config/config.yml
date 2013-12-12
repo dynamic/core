@@ -45,3 +45,20 @@ VirtualPage:
 ErrorPage:
   extensions:
     - HideExtension
+ChildListPage:
+  singular_name: "Child List Page"
+  plural_name: "Child List Pages"
+  description: "This page lists its sub pages"
+  hide_ancestor: "ChildListPage"
+CollectionPage:
+  singular_name: "Collection Page"
+  plural_name: "Collection Pages"
+  description: "Displays a searchable, paginated list of content"
+  hide_ancestor: "CollectionPage"
+  allowed_children: ["DetailPage"]
+  default_child: "DetailPage"
+DetailPage:
+  singular_name: "Detail Page"
+  plural_name: "Detail Pages"
+  description: "Rich content page, includes images and slides"
+  hide_ancestor: "Page"
