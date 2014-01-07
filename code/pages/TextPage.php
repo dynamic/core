@@ -10,3 +10,13 @@
 			'ShowInMenus' => 0);
 
 	}
+	
+	class TextPage_Controller extends Page_Controller{
+		
+		public function init(){
+			parent::init();
+			
+		}
+		
+		
+	}
