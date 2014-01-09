@@ -23,6 +23,14 @@ class NewsHolder extends HolderPage {
 			->sort('DateAuthored', 'DESC'));
 	}
 
+	public static function getRecentNews($limit = 10){
+		$news = NewsArticle::get()
+			->limit($limit)
+			->sort(array('DateAuthored'=>'DESC'));
+
+		return $news;
+	}
+
 }
 
 class NewsHolder_Controller extends HolderPage_Controller {
