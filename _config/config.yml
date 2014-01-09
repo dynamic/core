@@ -70,3 +70,14 @@ HolderPage:
   singular_name: "Group Page"
   plural_name: "Group Pages"
   hide_ancestor: "HolderPage"
+HolderItem:
+  singular_name: "Holder Item"
+  plural_name: "Holder Items"
+AlbumPage:
+  singular_name: 'Album Page'
+  plural_name: 'Album Pages'
+  description: 'Album holding images'
+NewsArticle:
+  singular_name: 'News Article'
+  plural_name: 'News Articles'
+  description: 'Article for the News section'

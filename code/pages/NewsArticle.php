@@ -2,10 +2,6 @@
 
 class NewsArticle extends HolderItem {
 
-	private static $singular_name = "News Article";
-	private static $plural_name = "News Articles";
-	private static $description = "Article for the News section";
-
 	// used to determine parent page class
 	public static $listing_page_class = 'NewsHolder';
 
