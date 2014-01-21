@@ -2,6 +2,10 @@
 
 class AlbumCollectionPage extends CollectionPage {
 
+	private static $singular_name = 'Album collection page';
+	private static $plural_name = 'Album collection pages';
+	private static $description = 'Collection page showing all albums';
+
 	private static $managed_detail = 'AlbumPage';
 	private static $page_size = 10;
 
