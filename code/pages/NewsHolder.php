@@ -31,10 +31,11 @@ class NewsHolder extends HolderPage {
 		return $news;
 	}
 
-	public function getRecentNewsShort(){
+	public function getItemsShort(){
 		return NewsArticle::get()
 			->limit(3)
-			->sort(array('DateAuthored'=>'DESC'));
+			->sort(array('DateAuthored' => 'DESC'))
+			->filter(array('ParentID' => $this->ID));
 	}
 
 }
