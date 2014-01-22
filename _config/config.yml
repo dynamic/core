@@ -27,11 +27,6 @@ SiteConfig:
     - TemplateConfig
     - SettingsConfig
 DetailPage:
-  db:
-# Preview Extension
-    PreviewTitle: HTMLVarchar
-    Abstract: HTMLText
-    AbstractFirstParagraph: Boolean
   extensions:
     - PreviewExtension
     - FlexSlider

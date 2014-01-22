@@ -2,6 +2,11 @@
 
 class PreviewExtension extends DataExtension {
 
+	private static $db = array(
+		'PreviewTitle' => 'HTMLVarchar',
+		'Abstract' => 'HTMLText',
+		'AbstractFirstParagraph' => 'Boolean');
+
 	private static $has_one = array(
 		'Thumbnail' => 'CoreImage'
 	);
