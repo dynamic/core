@@ -30,7 +30,7 @@
 			return EventPage::get()
 				->limit(3)
 				->filter(array(
-					'Date:LessThan:Not' => date('Y-m-d',strtotime('now'))
+					'Date:LessThan:Not' => date('Y-m-d',strtotime('now')),
 					'ParentID' => $this->ID))
 				->sort('Date', 'ASC');
 		}
