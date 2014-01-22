@@ -2,8 +2,8 @@
 
 class NewsHolder extends HolderPage {
 
-	private static $singular_name = "News Page";
-	private static $plural_name = "News Pages";
+	private static $singular_name = "News Holder";
+	private static $plural_name = "News Holders";
 	private static $description = "Displays list of News Articles";
 
 	// used by Items method in HolderPage
@@ -29,6 +29,12 @@ class NewsHolder extends HolderPage {
 			->sort(array('DateAuthored'=>'DESC'));
 
 		return $news;
+	}
+
+	public function getRecentNewsShort(){
+		return NewsArticle::get()
+			->limit(3)
+			->sort(array('DateAuthored'=>'DESC'));
 	}
 
 }
