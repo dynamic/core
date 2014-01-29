@@ -67,4 +67,13 @@ class PreviewExtension extends DataExtension {
 		return false;
 	}
 
+	public function getPreviewAbstract(){
+		if(!$this->owner->AbstractFirstParagraph&&$this->owner->Abstract){
+			return $this->owner->Abstract;
+		}elseif((!$this->owner->AbstractFirstParagraph&&!$this->owner->Abstract)||$this->owner->AbstractFirstParagraph){
+			$content = $this->owner->obj('Content');
+			return $content->FirstParagraph();
+		}
+	}
+
 }

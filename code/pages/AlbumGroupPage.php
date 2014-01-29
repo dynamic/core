@@ -6,6 +6,9 @@
 		private static $plural_name = 'Album Group Pages';
 		private static $description = 'Page holding all albums in the site';
 
+		private static $default_child = 'AlbumPage';
+		private static $allowed_children = array('AlbumPage');
+
 		private static $db = array(
 			'Overlay' => 'Boolean');
 
