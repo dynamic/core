@@ -2,6 +2,12 @@
 
 	class AlbumPage extends DetailPage{
 
+		private static $singular_name = 'Album';
+		private static $plural_name = 'Albums';
+		private static $description = 'Album containing images';
+		private static $default_parent = 'AlbumGroupPage';
+		private static $can_be_root = false;
+
 		private static $db = array();
 		private static $has_one = array();
 		private static $has_many = array(
