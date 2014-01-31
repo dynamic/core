@@ -22,6 +22,10 @@
 		private static $many_many_extraFields = array();
 		private static $belongs_many_many = array();
 
+		private static $summary_fields = array(
+			'Title' => 'Title',
+			'GridThumb' => 'Image');
+
 		private static $default_sort = 'Sort';
 
 		public function getCMSFields(){
@@ -40,6 +44,14 @@
 
 			$fields->extend('updateCMSFields');
 			return $fields;
+		}
+
+		public function GridThumb() {
+			$Image = $this->Image();
+			if ( $Image )
+				return $Image->CMSThumbnail();
+			else
+				return null;
 		}
 
 	}
