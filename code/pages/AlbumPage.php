@@ -20,7 +20,12 @@
 		public function getCMSFields(){
 			$fields = parent::getCMSfields();
 
-			$gridField = new GridField('Images', 'Album images', $this->Images(), GridFieldConfig_RelationEditor::create());
+			$config = GridFieldConfig_RelationEditor::create();
+			//$config->addComponent(new GridFieldBulkImageUpload());
+			//$config->addComponent(new GridFieldBulkManager());
+			//$config->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
+			$config->addComponent(new GridFieldSortableRows('Sort'));
+			$gridField = new GridField('Images', 'Album images', $this->Images()->sort('Sort'), $config);
 			$fields->addFieldToTab('Root.Images', $gridField);
 
 			$fields->extend('updateCMSFields');
