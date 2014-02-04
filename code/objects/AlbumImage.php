@@ -23,6 +23,7 @@
 		private static $belongs_many_many = array();
 
 		private static $summary_fields = array(
+			'Image.Name' => 'Image Name',
 			'Title' => 'Title',
 			'GridThumb' => 'Image');
 
@@ -36,6 +37,9 @@
 			$imageField->setFolderName('Uploads/AlbumImages');
 			$imageField->setConfig('allowedMaxFileNumber', 1);
 
+			$fields->addFieldToTab('Root.Main', ReadonlyField::create('Filename')
+				->setTitle('Filename')
+				->setValue($this->Image()->Name));
 			$fields->addFieldToTab('Root.Main', TextField::create('Title')->setTitle('Title'));
 			$fields->addFieldToTab('Root.Main', $imageField);
 			$fields->addFieldToTab('Root.Main', $desc = HTMLEditorField::create('ImageDescription')->setTitle('Description'));
