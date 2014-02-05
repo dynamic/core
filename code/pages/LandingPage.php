@@ -9,7 +9,7 @@ class LandingPage extends SectionPage {
 	public function getCMSFields(){
 		$fields = parent::getCMSFields();
 
-		$fields->extend('updateCMSFields');
+		$fields->extend('updateCMSFields', $fields);
 		return $fields;
 	}
 
