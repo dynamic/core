@@ -10,14 +10,22 @@
 		private static $allowed_children = array('AlbumPage');
 
 		private static $db = array(
-			'Overlay' => 'Boolean');
+			'Overlay' => 'Boolean',
+			'LimitListSize' => 'Boolean',
+			'ListSize' => 'Int');
 
 		public static $item_class = 'AlbumPage';
 
 		public function getCMSFields(){
 			$fields = parent::getCMSFields();
 
-			$fields->addFieldToTab('Root.Main', CheckboxField::create('Overlay')->setTitle('Show albums in overlay'), 'Content');
+			$fields->addFieldToTab('Root.Settings', CheckboxField::create('Overlay')->setTitle('Show albums in overlay'));
+			$fields->addFieldToTab('Root.Settings', CheckboxField::create('LimitListSize')->setTitle('Limit list size'));
+			$fields->addFieldToTab('Root.Settings', $limitInt = NumericField::create('ListSize')->setTitle('List size'));
+			
+			if(class_exists('DisplayLogicFormField')){
+				$limitInt->displayIf('LimitListSize')->isChecked();
+			}
 
 			$fields->extend('updateCMSFields');
 			return $fields;
@@ -46,6 +54,28 @@
 				));
 			}
 
+		}
+		
+		public function Items($filter = array(), $pageSize = 10) {
+
+			$filter['ParentID'] = $this->Data()->ID;
+			$class =  $this->Data()->stat('item_class');
+	
+			// get all records from $class using $filter
+			$items = $class::get()->filter($filter);
+			
+			if($this->Data()->LimitListSize){
+				$list = PaginatedList::create($items, $this->request);
+				
+				$listSize = ($this->Data()->ListSize) ? $this->Data()->ListSize : $pageSize;
+				
+				$list->setPageLength($listSize);
+			}else{
+				$list = $items;
+			}
+	
+			return $list;
+	
 		}
 
 	}
