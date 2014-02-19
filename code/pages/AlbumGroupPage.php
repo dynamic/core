@@ -40,21 +40,12 @@
 
 			$themeDir = SSViewer::get_theme_folder();
 
-			if($this->Data()->Overlay){
-				Requirements::combine_files(
-					'Gallery.css',
-					array(
-						$themeDir . 'css/flexgallery.css',
-						$themeDir . 'css/gallery.css'
-				));
-
-				Requirements::combine_files(
-					'Gallery.js',
-					array(
-						$themeDir . 'javascript/flexslider/jquery.flexslider-min.js',
-						$themeDir . 'javascript/gallery_init.js'
-				));
-			}
+			Requirements::combine_files(
+				'Gallery.css',
+				array(
+					$themeDir . 'css/flexgallery.css',
+					$themeDir . 'css/gallery.css'
+			));
 
 		}
 		
