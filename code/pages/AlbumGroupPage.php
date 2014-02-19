@@ -43,8 +43,8 @@
 			Requirements::combine_files(
 				'Gallery.css',
 				array(
-					$themeDir . 'css/flexgallery.css',
-					$themeDir . 'css/gallery.css'
+					$themeDir . '/css/flexgallery.css',
+					$themeDir . '/css/gallery.css'
 			));
 
 		}
