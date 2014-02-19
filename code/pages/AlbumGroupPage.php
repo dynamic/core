@@ -38,19 +38,21 @@
 		public function init(){
 			parent::init();
 
+			$themeDir = SSViewer::get_theme_folder();
+
 			if($this->Data()->Overlay){
 				Requirements::combine_files(
 					'Gallery.css',
 					array(
-						'themes/dynamic-core-theme/css/flexgallery.css',
-						'themes/dynamic-core-theme/css/gallery.css'
+						$themeDir . 'css/flexgallery.css',
+						$themeDir . 'css/gallery.css'
 				));
 
 				Requirements::combine_files(
 					'Gallery.js',
 					array(
-						'themes/dynamic-core-theme/javascript/flexslider/jquery.flexslider-min.js',
-						'themes/dynamic-core-theme/javascript/gallery_init.js'
+						$themeDir . 'javascript/flexslider/jquery.flexslider-min.js',
+						$themeDir . 'javascript/gallery_init.js'
 				));
 			}
 
