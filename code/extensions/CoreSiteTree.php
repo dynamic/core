@@ -3,7 +3,7 @@
 class CoreSiteTree extends SiteTreeExtension {
 
 	public function updateCMSFields(FieldList $fields) {
-		$fields->addFieldToTab('Root.Main', TextField::create('SubTitle', 'Sub Title'), 'Content');
+		$fields->insertAfter(TextField::create('SubTitle', 'Sub Title'), 'MenuTitle');
 	}
 
 	public function MenuChildren() {
