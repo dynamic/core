@@ -17,7 +17,7 @@ class DetailPage extends Page {
 		)
 	);
 
-	public static $searchable_fields = array(
+	private static $searchable_fields = array(
 		'Title',
 		'Tags.ID'
 	);
