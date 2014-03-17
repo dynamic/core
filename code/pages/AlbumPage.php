@@ -28,7 +28,7 @@
 			$gridField = new GridField('Images', 'Album images', $this->Images()->sort('Sort'), $config);
 			$fields->addFieldToTab('Root.Images', $gridField);
 
-			$fields->extend('updateCMSFields');
+			$this->extend('updateCMSFields', $fields);
 			return $fields;
 		}
 		
