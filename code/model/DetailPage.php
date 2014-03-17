@@ -58,6 +58,8 @@ class DetailPage extends Page {
 	    	$LinksField
 	    ));
 
+		$this->extend('updateCMSFields', $fields);
+
 		return $fields;
 	}
 
