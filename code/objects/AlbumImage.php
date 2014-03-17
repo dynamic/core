@@ -58,7 +58,7 @@
 				return null;
 		}
 
-		public function canAdd($member = null){
+		public function canCreate($member = null){
 			return true;
 		}
 
