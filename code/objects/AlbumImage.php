@@ -46,7 +46,7 @@
 			$fields->removeFieldFromTab('Root.Main', 'Sort');
 			$fields->removeFieldfromTab('Root.Main', 'AlbumID');
 
-			$fields->extend('updateCMSFields');
+			$this->extend('updateCMSFields', $fields);
 			return $fields;
 		}
 
