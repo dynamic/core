@@ -63,7 +63,7 @@ class HolderPage_Controller extends Page_Controller {
 		$request = $this->request;
 		$params = $request->allParams();
 
-		if ($tag = Convert::raw2sql($params['ID'])) {
+		if ($tag = Convert::raw2sql(urldecode($params['ID']))) {
 
 			$filter = array('Tags.Title' => $tag);
 
