@@ -26,10 +26,6 @@ SiteConfig:
     - CompanyConfig
     - TemplateConfig
     - SettingsConfig
-DetailPage:
-  extensions:
-    - PreviewExtension
-    - FlexSlider
 SectionPage:
   extensions:
     - FlexSlider
@@ -61,6 +57,9 @@ DetailPage:
   plural_name: "Detail Pages"
   description: "Rich content page, includes images and slides"
   hide_ancestor: "Page"
+  extensions:
+    - PreviewExtension
+    - FlexSlider
 HolderPage:
   singular_name: "Group Page"
   plural_name: "Group Pages"
