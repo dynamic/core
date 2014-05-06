@@ -42,7 +42,11 @@ class DetailPage extends Page {
 		$ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
 		$ImageField->setFolderName('Uploads/DetailMain');
 		$ImageField->setConfig('allowedMaxFileNumber', 1);
-		$ImageField->setRightTitle('Large image displayed near the top of the page');
+		if($this->stat('customImageRightTitle')){
+			$ImageField->setRightTitle($this->stat('customImageRightTitle'));
+		}else{
+			$ImageField->setRightTitle('Large image displayed near the top of the page');
+		}
 
 		$fields->addFieldsToTab('Root.Images', array(
 			$ImageField
