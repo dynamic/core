@@ -17,7 +17,11 @@ class PreviewExtension extends DataExtension {
 		$ThumbField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
 		$ThumbField->setFolderName('Uploads/DetailThumb');
 		$ThumbField->setConfig('allowedMaxFileNumber', 1);
-		$ThumbField->setRightTitle('Small image used in summary');
+		if($this->owner->stat('customThumbnailTitle')){
+			$ThumbField->setRightTitle($this->owner->stat('customThumbnailTitle'));
+		}else{
+			$ThumbField->setRightTitle('Small image used in summary');
+		}
 
 		// Preview
 	    $fields->addFieldsToTab('Root.Preview', array(
