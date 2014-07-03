@@ -11,7 +11,7 @@
 		public static function getUpcomingEvents($filter = null, $limit = 10, $allCalendars = false){
 
 			if($filter===null){
-				$filter = array('Date:LessThan:Not' => date('Y-m-d',strtotime('now')));
+				$filter = array('Date:GreaterThanOrEqual' => date('Y-m-d',strtotime('now')));
 			}
 			if($limit == 0){
 				return EventPage::get()
@@ -48,6 +48,14 @@
 
 		public function items($filter = array(), $pageSize = 10){
 
+		}
+
+		public function getUpcomingEvents(){
+			$filter = array(
+				'Date:GreaterThanOrEqual' => date('Y-m-d',strtotime('now')),
+				'ParentID' => $this->data()->ID
+			);
+			return EventHolder::getUpcomingEvents($filter, 10, false);
 		}
 
 	}
