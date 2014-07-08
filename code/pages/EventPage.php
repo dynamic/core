@@ -14,6 +14,9 @@
 		private static $many_many = array();
 		private static $many_many_extraFields = array();
 		private static $belongs_many_many = array();
+		private static $defaults = array(
+			'ShowInMenus' => 0
+		);
 
 		public function getCMSFields(){
 			$fields = parent::getCMSFields();
