@@ -80,4 +80,10 @@ class Spiff extends DataObject {
 		return $this->renderWith('SpiffView');
 	}
 
+	// Set permissions, allow all users to access in ModelAdmin
+	function canCreate($member=null) {return true;}
+	function canView($member=null) {return true;}
+	function canEdit($member=null) {return true;}
+	function canDelete($member=null) {return true;}
+
 }
