@@ -26,6 +26,8 @@
 			$fields->addFieldToTab('Root.EventInformation', DateField::create('Date')->setTitle('Event Date'));
 			$fields->addFieldToTab('Root.EventInformation', TimePickerField::create('Time')->setTitle('Event Time'));
 
+			$this->extend('updateCMSFields', $fields);
+
 			return $fields;
 		}
 
