@@ -9,7 +9,7 @@
  */
 class HideExtension extends DataExtension {
 	
-	public function canCreate($member){ 
+	public function canCreate($member = null){
 	   return false; 
 	}
 	
