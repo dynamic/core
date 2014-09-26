@@ -50,12 +50,17 @@
 
 		}
 
-		public function getUpcomingEvents(){
+		public function getUpcomingEvents($pageSize = 10){
 			$filter = array(
 				'Date:GreaterThanOrEqual' => date('Y-m-d',strtotime('now')),
 				'ParentID' => $this->data()->ID
 			);
-			return EventHolder::getUpcomingEvents($filter, 10, false);
+			$items = EventHolder::getUpcomingEvents($filter, 0, false);
+
+            $list = PaginatedList::create($items, $this->request);
+            $list->setPageLength($pageSize);
+
+            return $list;
 		}
 
 	}
