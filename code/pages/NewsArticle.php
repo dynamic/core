@@ -39,7 +39,7 @@ class NewsArticle extends HolderItem {
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
-        $fields->addFieldToTab('Root.Main', TextField::create('Author')->setTitle('Author'));
+        $fields->addFieldToTab('Root.Main', TextField::create('Author')->setTitle('Author'), 'Content');
 		$fields->addFieldToTab('Root.Main', $dateTimeField = new DatetimeField('DateAuthored'), 'Content');
 		$dateTimeField->getDateField()->setConfig('showcalendar', true);
 
