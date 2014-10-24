@@ -8,7 +8,10 @@
 
 		private static $db = array(
 			'Date' => 'Date',
-			'Time' => 'Time');
+            'EndDate' => 'Date',
+			'Time' => 'Time',
+            'EndTime' => 'Time'
+        );
 		private static $has_one = array();
 		private static $has_many = array();
 		private static $many_many = array();
@@ -23,8 +26,10 @@
 
 			DateField::set_default_config('showcalendar',true);
 
-			$fields->addFieldToTab('Root.EventInformation', DateField::create('Date')->setTitle('Event Date'));
+			$fields->addFieldToTab('Root.EventInformation', DateField::create('Date')->setTitle('Event Start Date'));
+            $fields->addFieldToTab('Root.EventInformation', DateField::create('EndDate')->setTitle('Event End Date'));
 			$fields->addFieldToTab('Root.EventInformation', TimePickerField::create('Time')->setTitle('Event Time'));
+            $fields->addFieldToTab('Root.EventInformation', TimePickerField::create('EndTime')->setTitle('Event End Time'));
 
 			$this->extend('updateCMSFields', $fields);
 
