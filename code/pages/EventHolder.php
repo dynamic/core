@@ -110,7 +110,7 @@
             return $end_date;
         }
 
-		public static function getUpcomingEvents($filter = null, $limit = 10, $allCalendars = false){
+		public static function getUpcomingEvents($filter = null, $limit = 10){
 
 			if($filter===null){
 				$filter = array('Date:GreaterThanOrEqual' => date('Y-m-d',strtotime('now')));
@@ -129,6 +129,17 @@
             return $events;
 
 		}
+
+        public function getEvents($filter = null, $limit = 10){
+            $eventList = ArrayList::create();
+            $events = self::getUpcomingEvents($filter, $limit);
+            $eventList->merge($events);
+            if($this->ICSFeed){
+                $icsEvents = $this->getFeedEvents();
+                $eventList->merge($icsEvents);
+            }
+            return $eventList;
+        }
 
 		public function getItemsShort(){
 			return EventPage::get()
@@ -154,7 +165,7 @@
             return $this->getUpcomingEvents();
 		}
 
-		public function getUpcomingEvents(){
+		public function getUpcomingEvents($paginate = true){
             $pageSize = ($this->data()->EventsPerPage == 0) ? 10 : $this->data()->EventsPerPage;
 
 			$filter = array(
@@ -165,14 +176,9 @@
                 $end_date = $this->data()->buildEndDate();
                 $filter['Date:LessThanOrEqual'] = $end_date;
             }
-			$items = EventHolder::getUpcomingEvents($filter, 0, false);
-            $newItems = ArrayList::create();
-            $newItems->merge($items);
-            if($this->data()->ICSFeed){
-                $additionalEvents = $this->data()->getFeedEvents();
-                $newItems->merge($additionalEvents);
-            }
-            $newItems = $newItems->sort(
+			$items = $this->data()->getEvents($filter, 0);
+
+            $newItems = $items->sort(
                 array(
                     'Date' => 'ASC',
                     'Time' => 'ASC'
@@ -180,9 +186,13 @@
             );
 
             //debug::show($newItems);
+            if($paginate === true){
+                $list = PaginatedList::create($newItems, $this->request);
+                $list->setPageLength($pageSize);
+            }else{
+                $list = $newItems;
+            }
 
-            $list = PaginatedList::create($newItems, $this->request);
-            $list->setPageLength($pageSize);
 
             return $list;
 		}
