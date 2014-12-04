@@ -21,8 +21,8 @@
 			$fields = parent::getCMSfields();
 
 			$config = GridFieldConfig_RelationEditor::create();
-			//$config->addComponent(new GridFieldBulkImageUpload());
-			//$config->addComponent(new GridFieldBulkManager());
+			$config->addComponent(new GridFieldBulkImageUpload());
+			$config->addComponent(new GridFieldBulkManager());
 			//$config->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
 			$config->addComponent(new GridFieldSortableRows('Sort'));
 			$gridField = new GridField('Images', 'Album images', $this->Images()->sort('Sort'), $config);
