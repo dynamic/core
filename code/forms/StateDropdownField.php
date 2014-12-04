@@ -12,7 +12,7 @@ class StateDropdownField extends DropdownField {
 	 */
 	//private static $default_to_locale = true;
 
-    public static $source = array(
+    public static $stateSource = array(
         'AL'=>"Alabama",
         'AK'=>"Alaska",
         'AZ'=>"Arizona",
@@ -97,7 +97,7 @@ class StateDropdownField extends DropdownField {
 	public function __construct($name, $title = null, $source = null, $value = "", $form=null) {
 		if(!is_array($source)) {
 			// Get a list of countries from Zend
-			$source = self::$source;
+			$source = self::$stateSource;
 		}
 
 		parent::__construct($name, ($title===null) ? $name : $title, $source, $value, $form);
