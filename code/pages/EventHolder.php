@@ -69,13 +69,15 @@
                     || $startdatetime->get() > $end->get() && $enddatetime->get() > $end->get())) {
                     // do nothing; dates outside range
                 } else {
-                    $feedevent->Date = $startdatetime->format('Y-m-d');
-                    $feedevent->Time = $startdatetime->format('H:i:s');
+                    if($startdatetime->get() > $start->get()){
+                        $feedevent->Date = $startdatetime->format('Y-m-d');
+                        $feedevent->Time = $startdatetime->format('H:i:s');
 
-                    $feedevent->EndDate = $enddatetime->format('Y-m-d');
-                    $feedevent->EndTime = $enddatetime->format('H:i:s');
+                        $feedevent->EndDate = $enddatetime->format('Y-m-d');
+                        $feedevent->EndTime = $enddatetime->format('H:i:s');
 
-                    $feedevents->push($feedevent);
+                        $feedevents->push($feedevent);
+                    }
                 }
             }
             return $feedevents;
