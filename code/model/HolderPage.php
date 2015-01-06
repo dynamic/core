@@ -12,7 +12,7 @@ class HolderPage extends Page {
 				'Pages.ID:GreaterThan'=>0,
 				'Pages.ClassName' => $this->stat('item_class'),
 				'Pages.ID.ParentID' => $this->ID))
-			//->sort('RelatedPages', 'DESC')
+			->sort('Title')
 			->limit(10);
 		if($hit->Count()==0){
 			$hit = false;
