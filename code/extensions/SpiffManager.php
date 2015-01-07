@@ -11,7 +11,7 @@ class SpiffManager extends DataExtension {
 			'SortOrder' => 'Int'
 		)
 	);
-	
+
 	public function getSpiffList() {
 		return $this->owner->Spiffs()->sort('SortOrder');
 	}
@@ -21,7 +21,13 @@ class SpiffManager extends DataExtension {
 		$config = GridFieldConfig_RelationEditor::create();	
 		//$config->addComponent(new GridFieldBulkEditingTools());
 		//$config->addComponent(new GridFieldBulkImageUpload('ImageID', array('Name')));
-		$config->addComponent(new GridFieldSortableRows("SortOrder"));
+		if(class_exists('GridFieldManyRelationHandler')){
+			$config->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
+			$config->addComponent(new GridFieldSortableRows("SortOrder"), 'GridFieldManyRelationHandler');
+		}else{
+			$config->addComponent(new GridFieldSortableRows("SortOrder"));
+		}
+
 	    
 		$SpiffGridField = GridField::create("Spiffs", "Spiffs", $this->owner->Spiffs()->sort('SortOrder'), $config);
 	    	    
@@ -38,6 +44,10 @@ class SpiffManager extends DataExtension {
 			return false;
 		}
 		return true;
+	}
+
+	public function getSpiffs(){
+		return $this->owner->getManyManyComponents('Spiffs')->sort('SortOrder');
 	}
 		
 }
