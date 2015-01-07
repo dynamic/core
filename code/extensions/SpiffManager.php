@@ -24,6 +24,7 @@ class SpiffManager extends DataExtension {
 		if(class_exists('GridFieldManyRelationHandler')){
 			$config->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
 			$config->addComponent(new GridFieldSortableRows("SortOrder"), 'GridFieldManyRelationHandler');
+			$config->removeComponentsByType('GridFieldAddExistingAutocompleter');
 		}else{
 			$config->addComponent(new GridFieldSortableRows("SortOrder"));
 		}
