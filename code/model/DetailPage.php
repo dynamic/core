@@ -55,7 +55,13 @@ class DetailPage extends Page {
 	    // Side Bar
 	    // Links
 		$gridFieldConfig = GridFieldConfig_RelationEditor::create();
-		$gridFieldConfig->addComponents(new GridFieldSortableRows('SortOrder'));
+		if(class_exists('GridFieldManyRelationHandler')){
+			$gridFieldConfig->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
+			$gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"), 'GridFieldManyRelationHandler');
+			$gridFieldConfig->removeComponentsByType('GridFieldAddExistingAutocompleter');
+		}else{
+			$gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"));
+		}
 	    $LinksField = GridField::create("Links", "Links", $this->Links()->sort('SortOrder'), $gridFieldConfig);
 
 	    $fields->addFieldsToTab('Root.SideBar', array(
@@ -65,6 +71,10 @@ class DetailPage extends Page {
 		$this->extend('updateCMSFields', $fields);
 
 		return $fields;
+	}
+
+	public function getLinks(){
+		return $this->getManyManyComponents('Links')->sort('SortOrder');
 	}
 
 }
