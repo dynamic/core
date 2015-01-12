@@ -23,8 +23,9 @@
 			$config = GridFieldConfig_RelationEditor::create();
 			$config->addComponent(new GridFieldBulkImageUpload());
 			$config->addComponent(new GridFieldBulkManager());
-			//$config->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
+			$config->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
 			$config->addComponent(new GridFieldSortableRows('Sort'));
+			$config->removeComponentsByType('GridFieldAddExistingAutocompleter');
 			$gridField = new GridField('Images', 'Album images', $this->Images()->sort('Sort'), $config);
 			$fields->addFieldToTab('Root.Images', $gridField);
 
