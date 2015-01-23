@@ -36,6 +36,13 @@
 			return $fields;
 		}
 
+		public function onBeforeWrite(){
+			parent::onBeforeWrite();
+			if(!$this->EndDate){
+				$this->EndDate = $this->Date;
+			}
+		}
+
 	}
 
 	class EventPage_Controller extends DetailPage_Controller{

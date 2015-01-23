@@ -171,7 +171,7 @@
             $pageSize = ($this->data()->EventsPerPage == 0) ? 10 : $this->data()->EventsPerPage;
 
 			$filter = array(
-				'Date:GreaterThanOrEqual' => date('Y-m-d',strtotime('now')),
+                'EndDate:GreaterThanOrEqual' => date('Y-m-d', strtotime('now')),
 				'ParentID' => $this->data()->ID
 			);
             if($this->data()->RangeToShow != 'All Upcoming'){
