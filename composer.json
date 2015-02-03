@@ -1,18 +1,25 @@
 {
-    "name": "dynamic/webbuilder",
-    "description": "The Dynamic WebBuilder Module",
-    "keywords": ["silverstripe", "theme"],
+    "name": "dynamic/core",
+    "description": "The Dynamic Core Module",
+    "keywords": ["silverstripe", "module"],
     "license": "BSD-3-Clause",
     "type": "silverstripe-module",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/dynamic/SilverStripe-FlexSlider.git"
+        }
+    ],
     "require": {
-    	"silverstripe/framework": ">=3.0",
-    	"silverstripe/dashboard": "*",
-    	"unclecheese/eventcalendar": "dev-master",
-    	"silverstripe-labs/googleanalytics": "1.1.*@dev",
-    	"silverstripe/googlesitemaps": "1.1.*@dev",
-    	"silverstripe/userforms": "1.0.*@dev"
+    	"silverstripe/cms": "3.1.*",
+        "dynamic/flexslider": "dev-master",
+        "colymba/gridfield-bulk-editing-tools": "*",
+        "undefinedoffset/sortablegridfield": "*",
+        "silverstripe/tagfield": "*",
+        "silverstripe/timepickerfield": "1.0.*",
+        "silverstripe/userforms": "2.0.*",
+        "silverstripe/spamprotection": "dev-master"
     },
-   
     "authors": [
         {
             "name": "Dynamic Inc",
@@ -20,6 +27,6 @@
         }
     ],
 	"extra": {
-		"installer-name": "webbuilder"
+		"installer-name": "dynamic-core"
 	}
 }
