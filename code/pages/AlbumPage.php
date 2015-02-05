@@ -1,6 +1,6 @@
 <?php
 
-	class AlbumPage extends DetailPage{
+	class AlbumPage extends DetailPage implements PermissionProvider{
 
 		private static $singular_name = 'Album';
 		private static $plural_name = 'Albums';
@@ -23,7 +23,9 @@
 			$config = GridFieldConfig_RelationEditor::create();
 			$config->addComponent(new GridFieldBulkImageUpload());
 			$config->addComponent(new GridFieldBulkManager());
-			$config->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
+			if(class_exists('GridFieldManyRelationHandler')){
+				$config->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
+			}
 			$config->addComponent(new GridFieldSortableRows('Sort'));
 			$config->removeComponentsByType('GridFieldAddExistingAutocompleter');
 			$gridField = new GridField('Images', 'Album images', $this->Images()->sort('Sort'), $config);
@@ -65,6 +67,33 @@
 			return $template->process($this->customise(new ArrayData(array(
 				'Pages' => new ArrayList(array_reverse($pages))
 			))));
+		}
+
+		/**
+		 * @param Member $member
+		 * @return boolean
+		 */
+		public function canView($member = false) {
+			return true;
+		}
+
+		public function canEdit($member = false) {
+			return Permission::check('Album_CRUD');
+		}
+
+		public function canDelete($member = false) {
+			return Permission::check('Album_CRUD');
+		}
+
+		public function canCreate($member = false) {
+			return Permission::check('Album_CRUD');
+		}
+
+		public function providePermissions() {
+			return array(
+				//'Location_VIEW' => 'Read a Location',
+				'Album_CRUD' => 'Create, Update and Delete an album/holder/collection'
+			);
 		}
 
 	}
