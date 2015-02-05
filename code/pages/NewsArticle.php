@@ -48,10 +48,19 @@ class NewsArticle extends HolderItem {
 		return $fields;
 	}
 
-	// News Archive Grouping
+	/***
+	 * @return bool|string
+	 */
 	public function getMonthCreated() {
-        return date('F Y', strtotime($this->DateAuthored));
+        return ($this->DateAuthored) ? date('F Y', strtotime($this->DateAuthored)) : false;
     }
+
+	/***
+	 * @return bool|string
+	 */
+	public function getYearCreated() {
+		return ($this->DateAuthored) ? date('Y', strtotime($this->DateAuthored)) : false;
+	}
 
     // summary
     public function getSummary() {
