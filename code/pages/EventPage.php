@@ -43,7 +43,7 @@
 				return $result->error('End Time must be later than the Start Time');
 			}
 
-			if($this->Date > $this->EndDate){
+			if($this->EndDate && ($this->Date > $this->EndDate)){
                 return $result->error('End Date must be equal to the Start Date or in the future');
             }
 
