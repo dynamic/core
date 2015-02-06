@@ -36,6 +36,20 @@
 			return $fields;
 		}
 
+		public function validate(){
+			$result = parent::validate();
+
+			if($this->EndTime && ($this->Time > $this->EndTime)){
+				return $result->error('End Time must be later than the Start Time');
+			}
+
+			if($this->Date > $this->EndDate){
+                return $result->error('End Date must be equal to the Start Date or in the future');
+            }
+
+			return $result;
+		}
+
 		public function onBeforeWrite(){
 			parent::onBeforeWrite();
 			if(!$this->EndDate){
