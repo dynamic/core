@@ -43,6 +43,10 @@ class SiteMap extends Page {
 		return SiteTree::get()->filter(array("ParentID" => 0, "ShowInMenus" => 1));
 	}
 
+	public function canCreate($member = null){
+		return (SiteMap::get()->first()) ? false : true;
+	}
+
 }
 
 class SiteMap_Controller extends Page_Controller {

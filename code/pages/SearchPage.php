@@ -10,6 +10,10 @@ class SearchPage extends Page {
 		'ShowInMenus' => 0
 	);
 
+	public function canCreate($member = null){
+		return (SearchPage::get()->first()) ? false : true;
+	}
+
 }
 
 class SearchPage_Controller extends Page_Controller {

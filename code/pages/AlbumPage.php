@@ -73,19 +73,19 @@
 		 * @param Member $member
 		 * @return boolean
 		 */
-		public function canView($member = false) {
-			return true;
+		public function canView($member = null) {
+			return parent::canView($member = null);
 		}
 
-		public function canEdit($member = false) {
+		public function canEdit($member = null) {
 			return Permission::check('Album_CRUD');
 		}
 
-		public function canDelete($member = false) {
+		public function canDelete($member = null) {
 			return Permission::check('Album_CRUD');
 		}
 
-		public function canCreate($member = false) {
+		public function canCreate($member = null) {
 			return Permission::check('Album_CRUD');
 		}
 
