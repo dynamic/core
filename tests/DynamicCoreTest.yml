@@ -12,3 +12,23 @@ AlbumPage:
   album2:
     Title: Album of Stuff
     URLSegment: album-of-stuff
+BasicPage:
+  basic1:
+    Title: Basic Page 1
+  basic2:
+    Title: Another Basic Page
+ContactPage:
+  contact1:
+    Title: Contact Page 1
+  contact2:
+    Title: Another Contact Page
+DynamicHomePage:
+  newhome1:
+    Title: Dynamic Home Page
+  newhome2:
+    Title: Yet Another Instance
+FormPage:
+  form1:
+    Title: Form Page 1
+  form2:
+    Title: Another Form Page

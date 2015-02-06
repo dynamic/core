@@ -1,6 +1,6 @@
 <?php
 
-class DetailPage extends Page {
+class DetailPage extends Page{
 
 	private static $has_one = array(
 		'Image' => 'CoreImage'
@@ -75,6 +75,10 @@ class DetailPage extends Page {
 
 	public function getLinks(){
 		return $this->getManyManyComponents('Links')->sort('SortOrder');
+	}
+
+	public function canView($member = null){
+		return parent::canView($member = null);
 	}
 
 }

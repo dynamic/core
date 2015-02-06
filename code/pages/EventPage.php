@@ -1,6 +1,6 @@
 <?php
 
-	class EventPage extends DetailPage{
+	class EventPage extends DetailPage implements PermissionProvider{
 
 		private static $singular_name = 'Event';
 		private static $plural_name = 'Events';
@@ -41,6 +41,33 @@
 			if(!$this->EndDate){
 				$this->EndDate = $this->Date;
 			}
+		}
+
+		/**
+		 * @param Member $member
+		 * @return boolean
+		 */
+		public function canView($member = null) {
+			return parent::canView($member = null);
+		}
+
+		public function canEdit($member = null) {
+			return Permission::check('Event_CRUD');
+		}
+
+		public function canDelete($member = null) {
+			return Permission::check('Event_CRUD');
+		}
+
+		public function canCreate($member = null) {
+			return Permission::check('Event_CRUD');
+		}
+
+		public function providePermissions() {
+			return array(
+				//'Location_VIEW' => 'Read a Location',
+				'Event_CRUD' => 'Create, Update and Delete a Event Page'
+			);
 		}
 
 	}
