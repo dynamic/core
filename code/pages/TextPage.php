@@ -1,6 +1,6 @@
 <?php
 
-	class TextPage extends Page{
+	class TextPage extends Page implements PermissionProvider{
 
 		private static $singular_name = 'Text Page';
 		private static $plural_name = 'Text Pages';
@@ -8,6 +8,34 @@
 
 		private static $defaults = array(
 			'ShowInMenus' => 0);
+
+        /**
+         * @param Member $member
+         * @return boolean
+         */
+        public function canView($member = null) {
+            return parent::canView($member = null);
+        }
+
+        public function canEdit($member = null) {
+            return Permission::check('TextPage_CRUD');
+        }
+
+        public function canDelete($member = null) {
+            return Permission::check('TextPage_CRUD');
+        }
+
+        public function canCreate($member = null) {
+            if (SiteMap::get()->first()) return false;
+            return Permission::check('TextPage_CRUD');
+        }
+
+        public function providePermissions() {
+            return array(
+                //'Location_VIEW' => 'Read a Location',
+                'TextPage_CRUD' => 'Create, Update and Delete a Text Page'
+            );
+        }
 
 	}
 	

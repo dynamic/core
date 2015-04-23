@@ -92,7 +92,7 @@
 		public function providePermissions() {
 			return array(
 				//'Location_VIEW' => 'Read a Location',
-				'Album_CRUD' => 'Create, Update and Delete an album/holder/collection'
+				'Album_CRUD' => 'Create, Update and Delete an Album Page'
 			);
 		}
 

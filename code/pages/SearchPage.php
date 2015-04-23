@@ -1,6 +1,6 @@
 <?php
 
-class SearchPage extends Page {
+class SearchPage extends Page implements PermissionProvider{
 
 	private static $singular_name = "Search Page";
 	private static $plural_name = "Search Pages";
@@ -10,9 +10,33 @@ class SearchPage extends Page {
 		'ShowInMenus' => 0
 	);
 
-	public function canCreate($member = null){
-		return (SearchPage::get()->first()) ? false : true;
-	}
+    /**
+     * @param Member $member
+     * @return boolean
+     */
+    public function canView($member = null) {
+        return parent::canView($member = null);
+    }
+
+    public function canEdit($member = null) {
+        return Permission::check('SearchPage_CRUD');
+    }
+
+    public function canDelete($member = null) {
+        return Permission::check('SearchPage_CRUD');
+    }
+
+    public function canCreate($member = null) {
+        if (SearchPage::get()->first()) return false;
+        return Permission::check('SearchPage_CRUD');
+    }
+
+    public function providePermissions() {
+        return array(
+            //'Location_VIEW' => 'Read a Location',
+            'SearchPage_CRUD' => 'Create, Update and Delete a Search Page'
+        );
+    }
 
 }
 

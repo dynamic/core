@@ -1,6 +1,6 @@
 <?php
 
-class DynamicHomePage extends SectionPage {
+class DynamicHomePage extends SectionPage implements PermissionProvider{
 
 	private static $singular_name = "Home Page";
 	private static $plural_name = "Home Pages";
@@ -10,9 +10,33 @@ class DynamicHomePage extends SectionPage {
 		'ShowInMenus' => 0
 	);
 
-	public function canCreate($member = null){
-		return (DynamicHomePage::get()->first()) ? false : true;
-	}
+    /**
+     * @param Member $member
+     * @return boolean
+     */
+    public function canView($member = null) {
+        return parent::canView($member = null);
+    }
+
+    public function canEdit($member = null) {
+        return Permission::check('DynamicHomePage_CRUD');
+    }
+
+    public function canDelete($member = null) {
+        return Permission::check('DynamicHomePage_CRUD');
+    }
+
+    public function canCreate($member = null) {
+        if (DynamicHomePage::get()->first()) return false;
+        return Permission::check('DynamicHomePage_CRUD');
+    }
+
+    public function providePermissions() {
+        return array(
+            //'Location_VIEW' => 'Read a Location',
+            'DynamicHomePage_CRUD' => 'Create, Update and Delete a Home Page'
+        );
+    }
 
 }
 

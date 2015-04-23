@@ -1,6 +1,6 @@
 <?php
 
-	class NewsGroupPage extends HolderPage{
+	class NewsGroupPage extends HolderPage implements PermissionProvider{
 
 		private static $singular_name = "News and Events";
 		private static $plural_name = 'News and Events';
@@ -17,6 +17,33 @@
 
 			return $fields;
 		}
+
+        /**
+         * @param Member $member
+         * @return boolean
+         */
+        public function canView($member = null) {
+            return parent::canView($member = null);
+        }
+
+        public function canEdit($member = null) {
+            return Permission::check('NewsGroupPage_CRUD');
+        }
+
+        public function canDelete($member = null) {
+            return Permission::check('NewsGroupPage_CRUD');
+        }
+
+        public function canCreate($member = null) {
+            return Permission::check('NewsGroupPage_CRUD');
+        }
+
+        public function providePermissions() {
+            return array(
+                //'Location_VIEW' => 'Read a Location',
+                'NewsGroupPage_CRUD' => 'Create, Update and Delete a News Group Page'
+            );
+        }
 
 	}
 

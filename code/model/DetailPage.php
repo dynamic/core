@@ -1,6 +1,6 @@
 <?php
 
-class DetailPage extends Page{
+class DetailPage extends Page implements PermissionProvider{
 
 	private static $has_one = array(
 		'Image' => 'CoreImage'
@@ -77,9 +77,32 @@ class DetailPage extends Page{
 		return $this->getManyManyComponents('Links')->sort('SortOrder');
 	}
 
-	public function canView($member = null){
-		return parent::canView($member = null);
-	}
+    /**
+     * @param Member $member
+     * @return boolean
+     */
+    public function canView($member = null) {
+        return parent::canView($member = null);
+    }
+
+    public function canEdit($member = null) {
+        return Permission::check('DetailPage_CRUD');
+    }
+
+    public function canDelete($member = null) {
+        return Permission::check('DetailPage_CRUD');
+    }
+
+    public function canCreate($member = null) {
+        return Permission::check('DetailPage_CRUD');
+    }
+
+    public function providePermissions() {
+        return array(
+            //'Location_VIEW' => 'Read a Location',
+            'DetailPage_CRUD' => 'Create, Update and Delete a Detail Page'
+        );
+    }
 
 }
 

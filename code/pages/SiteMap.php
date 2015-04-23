@@ -1,6 +1,6 @@
 <?php
 
-class SiteMap extends Page {
+class SiteMap extends Page implements PermissionProvider{
 
 	private static $singular_name = "Site Map";
 	private static $plural_name = "Site Maps";
@@ -43,9 +43,33 @@ class SiteMap extends Page {
 		return SiteTree::get()->filter(array("ParentID" => 0, "ShowInMenus" => 1));
 	}
 
-	public function canCreate($member = null){
-		return (SiteMap::get()->first()) ? false : true;
-	}
+    /**
+     * @param Member $member
+     * @return boolean
+     */
+    public function canView($member = null) {
+        return parent::canView($member = null);
+    }
+
+    public function canEdit($member = null) {
+        return Permission::check('SiteMapPage_CRUD');
+    }
+
+    public function canDelete($member = null) {
+        return Permission::check('SiteMapPage_CRUD');
+    }
+
+    public function canCreate($member = null) {
+        if (SiteMap::get()->first()) return false;
+        return Permission::check('SiteMapPage_CRUD');
+    }
+
+    public function providePermissions() {
+        return array(
+            //'Location_VIEW' => 'Read a Location',
+            'SiteMapPage_CRUD' => 'Create, Update and Delete a Site Map Page'
+        );
+    }
 
 }
 
