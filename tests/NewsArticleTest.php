@@ -9,6 +9,7 @@ class NewsArticleTest extends DC_Test{
 
         $holder = NewsHolder::create();
         $holder->Title = "News";
+        $holder->write();
         $holder->doPublish();
     }
 
@@ -18,8 +19,10 @@ class NewsArticleTest extends DC_Test{
         $page = singleton('NewsArticle');
         $this->assertTrue($page->canCreate());
 
+        $holder = NewsHolder::get()->first();
+
         $news = new NewsArticle();
-        $news->ParentID = NewsHolder::get()->first()->ID;
+        $news->ParentID = $holder->ID;
         $news->Title = 'Our First News Article';
         $news->DateAuthored = date('Y-m-d H:i:s', strtotime('now'));
         $news->Author = 'Dynamic Inc.';
@@ -37,8 +40,10 @@ class NewsArticleTest extends DC_Test{
 
         $this->logInWithPermission('ADMIN');
 
+        $holder = NewsHolder::get()->first();
+
         $news = new NewsArticle();
-        $news->ParentID = NewsHolder::get()->first()->ID;
+        $news->ParentID = $holder->ID;
         $news->Title = 'Our First News Article';
         $news->DateAuthored = date('Y-m-d H:i:s', strtotime('now'));
         $news->Author = 'Dynamic Inc.';

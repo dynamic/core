@@ -1,6 +1,6 @@
 <?php
 
-class AlbumCollectionPage extends CollectionPage {
+class AlbumCollectionPage extends CollectionPage implements PermissionProvider{
 
 	private static $singular_name = 'Album collection page';
 	private static $plural_name = 'Album collection pages';
@@ -8,6 +8,33 @@ class AlbumCollectionPage extends CollectionPage {
 
 	private static $managed_detail = 'AlbumPage';
 	private static $page_size = 10;
+
+    /**
+     * @param Member $member
+     * @return boolean
+     */
+    public function canView($member = null) {
+        return parent::canView($member = null);
+    }
+
+    public function canEdit($member = null) {
+        return Permission::check('AlbumCollectionPage_CRUD');
+    }
+
+    public function canDelete($member = null) {
+        return Permission::check('AlbumCollectionPage_CRUD');
+    }
+
+    public function canCreate($member = null) {
+        return Permission::check('AlbumCollectionPage_CRUD');
+    }
+
+    public function providePermissions() {
+        return array(
+            //'Location_VIEW' => 'Read a Location',
+            'AlbumCollectionPage_CRUD' => 'Create, Update and Delete a Album Collection Page'
+        );
+    }
 
 }
 
