@@ -75,3 +75,5 @@ NewsArticle:
   singular_name: 'News Article'
   plural_name: 'News Articles'
   description: 'Article for the News section'
+LeftAndMain:
+  extra_requirements_css: [dynamic-core/css/leftandmainextracss.css]
