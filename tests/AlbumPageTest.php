@@ -9,6 +9,7 @@ class AlbumPageTest extends DC_Test{
 
         $holder = AlbumGroupPage::create();
         $holder->Title = 'Albums';
+        $holder->write();
         $holder->doPublish();
     }
 
@@ -25,9 +26,9 @@ class AlbumPageTest extends DC_Test{
 
         $this->logInWithPermission('ADMIN');
 
-        $holderID = AlbumGroupPage::get()->first()->ID;
+        $holder = AlbumGroupPage::get()->first();
         $album = $this->objFromFixture('AlbumPage', 'album1');
-        $album->ParentID = $holderID;
+        $album->ParentID = $holder->ID;
         $albumID = $album->ID;
 
         $album->doPublish();

@@ -1,6 +1,6 @@
 <?php
 
-	class AlbumGroupPage extends HolderPage{
+	class AlbumGroupPage extends HolderPage implements PermissionProvider{
 
 		private static $singular_name = 'Album Group Page';
 		private static $plural_name = 'Album Group Pages';
@@ -30,6 +30,33 @@
 			$fields->extend('updateCMSFields');
 			return $fields;
 		}
+
+        /**
+         * @param Member $member
+         * @return boolean
+         */
+        public function canView($member = null) {
+            return parent::canView($member = null);
+        }
+
+        public function canEdit($member = null) {
+            return Permission::check('AlbumGroupPage_CRUD');
+        }
+
+        public function canDelete($member = null) {
+            return Permission::check('AlbumGroupPage_CRUD');
+        }
+
+        public function canCreate($member = null) {
+            return Permission::check('AlbumGroupPage_CRUD');
+        }
+
+        public function providePermissions() {
+            return array(
+                //'Location_VIEW' => 'Read a Location',
+                'AlbumGroupPage_CRUD' => 'Create, Update and Delete a Album Group Page'
+            );
+        }
 
 	}
 

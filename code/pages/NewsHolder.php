@@ -1,6 +1,6 @@
 <?php
 
-class NewsHolder extends HolderPage {
+class NewsHolder extends HolderPage implements PermissionProvider{
 
 	private static $singular_name = "News Holder";
 	private static $plural_name = "News Holders";
@@ -37,6 +37,33 @@ class NewsHolder extends HolderPage {
 			->sort(array('DateAuthored' => 'DESC'))
 			->filter(array('ParentID' => $this->ID));
 	}
+
+    /**
+     * @param Member $member
+     * @return boolean
+     */
+    public function canView($member = null) {
+        return parent::canView($member = null);
+    }
+
+    public function canEdit($member = null) {
+        return Permission::check('NewsHolderPage_CRUD');
+    }
+
+    public function canDelete($member = null) {
+        return Permission::check('NewsHolderPage_CRUD');
+    }
+
+    public function canCreate($member = null) {
+        return Permission::check('NewsHolderPage_CRUD');
+    }
+
+    public function providePermissions() {
+        return array(
+            //'Location_VIEW' => 'Read a Location',
+            'NewsHolderPage_CRUD' => 'Create, Update and Delete a News Holder Page'
+        );
+    }
 
 }
 
