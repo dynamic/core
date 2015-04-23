@@ -27,4 +27,7 @@ before_script:
  - cd ~/builds/ss
 
 script:
- - vendor/bin/phpunit dynamic-core/tests/
+- vendor/bin/phpunit dynamic-core/tests/
+notifications:
+  slack:
+    secure: pUlNZmgSU8ZCwfvL0KCCKglZKTvI8oJIAK1bkTENtWRPU6a1so2XDWzsxIoZC9VcvbycOogk7bbYTSyFWZVyhv777CIp4voxlH+DQ9U2LCbibAbXXOWc9cEEo8o2t2KerI8zA1P+kdXDXNjTNyGNXVLickIDFWHqe7570kBt4uQ=
