@@ -21,7 +21,7 @@
 			$fields = parent::getCMSfields();
 
 			$config = GridFieldConfig_RelationEditor::create();
-			$config->addComponent(new GridFieldBulkImageUpload());
+			$config->addComponent(new GridFieldBulkUpload());
 			$config->addComponent(new GridFieldBulkManager());
 			if(class_exists('GridFieldManyRelationHandler')){
 				$config->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
