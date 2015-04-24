@@ -15,17 +15,11 @@ SiteConfig:
     EmailAddress: Varchar(100)
     ShowDirections: Boolean
     Hours: Text
-# Settings Config
-    ShareThisPublisherID: Varchar(255)
 # Template Config
     TitleLogo: enum('Logo, Title', 'Title')
-    LogoDimensionOverride: Boolean
-    LogoWidth: Int
-    LogoHeight: Int
   extensions:
     - CompanyConfig
     - TemplateConfig
-    - SettingsConfig
 SectionPage:
   extensions:
     - FlexSlider
@@ -37,9 +31,6 @@ SectionPage:
 VirtualPage:
   extensions:
     - VirtualPageExtension
-ErrorPage:
-  extensions:
-    - HideExtension
 ChildListPage:
   singular_name: "Child List Page"
   plural_name: "Child List Pages"

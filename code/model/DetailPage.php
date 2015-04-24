@@ -3,7 +3,7 @@
 class DetailPage extends Page implements PermissionProvider{
 
 	private static $has_one = array(
-		'Image' => 'CoreImage'
+		'Image' => 'Image'
 	);
 
 	private static $many_many = array(

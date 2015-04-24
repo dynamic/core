@@ -4,15 +4,13 @@ class Spiff extends DataObject {
 
 	private static $db = array(
 		'Name' => 'Varchar(255)',
-		'Headline' => 'Varchar(255)',
 		'Description' => 'HTMLText',
 		'ShowSpiffLink' => 'Boolean'
 	);
 
 	private static $has_one = array(
 		'Image' => 'Image',
-		'PageLink' => 'SiteTree',
-		'Category' => 'SpiffCategory'
+		'PageLink' => 'SiteTree'
 	);
 
 	private static $belongs_many_many = array(
@@ -28,7 +26,6 @@ class Spiff extends DataObject {
 	function getTableTitle() {
 		$text = '';
 		if ($this->Name) $text .= "<h5 style='margin: 3px 0; padding: 0;'>" . $this->Name . "</h5>";
-		if ($this->Headline) $text .= $this->Headline;
 		return $text;
 	}
 	function getTableDescription() {
@@ -37,13 +34,6 @@ class Spiff extends DataObject {
 
 
 	public function getCMSFields() {
-
-		$categories = DataObject::get('SpiffCategory');
-		if ($categories) {
-			$categoryList = $categories->Map('ID', 'Name');
-		} else {
-			$categoryList = null;
-		};
 
 		$ImageField = new UploadField('Image', 'Image');
 		$ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
@@ -54,10 +44,8 @@ class Spiff extends DataObject {
 
 		$fields->addFieldsToTab('Root.Main', array(
 			new TextField('Name'),
-			new TextField('Headline'),
 			new CheckboxField('ShowSpiffLink','Show Spiff Link'),
 			$pageLink = new TreeDropdownField("PageLinkID", "Page to link to", "SiteTree"),
-			new DropdownField('CategoryID', 'Category', $categoryList),
 			new HTMLEditorField('Description')
 		));
 		$fields->addFieldsToTab('Root.Image', array(

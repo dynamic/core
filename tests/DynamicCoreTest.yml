@@ -5,13 +5,6 @@ DetailPage:
   page2:
     Title: About Us
     URLSegment: about-us
-AlbumPage:
-  album1:
-    Title: Album 1
-    URLSegment: album-1
-  album2:
-    Title: Album of Stuff
-    URLSegment: album-of-stuff
 BasicPage:
   basic1:
     Title: Basic Page 1

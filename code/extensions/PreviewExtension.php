@@ -8,7 +8,7 @@ class PreviewExtension extends DataExtension {
 		'AbstractFirstParagraph' => 'Boolean');
 
 	private static $has_one = array(
-		'Thumbnail' => 'CoreImage'
+		'Thumbnail' => 'Image'
 	);
 
 	public function updateCMSFields(FieldList $fields) {
