@@ -3,8 +3,7 @@
 class SpiffAdmin extends ModelAdmin {
 
   private static $managed_models = array(
-      'Spiff',
-      'SpiffCategory'
+      'Spiff'
    );
 
   private static $url_segment = 'spiffs';
