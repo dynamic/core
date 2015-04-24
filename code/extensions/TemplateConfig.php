@@ -41,7 +41,9 @@ class TemplateConfig extends DataExtension {
 		$config = GridFieldConfig_RelationEditor::create();
 		//$config->addComponent(new GridFieldBulkEditingTools());
 		//$config->addComponent(new GridFieldBulkImageUpload('ImageID', array('Name')));
-		$config->addComponent(new GridFieldSortableRows("SortOrder"));
+		if (class_exists('GridFieldSortableRows')) {
+            $config->addComponent(new GridFieldSortableRows("SortOrder"));
+        }
 
 		$FooterGridField = GridField::create("FooterLinks", "Footer Links", $this->owner->FooterLinks()->sort('SortOrder'), $config);
 

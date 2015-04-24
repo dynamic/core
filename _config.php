@@ -4,7 +4,9 @@
 FulltextSearchable::enable();
 
 // SPAM protection
-SpamProtectorManager::set_spam_protector("MathSpamProtector");
+if (class_exists('SpamProtectorManager')) {
+    SpamProtectorManager::set_spam_protector("MathSpamProtector");
+}
 
 // Addressable
 if (class_exists('Addressable')) {

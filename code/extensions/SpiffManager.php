@@ -23,10 +23,12 @@ class SpiffManager extends DataExtension {
 		//$config->addComponent(new GridFieldBulkImageUpload('ImageID', array('Name')));
 		if(class_exists('GridFieldManyRelationHandler')){
 			$config->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
-			$config->addComponent(new GridFieldSortableRows("SortOrder"), 'GridFieldManyRelationHandler');
+			if(class_exists('GridFieldSortableRows')) {
+                $config->addComponent(new GridFieldSortableRows("SortOrder"), 'GridFieldManyRelationHandler');
+            }
 			$config->removeComponentsByType('GridFieldAddExistingAutocompleter');
 		}else{
-			$config->addComponent(new GridFieldSortableRows("SortOrder"));
+            if(class_exists('GridFieldSortableRows')) $config->addComponent(new GridFieldSortableRows("SortOrder"));
 		}
 
 	    
