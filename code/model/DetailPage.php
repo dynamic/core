@@ -57,10 +57,12 @@ class DetailPage extends Page implements PermissionProvider{
 		$gridFieldConfig = GridFieldConfig_RelationEditor::create();
 		if(class_exists('GridFieldManyRelationHandler')){
 			$gridFieldConfig->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
-			$gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"), 'GridFieldManyRelationHandler');
+			if(class_exists('GridFieldSortableRows')) {
+                $gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"), 'GridFieldManyRelationHandler');
+            }
 			$gridFieldConfig->removeComponentsByType('GridFieldAddExistingAutocompleter');
 		}else{
-			$gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"));
+			if (class_exists('GridFieldSortableRows')) $gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"));
 		}
 	    $LinksField = GridField::create("Links", "Links", $this->Links()->sort('SortOrder'), $gridFieldConfig);
 

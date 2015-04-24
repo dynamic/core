@@ -21,12 +21,12 @@
 			$fields = parent::getCMSfields();
 
 			$config = GridFieldConfig_RelationEditor::create();
-			$config->addComponent(new GridFieldBulkUpload());
-			$config->addComponent(new GridFieldBulkManager());
-			if(class_exists('GridFieldManyRelationHandler')){
+			if (class_exists('GridFieldBulkImageUpload')) $config->addComponent(new GridFieldBulkImageUpload());
+            if (class_exists('GridFieldBulkManager')) $config->addComponent(new GridFieldBulkManager());
+			if (class_exists('GridFieldManyRelationHandler')){
 				$config->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
 			}
-			$config->addComponent(new GridFieldSortableRows('Sort'));
+			if (class_exists('GridFieldSortableRows')) $config->addComponent(new GridFieldSortableRows('Sort'));
 			$config->removeComponentsByType('GridFieldAddExistingAutocompleter');
 			$gridField = new GridField('Images', 'Album images', $this->Images()->sort('Sort'), $config);
 			$fields->addFieldToTab('Root.Images', $gridField);

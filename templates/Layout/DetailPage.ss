@@ -8,10 +8,6 @@
 		<% if Image %><p class="half-bottom">$Image.LargePadded(600,400)</p><% end_if %>		
 		<% if SubTitle %><h3>$SubTitle</h3><% end_if %>
 
-		<div class="toolbar">
-			<% include ShareThis %>
-		</div>
-		
 		<div class="content typography">$Content</div>
 		
 		<% if SlideShow %>
