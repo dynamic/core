@@ -15,7 +15,7 @@
         "dynamic/flexslider": "dev-master",
         "colymba/gridfield-bulk-editing-tools": "*",
         "undefinedoffset/sortablegridfield": "*",
-        "silverstripe/tagfield": "*",
+        "silverstripe/tagfield": "1.0.0",
         "silverstripe/timepickerfield": "1.0.*",
         "silverstripe/userforms": "2.0.*",
         "silverstripe/spamprotection": "dev-master"
