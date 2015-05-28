@@ -31,8 +31,8 @@ class DetailPage extends Page implements PermissionProvider{
 		$fields = parent::getCMSFields();
 
 		// Tag Field
-		$TagField = TagField::create('Tags', null, null, 'DetailPage');
-		$TagField->setSeparator(', ');
+		$TagField = TagField::create('Tags', null, Tag::get(), $this->Tags());
+		$TagField->setCanCreate(true);
 		$fields->addFieldToTab('Root.Main', $TagField, 'Content');
 
 		// Images
