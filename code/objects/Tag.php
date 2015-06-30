@@ -13,6 +13,8 @@ class Tag extends DataObject {
     public function getCMSFields() {
 	    $fields = parent::getCMSFields();
 
+
+		$this->extend('updateCMSFields', $fields);
 	    return $fields;
     }
 
