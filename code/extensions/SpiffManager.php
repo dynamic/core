@@ -54,8 +54,4 @@ class SpiffManager extends DataExtension {
 		return true;
 	}
 
-	public function getSpiffs(){
-		return $this->owner->getManyManyComponents('Spiffs')->sort('SortOrder');
-	}
-
 }
