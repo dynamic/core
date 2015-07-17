@@ -28,6 +28,9 @@ SectionPage:
   plural_name: "Section Pages"
   description: "Section Landing Page, uses Flexslider and Spiffs"
   hide_ancestor: "SectionPage"
+SectionPage_Controller:
+  extensions:
+    - FlexSliderExtension
 VirtualPage:
   extensions:
     - VirtualPageExtension
@@ -51,6 +54,9 @@ DetailPage:
   extensions:
     - PreviewExtension
     - FlexSlider
+DetailPage_Controller:
+  extensions:
+      - FlexSliderExtension
 HolderPage:
   singular_name: "Group Page"
   plural_name: "Group Pages"
