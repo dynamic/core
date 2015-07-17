@@ -5,7 +5,6 @@ class Spiff extends DataObject {
 	private static $db = array(
 		'Name' => 'Varchar(255)',
 		'Description' => 'HTMLText',
-		'ShowSpiffLink' => 'Boolean'
 	);
 
 	private static $has_one = array(
@@ -19,19 +18,12 @@ class Spiff extends DataObject {
 
 	private static $default_sort = 'Name ASC';
 
-	// Custom Table Fields
-	function getTableThumb() {
-		return $this->Image()->CroppedImage(50,40);
-	}
-	function getTableTitle() {
-		$text = '';
-		if ($this->Name) $text .= "<h5 style='margin: 3px 0; padding: 0;'>" . $this->Name . "</h5>";
-		return $text;
-	}
-	function getTableDescription() {
-		return $this->obj('Description')->Summary(40);
-	}
-
+    private static $summary_fields = array(
+        'Image.CMSThumbnail' => 'Image',
+        'Name' => 'Title',
+        'Description' => 'Description',
+        'PageLink.MenuTitle' => 'Link'
+    );
 
 	public function getCMSFields() {
 
@@ -40,21 +32,15 @@ class Spiff extends DataObject {
 		$ImageField->setFolderName('Uploads/Spiffs');
 		$ImageField->setConfig('allowedMaxFileNumber', 1);
 
-		$fields = parent::getCMSFields();
+		//$fields = parent::getCMSFields();
+        $fields = FieldList::create(
+            TextField::create('Name', 'Title'),
+            $pageLink = TreeDropdownField::create("PageLinkID", "Link", "SiteTree")
+                ->setDescription('clear/remove your selection by choosing the currently selected item and hit save'),
+            $ImageField,
+            HTMLEditorField::create('Description')
+        );
 
-		$fields->addFieldsToTab('Root.Main', array(
-			new TextField('Name'),
-			new CheckboxField('ShowSpiffLink','Show Spiff Link'),
-			$pageLink = new TreeDropdownField("PageLinkID", "Page to link to", "SiteTree"),
-			new HTMLEditorField('Description')
-		));
-		$fields->addFieldsToTab('Root.Image', array(
-			$ImageField
-		));
-
-		if(class_exists('DisplayLogicFormField')){
-			$pageLink->displayIf('ShowSpiffLink')->isChecked();
-         }
         $this->extend('updateCMSFields', $fields);
         return $fields;
 	}
