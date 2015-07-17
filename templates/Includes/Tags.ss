@@ -1,1 +1,1 @@
-<% if Tags %>Tagged: <% loop Tags %><a href="{$Top.Parent.Link}Tag/$ID">$Title</a> <% end_loop %><% end_if %>
+<% if $Tags %>Tagged: <% loop $Tags %><a href="{$Top.Parent.Link}Tag/$Title">$Title</a> <% end_loop %><% end_if %>

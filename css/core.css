@@ -1,0 +1,42 @@
+.typography .noborder img {
+    border: 0;
+}
+
+.content img {
+    width: 100%;
+    height: auto;
+}
+.preview {
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 640px) {
+    .slide {
+        width: 97%;
+    }
+    .spiff {
+        width: 47%;
+        margin-bottom: 20px;
+    }
+    .preview {
+        width: 47%;
+    }
+    .core-container form {
+        width: 97%;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .spiff {
+        width: 97%;
+        margin-bottom: 20px;
+    }
+    .preview {
+        width: 97%;
+    }
+    .core-container,
+    .core-sidebar {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

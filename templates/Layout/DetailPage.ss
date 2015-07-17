@@ -1,31 +1,27 @@
-<div class="row">
-	$Breadcrumbs
-</div>
-<div class="twelve columns alpha">
-	<h2>$Title</h2>
-		
-	<article>
-		<% if Image %><p class="half-bottom">$Image.LargePadded(600,400)</p><% end_if %>		
-		<% if SubTitle %><h3>$SubTitle</h3><% end_if %>
-
-		<div class="content typography">$Content</div>
-		
-		<% if SlideShow %>
-			<div class="slideshow clearfix">
-				<% include FlexSlider %>
-			</div>
-		<% end_if %>
-		
-		<% if Tags %><p><% include Tags %></p><% end_if %>
-		
+<% include SideBar %>
+<div class="content unit size3of4 lastUnit">
+    <article>
+        <h1>$Title</h1>
+        <% if $Image %>
+            <p class="noborder">
+                <img class="lazy" data-original="$Image.PaddedImage(700,400).URL" src="core/thirdparty/lazyload/img/grey.gif"
+                     width="700" height="400" alt="$Title.XML">
+            </p>
+        <% end_if %>
+        <% if $SubTitle %><h2>$SubTitle</h2><% end_if %>
+        <% if $Content %>$Content<% end_if %>
+        <% if $SlideShow %>
+            <div class="slideshow clearfix">
+                <% include FlexSlider %>
+            </div>
+        <% end_if %>
+        <% if $Tags %><p><% include Tags %></p><% end_if %>
 	</article>
 			
 	$Form
 	$PageComments
 			
 </div>
-<div class="four columns sidebar omega">
-	<aside>
-		<% include SideBar %>
-	</aside>
-</div>
+<% require javascript('framework/thirdparty/jquery/jquery.js') %>
+<% require javascript('core/thirdparty/lazyload/jquery.lazyload.min.js') %>
+<% require javascript('core/javascript/lazy_init.js') %>
