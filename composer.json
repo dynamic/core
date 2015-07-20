@@ -1,32 +1,40 @@
 {
-    "name": "dynamic/core",
-    "description": "The Dynamic Core Module",
-    "keywords": ["silverstripe", "module"],
-    "license": "BSD-3-Clause",
-    "type": "silverstripe-module",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/dynamic/SilverStripe-FlexSlider.git"
-        }
-    ],
-    "require": {
-    	"silverstripe/cms": "3.1.*",
-        "dynamic/flexslider": "dev-master",
-        "colymba/gridfield-bulk-editing-tools": "*",
-        "undefinedoffset/sortablegridfield": "*",
-        "silverstripe/tagfield": "1.0.0",
-        "silverstripe/timepickerfield": "1.0.*",
-        "silverstripe/userforms": "2.0.*",
-        "silverstripe/spamprotection": "dev-master"
-    },
-    "authors": [
-        {
-            "name": "Dynamic Inc",
-            "homepage": "http://dynamicdoes.com"
-        }
-    ],
-	"extra": {
-		"installer-name": "dynamic-core"
-	}
+  "name": "dynamic/core",
+  "description": "The Dynamic Core Module",
+  "keywords": [
+    "silverstripe",
+    "module"
+  ],
+  "license": "BSD-3-Clause",
+  "type": "silverstripe-module",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/dynamic/SilverStripe-FlexSlider.git"
+    }
+  ],
+  "require": {
+    "silverstripe/framework": ">=3.1",
+    "silverstripe/cms": ">=3.1",
+    "dynamic/flexslider": "dev-master",
+    "colymba/gridfield-bulk-editing-tools": "*",
+    "silverstripe/tagfield": "1.0.*",
+    "silverstripe/userforms": "2.0.*",
+    "silverstripe/spamprotection": "2.0.*"
+  },
+  "suggest": {
+    "simonwelsh/gridfieldrelationhandler": "1.0.*",
+    "unclecheese/display-logic": "1.2.*",
+    "undefinedoffset/sortablegridfield": "0.4.*"
+  },
+  "authors": [
+    {
+      "name": "Dynamic Inc",
+      "homepage": "http://dynamicagency.com",
+      "email": "dev@dynamicagency.com"
+    }
+  ],
+  "extra": {
+    "installer-name": "dynamic-core"
+  }
 }
