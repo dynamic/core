@@ -48,7 +48,7 @@ Assuming you have proper permissions to use the `core` repository add the follow
 as well as in your `"requirements"`:
 
 ```
-"dynamic/core": "2.0.0-alpha1"
+"dynamic/core": "2.0"
 ```
 
 ### Git Installation
@@ -72,6 +72,28 @@ Like other installations with SilverStripe, we need to rebuild the database and 
 `http://yoursite.com/dev/build` and `http://yoursite.com/?flush=all`
 
 Replace `yoursite.com` with your domain name.
+
+### Recommended Configuration
+
+```
+SectionPage:
+  extensions:
+    - FlexSlider
+    - SpiffManager
+SectionPage_Controller:
+  extensions:
+    - FlexSliderExtension
+DetailPage:
+  extensions:
+    - PreviewExtension
+    - FlexSlider
+DetailPage_Controller:
+  extensions:
+    - FlexSliderExtension
+VirtualPage:
+  extensions:
+    - VirtualPageExtension
+```
 
 ## Additional Information
 
