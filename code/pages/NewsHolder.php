@@ -2,8 +2,8 @@
 
 class NewsHolder extends HolderPage implements PermissionProvider{
 
-	private static $singular_name = "News Holder";
-	private static $plural_name = "News Holders";
+	private static $singular_name = "News Landing Page";
+	private static $plural_name = "News Landing Pages";
 	private static $description = "Displays list of News Articles";
 
 	// used by Items method in HolderPage
