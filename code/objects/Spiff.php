@@ -32,17 +32,15 @@ class Spiff extends DataObject {
 		$ImageField->setFolderName('Uploads/Spiffs');
 		$ImageField->setConfig('allowedMaxFileNumber', 1);
 
-		//$fields = parent::getCMSFields();
-        $fields = FieldList::create(
-            TextField::create('Name', 'Title'),
-            $pageLink = TreeDropdownField::create("PageLinkID", "Link", "SiteTree")
-                ->setDescription('clear/remove your selection by choosing the currently selected item and hit save'),
-            $ImageField,
-            HTMLEditorField::create('Description')
-        );
+		$fields = parent::getCMSFields();
+		$fields->addFieldsToTab('Root.Main', array(
+			TextField::create('Name', 'Title')
+		));
+		$fields->insertBefore($pageLink = TreeDropdownField::create("PageLinkID", "Link", "SiteTree"), 'Description');
+		$fields->insertBefore($ImageField, 'Description');
 
-        $this->extend('updateCMSFields', $fields);
-        return $fields;
+		$this->extend('updateCMSFields', $fields);
+		return $fields;
 	}
 
 	public function SideBarSpiff(){
