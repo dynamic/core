@@ -24,12 +24,12 @@ class Tag extends DataObject {
 
 		if($class == 'DetailPage' || is_subclass_of($class, 'DetailPage')) {
 			if($controller->Data()->Parent()->Parent()){
-				return $controller->Data()->Parent()->Parent()->URLSegment.'/'.$controller->Data()->Parent()->URLSegment.'/tag/'.urlencode($this->Title);
+				return $controller->Data()->Parent()->Parent()->URLSegment.'/'.$controller->Data()->Parent()->URLSegment.'/tag/'.htmlentities($this->Title);
 			}else{
-				return $controller->Data()->Parent()->URLSegment."/tag/".urlencode($this->Title);
+				return $controller->Data()->Parent()->URLSegment."/tag/".htmlentities($this->Title);
 			}
 		} else {
-			return $controller->join_links($controller->Link('tag'),urlencode($this->Title));
+			return $controller->join_links($controller->Link('tag'),htmlentities($this->Title));
 		}
 
 	}
