@@ -2,14 +2,13 @@
 
 class SpiffManager extends DataExtension
 {
-
-    static $many_many = array(
-        'Spiffs' => 'Spiff'
+    private static $many_many = array(
+        'Spiffs' => 'Spiff',
     );
 
-    public static $many_many_extraFields = array(
+    private static $many_many_extraFields = array(
         'Spiffs' => array(
-            'SortOrder' => 'Int'
+            'SortOrder' => 'Int',
         )
     );
 
@@ -20,46 +19,25 @@ class SpiffManager extends DataExtension
 
     public function updateCMSFields(FieldList $fields)
     {
-
         $config = GridFieldConfig_RelationEditor::create();
-        //$config->addComponent(new GridFieldBulkEditingTools());
-        //$config->addComponent(new GridFieldBulkImageUpload('ImageID', array('Name')));
-        if (class_exists('GridFieldManyRelationHandler')) {
-            $config->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
-            if (class_exists('GridFieldSortableRows')) {
-                $config->addComponent(new GridFieldSortableRows("SortOrder"), 'GridFieldManyRelationHandler');
-            }
-            $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
-        } else {
-            if (class_exists('GridFieldSortableRows')) {
-                $config->addComponent(new GridFieldSortableRows("SortOrder"));
-            }
+        if (class_exists('GridFieldSortableRows')) {
+            $config->addComponent(new GridFieldSortableRows('SortOrder'));
         }
+        if (class_exists('GridFieldAddExistingSearchButton')) {
+            $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
+            $config->addComponent(new GridFieldAddExistingSearchButton());
+        }
+        $spiffs = $this->owner->Spiffs()
+            ->filter(array('ClassName' => 'Spiff'))
+            ->sort('SortOrder')
+        ;
+        $SpiffGridField = GridField::create('Spiffs', 'Spiffs', $spiffs, $config);
 
-
-        $SpiffGridField = ($this->owner->ID != 0 ) ? GridField::create(
-            "Spiffs",
-            "Spiffs",
-            $this->owner->Spiffs()->filter(array('ClassName' => 'Spiff'))->sort('SortOrder'),
-            $config
-        ) : null;
-
-        // add FlexSlider, width and height
-        if ($this->owner->ID != 0) {
-            $fields->addFieldsToTab("Root.Spiffs", array(
-                $SpiffGridField
+        // add Spiff grid field if record exists
+        if ($this->owner->exists()) {
+            $fields->addFieldsToTab('Root.Spiffs', array(
+                $SpiffGridField,
             ));
         }
-
     }
-
-    public static function SideBarSpiff()
-    {
-        $className = Controller::curr()->Data()->ClassName;
-        if ($className == 'DynamicHomePage') {
-            return false;
-        }
-        return true;
-    }
-
 }
