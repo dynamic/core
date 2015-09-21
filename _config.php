@@ -13,3 +13,6 @@ if (class_exists('Addressable')) {
 	Object::add_extension('SiteConfig', 'Addressable');
 	Object::add_extension('SiteConfig', 'Geocodable');
 }
+
+// set image upload max size
+define('CORE_IMAGE_FILE_SIZE_LIMIT', '512000');
