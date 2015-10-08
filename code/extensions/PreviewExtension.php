@@ -22,6 +22,7 @@ class PreviewExtension extends DataExtension {
 		}else{
 			$ThumbField->setRightTitle('Small image used in summary');
 		}
+		$ThumbField->getValidator()->setAllowedMaxFileSize(CORE_IMAGE_FILE_SIZE_LIMIT);
 
 		// Preview
 	    $fields->addFieldsToTab('Root.Preview', array(
