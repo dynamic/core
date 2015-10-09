@@ -20,11 +20,10 @@
     "colymba/gridfield-bulk-editing-tools": "*",
     "silverstripe/tagfield": "1.0.*",
     "silverstripe/userforms": "2.0.*",
-    "silverstripe/spamprotection": "2.0.*"
+    "silverstripe/spamprotection": "2.0.*",
+    "unclecheese/display-logic": "1.2.1"
   },
   "suggest": {
-    "simonwelsh/gridfieldrelationhandler": "1.0.*",
-    "unclecheese/display-logic": "1.2.*",
     "undefinedoffset/sortablegridfield": "0.4.*"
   },
   "authors": [
