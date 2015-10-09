@@ -4,6 +4,7 @@ class Spiff extends DataObject
 {
     private static $db = array(
         'Name' => 'Varchar(255)',
+        'Title' => 'Varchar(255)',
         'Description' => 'HTMLText',
     );
 
@@ -25,7 +26,7 @@ class Spiff extends DataObject
 
     private static $searchable_fields = array(
         'Name' => 'Name',
-        'Description' => 'Description',
+        'Title' => 'Title',
     );
 
     public function getCMSFields()
@@ -37,9 +38,7 @@ class Spiff extends DataObject
         $ImageField->getValidator()->setAllowedMaxFileSize(CORE_IMAGE_FILE_SIZE_LIMIT);
 
         $fields = parent::getCMSFields();
-        $fields->addFieldsToTab('Root.Main', array(
-            TextField::create('Name', 'Title'),
-        ));
+
         $fields->insertBefore($pageLink = TreeDropdownField::create('PageLinkID', 'Link', 'SiteTree'), 'Description');
         $fields->insertBefore($ImageField, 'Description');
 
@@ -57,6 +56,12 @@ class Spiff extends DataObject
         }
 
         return $result;
+    }
+
+    public function getHeadline()
+    {
+        if ($this->Title) return $this->Title;
+        return false;
     }
 
     // return Spiff View
