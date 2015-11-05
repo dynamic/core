@@ -18,7 +18,7 @@
     "silverstripe/cms": ">=3.1",
     "dynamic/flexslider": "dev-master",
     "colymba/gridfield-bulk-editing-tools": "*",
-    "silverstripe/tagfield": "1.0.*",
+    "silverstripe/tagfield": "1.1.0",
     "silverstripe/userforms": "2.0.*",
     "silverstripe/spamprotection": "2.0.*",
     "unclecheese/display-logic": "1.2.1"
