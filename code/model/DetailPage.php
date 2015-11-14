@@ -35,13 +35,11 @@ class DetailPage extends Page implements PermissionProvider{
 		$TagField->setCanCreate(true);
 		$fields->addFieldToTab('Root.Main', $TagField, 'Content');
 
-		// Images
-		//$fields->insertBefore(new Tab('Images'), 'Slides');
-
 		$ImageField = UploadField::create('Image', 'Main Image');
 		$ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
 		$ImageField->setFolderName('Uploads/DetailMain');
 		$ImageField->setConfig('allowedMaxFileNumber', 1);
+		$ImageField->getValidator()->setAllowedMaxFileSize(CORE_IMAGE_FILE_SIZE_LIMIT);
 		if($this->stat('customImageRightTitle')){
 			$ImageField->setRightTitle($this->stat('customImageRightTitle'));
 		}else{
