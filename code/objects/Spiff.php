@@ -14,7 +14,7 @@ class Spiff extends DataObject
     );
 
     private static $belongs_many_many = array(
-        'SectionPages' => 'SectionPage',
+        // use DataExtensions to create recipricol relationships with Spiffs
     );
 
     private static $default_sort = 'Name ASC';
@@ -39,6 +39,8 @@ class Spiff extends DataObject
 
         $fields = parent::getCMSFields();
 
+        $fields->dataFieldByName('Name')->setRightTitle('For reference only. Does not appear in the template.');
+
         $fields->insertBefore($pageLink = TreeDropdownField::create('PageLinkID', 'Link', 'SiteTree'), 'Description');
         $fields->insertBefore($ImageField, 'Description');
 
@@ -60,6 +62,7 @@ class Spiff extends DataObject
 
     public function getHeadline()
     {
+        Deprecation::notice('3.0', 'Use "$Title" instead.');
         if ($this->Title) return $this->Title;
         return false;
     }
