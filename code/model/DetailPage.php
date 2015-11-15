@@ -8,13 +8,6 @@ class DetailPage extends Page implements PermissionProvider{
 
 	private static $many_many = array(
 		'Tags' => 'Tag',
-		'Links' => 'LinkObject'
-	);
-
-	private static $many_many_extraFields = array(
-		'Links' => array(
-			'SortOrder' => 'Int'
-		)
 	);
 
 	private static $searchable_fields = array(
@@ -52,31 +45,9 @@ class DetailPage extends Page implements PermissionProvider{
 			$ImageField
 		));
 
-	    // Side Bar
-	    // Links
-		$gridFieldConfig = GridFieldConfig_RelationEditor::create();
-		if(class_exists('GridFieldManyRelationHandler')){
-			$gridFieldConfig->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
-			if(class_exists('GridFieldSortableRows')) {
-                $gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"), 'GridFieldManyRelationHandler');
-            }
-			$gridFieldConfig->removeComponentsByType('GridFieldAddExistingAutocompleter');
-		}else{
-			if (class_exists('GridFieldSortableRows')) $gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"));
-		}
-	    $LinksField = GridField::create("Links", "Links", $this->Links()->sort('SortOrder'), $gridFieldConfig);
-
-	    $fields->addFieldsToTab('Root.SideBar', array(
-	    	$LinksField
-	    ));
-
-		$this->extend('updateCMSFields', $fields);
+	    $this->extend('updateCMSFields', $fields);
 
 		return $fields;
-	}
-
-	public function getLinks(){
-		return $this->getManyManyComponents('Links')->sort('SortOrder');
 	}
 
     /**

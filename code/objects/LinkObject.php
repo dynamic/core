@@ -12,7 +12,7 @@ class LinkObject extends DataObject {
 	);
 
 	private static $belongs_many_many = array(
-		'Pages' => 'Page'
+		// use DataExtensions to create recipricol relationships with LinkObjects
 	);
 
 	private static $singular_name = 'Link';
