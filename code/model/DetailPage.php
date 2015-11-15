@@ -7,7 +7,6 @@ class DetailPage extends Page implements PermissionProvider{
 	);
 
 	private static $many_many = array(
-		'Tags' => 'Tag',
 		'Links' => 'LinkObject'
 	);
 
@@ -19,7 +18,6 @@ class DetailPage extends Page implements PermissionProvider{
 
 	private static $searchable_fields = array(
 		'Title',
-		'Tags.ID'
 	);
 
 	// exclude child pages from Menu
@@ -29,11 +27,6 @@ class DetailPage extends Page implements PermissionProvider{
 
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
-
-		// Tag Field
-		$TagField = TagField::create('Tags', null, Tag::get(), $this->Tags());
-		$TagField->setCanCreate(true);
-		$fields->addFieldToTab('Root.Main', $TagField, 'Content');
 
 		// Images
 		//$fields->insertBefore(new Tab('Images'), 'Slides');

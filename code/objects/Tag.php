@@ -7,7 +7,7 @@ class Tag extends DataObject {
     );
 
     private static $belongs_many_many = array(
-        'Pages' => 'DetailPage'
+        // use DataExtensions to create recipricol relationships with tags
     );
 
     public function getCMSFields() {
