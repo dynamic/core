@@ -88,9 +88,7 @@
             $date = str_replace('T', '', $date);//remove T
             $date = str_replace('Z', '', $date);//remove Z
             $date = strtotime($date);
-            $removeHour = strtotime('Second Sunday March 0');
-            $addHour = strtotime('First Sunday November 0');
-            $date = ($date >= $removeHour && $date < $addHour) ? $date : strtotime('- 1 hour', $date);//http://dcousineau.com/blog/2009/03/10/calculating-daylight-savings-time-boundary-in-php/
+            $date = (!date('I')) ? $date : strtotime('- 1 hour', $date);
             $date = $date + date('Z');
             return sfDate::getInstance($date);
         }
