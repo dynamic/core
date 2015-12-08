@@ -6,9 +6,9 @@
 		private static $plural_name = 'News and Events';
 		private static $description = 'Page holding News Holder and Event Holder pages';
 
-		private static $allowed_children = array('NewsHolder','EventHolder');
+		private static $allowed_children = array('NewsHolder');
 
-		public static $item_class = array('NewsHolder','EventHolder');
+		public static $item_class = array('NewsHolder');
 
 		public function getCMSFields(){
 			$fields = parent::getCMSFields();
