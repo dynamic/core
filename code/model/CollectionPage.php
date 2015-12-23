@@ -89,7 +89,7 @@ class CollectionPage_Controller extends Page_Controller {
 	// Search Objects
 	public function AdvSearchForm() {
 
-		$Object = singleton('DetailPage');
+		$Object = singleton($this->getManagedDetail());
 
 		$context = $Object->getDefaultSearchContext();
 		$fields = $context->getSearchFields();
