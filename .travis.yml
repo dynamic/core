@@ -7,6 +7,13 @@ env:
    - DB=MYSQL CORE_RELEASE=3.1
    - DB=PGSQL CORE_RELEASE=3.1
    - DB=SQLITE CORE_RELEASE=3.1
+  global:
+    - COVERAGE=0
+    - MODULE_PATH=dynamic-core
+    - CODECOV_TOKEN=db9f22c7-fddd-4370-950f-43ea4b9512ea
+
+before_install:
+  - pip install --user codecov
 
 matrix:
   allow_failures:
@@ -14,11 +21,11 @@ matrix:
     - env: DB=MYSQL CORE_RELEASE=3.2
     - env: DB=MYSQL CORE_RELEASE=master
   include:
+    - php: 5.6
+      env: DB=MYSQL CORE_RELEASE=3.1 COVERAGE=1
     - php: 5.4
       env: DB=MYSQL CORE_RELEASE=3.1
     - php: 5.5
-      env: DB=MYSQL CORE_RELEASE=3.1
-    - php: 5.6
       env: DB=MYSQL CORE_RELEASE=3.1
     - php: 5.6
       env: DB=MYSQL CORE_RELEASE=3.2
@@ -29,12 +36,23 @@ matrix:
 
 before_script:
  - phpenv rehash
+ - composer self-update || true
  - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
  - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
  - cd ~/builds/ss
 
 script:
-- vendor/bin/phpunit dynamic-core/tests/
+  # Execute tests with no coverage.  This is the fastest option
+  - "if [ \"$COVERAGE\" = \"0\" ]; then vendor/bin/phpunit $MODULE_PATH/tests/; fi"
+
+  # Execute tests with coverage.  Do this for a small
+  - "if [ \"$COVERAGE\" = \"1\" ]; then vendor/bin/phpunit --coverage-clover=coverage.clover $MODULE_PATH/tests/; fi"
+
+after_script:
+  - "if [ \"$COVERAGE\" = \"1\" ]; then mv coverage.clover ~/build/$TRAVIS_REPO_SLUG/; fi"
+  - cd ~/build/$TRAVIS_REPO_SLUG
+  - bash <(curl -s https://codecov.io/bash) -t 9ff11073-5df8-48ab-aa94-af5ce6a9fc86
+
 notifications:
   slack:
     secure: pUlNZmgSU8ZCwfvL0KCCKglZKTvI8oJIAK1bkTENtWRPU6a1so2XDWzsxIoZC9VcvbycOogk7bbYTSyFWZVyhv777CIp4voxlH+DQ9U2LCbibAbXXOWc9cEEo8o2t2KerI8zA1P+kdXDXNjTNyGNXVLickIDFWHqe7570kBt4uQ=
