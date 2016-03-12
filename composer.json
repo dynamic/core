@@ -9,19 +9,28 @@
   "type": "silverstripe-module",
   "repositories": [
     {
-      "type": "vcs",
-      "url": "https://github.com/dynamic/SilverStripe-FlexSlider.git"
+      "type": "composer",
+      "url": "https://dynamicinc:I68blegDd@toran.dynamicagency.com/repo/private/"
+    },
+    {
+      "type": "composer",
+      "url": "https://dynamicinc:I68blegDd@toran.dynamicagency.com/repo/packagist/"
+    },
+    {
+      "packagist": false
     }
   ],
   "require": {
-    "silverstripe/framework": ">=3.1",
-    "silverstripe/cms": ">=3.1",
+    "silverstripe/framework": "^3.3",
+    "silverstripe/cms": "^3.3",
     "dynamic/flexslider": "dev-master",
-    "colymba/gridfield-bulk-editing-tools": "*",
-    "silverstripe/tagfield": "1.1.0",
-    "silverstripe/userforms": "2.0.*",
-    "silverstripe/spamprotection": "2.0.*",
-    "unclecheese/display-logic": "1.2.1"
+    "colymba/gridfield-bulk-editing-tools": "^v2.1",
+    "silverstripe/tagfield": "^1.2",
+    "silverstripe/userforms": "^3.1",
+    "silverstripe/spamprotection": "^2.0",
+    "unclecheese/display-logic": "^1.3",
+    "silverstripe/reports": "^3.3",
+    "silverstripe/siteconfig": "^3.3"
   },
   "suggest": {
     "undefinedoffset/sortablegridfield": "0.4.*"
