@@ -1,39 +1,40 @@
 <div class="twelve columns alpha typography">
-	<article>
+    <article>
 		$Breadcrumbs
-		<h2>$Title</h2>
+        <h2>$Title</h2>
 		<% if $SubTitle %><h3>$SubTitle</h3><% end_if %>
-		
-		<div class="content typography">$Content</div>
-	
-		<% if Items %>			
-			<header class="resultsHeader">
-				<% if Filter %><h3 class="pull-left">$Filter</h3><% end_if %>
-				<p class="pull-right">Displaying $Items.FirstItem - $Items.LastItem of $Items.Count</p>
-			</header>
-		
-			<% loop Items %>
-				<article class="$EvenOdd clearfix half-bottom">
+
+        <div class="content typography">$Content</div>
+
+		<% if $Results %>
+            <header class="resultsHeader">
+				<% if $Filter %><h3 class="pull-left">$Filter</h3><% end_if %>
+                <p class="pull-right">Displaying $Results.FirstItem - $Results.LastItem of $Results.Count</p>
+            </header>
+
+			<% loop $Results %>
+                <article class="$EvenOdd clearfix half-bottom">
+					<h3>$Title</h3>
 					$Summary
-				</article>
+                </article>
 			<% end_loop %>
 
-			<% with Items %>
+			<% with $Results %>
 				<% include Pagination %>
 			<% end_with %>
 
 		<% end_if %>
-		
-	</article>
-	
+
+    </article>
+
 </div>
 <div class="four columns sidebar omega">
-	<aside>
-	
+    <aside>
+
 		$AdvSearchForm
-	
+
 		<% include SideBar %>
-		
+
 		<% include TagList %>
-	</aside>
+    </aside>
 </div>

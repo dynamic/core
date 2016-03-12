@@ -1,142 +1,210 @@
 <?php
 
-class CollectionPage extends Page implements PermissionProvider{
+/**
+ * Class CollectionPage
+ */
+class CollectionPage extends Page implements PermissionProvider
+{
 
-	private static $managed_detail = 'DetailPage';
-	private static $page_size = 10;
+    /**
+     * @var string
+     */
+    private static $managed_detail = 'DetailPage';
+    /**
+     * @var int
+     */
+    private static $page_size = 10;
 
-	public static function getManagedDetail(){
-		return self::$managed_detail;
-	}
+    /**
+     * tag list for sidebar
+     *
+     * @return bool|DataList
+     */
+    public function getTags()
+    {
 
-	public static function getPageSize(){
-		return self::$page_size;
-	}
-
-	// tag list for sidebar
-	public function getTags() {
-
-		$hit = Tag::get()
-			->filter(array(
-				'Pages.ID:GreaterThan'=>0,
-				'Pages.ID.ParentID' => $this->ID))
-			->sort('Title', 'DESC');
-		if($hit->Count()==0){
-			$hit = false;
-		}
-		return $hit;
-	}
+        $hit = Tag::get()
+            ->filter(array(
+                'Pages.ID:GreaterThan' => 0,
+                'Pages.ID.ParentID' => $this->ID
+            ))
+            ->sort('Title', 'DESC');
+        if ($hit->Count() == 0) {
+            $hit = false;
+        }
+        return $hit;
+    }
 
     /**
      * @param Member $member
      * @return boolean
      */
-    public function canView($member = null) {
+    public function canView($member = null)
+    {
         return parent::canView($member = null);
     }
 
-    public function canEdit($member = null) {
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canEdit($member = null)
+    {
         return Permission::check('CollectionPage_CRUD');
     }
 
-    public function canDelete($member = null) {
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canDelete($member = null)
+    {
         return Permission::check('CollectionPage_CRUD');
     }
 
-    public function canCreate($member = null) {
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canCreate($member = null)
+    {
         return Permission::check('CollectionPage_CRUD');
     }
 
-    public function providePermissions() {
+    /**
+     * @return array
+     */
+    public function providePermissions()
+    {
         return array(
-            //'Location_VIEW' => 'Read a Location',
             'CollectionPage_CRUD' => 'Create, Update and Delete a Collection Page'
         );
     }
 
 }
 
-class CollectionPage_Controller extends Page_Controller {
+/**
+ * Class CollectionPage_Controller
+ */
+class CollectionPage_Controller extends Page_Controller
+{
 
-	private static $allowed_actions = array(
-		'tag',
-		'AdvSearchForm'
-	);
+    /**
+     * @var array
+     */
+    private static $allowed_actions = array(
+        'index',
+        'AdvSearchForm',
+        'tag',
+    );
 
-	// get child detail pages of this page
-	public function Items($searchCriteria = array()){
+    /**
+     * @return string
+     */
+    protected function getManagingClass()
+    {
+        return $this->data()->ClassName;
+    }
 
-		$request = ($this->request) ? $this->request : $this->parentController->getRequest();
-		if(empty($searchCriteria)) $searchCriteria = $request->requestVars();
+    /**
+     * @return array|scalar
+     */
+    protected function getManagedClass()
+    {
+        return Config::inst()->get($this->getManagingClass(), 'managed_detail');
+    }
 
-		$start = ($request->getVar('start')) ? (int)$request->getVar('start') : 0;
-		$limit = 10;//is this used?
-
-		$object = (property_exists($this->Data()->ClassName, 'managed_detail')) ? $this->Data()->stat('managed_detail') : CollectionPage::getManagedDetail();
-		$pageSize = (property_exists($this->Data()->ClassName, 'page_size')) ? $this->Data()->stat('page_size') : CollectionPage::getPageSize();
-		$context = (method_exists($object, 'getCustomSearchContext')) ? singleton($object)->getCustomSearchContext() : singleton($object)->getDefaultSearchContext();
-		$query = $context->getQuery($searchCriteria);
-		$records = $context->getResults($searchCriteria);
-
-        $records = PaginatedList::create($records, $this->request);
-        $records->setPageStart($start);
-        $records->setPageLength($pageSize);
-
-	    return $records;
-
-	}
-
-	// Search Objects
-	public function AdvSearchForm() {
-
-		$Object = singleton('DetailPage');
-
-		$context = $Object->getDefaultSearchContext();
-		$fields = $context->getSearchFields();
-
-		$actions = new FieldList(
-			new FormAction('search', 'Search')
-		);
-
-		$form = Form::create($this, "AdvSearchForm",
-			$fields,
-			$actions
-		);
-
-		$form->setFormMethod('get');
-
-		return $form;
-	}
+    /**
+     * @param SS_HTTPRequest $request
+     * @return PaginatedList
+     */
+    public function index(SS_HTTPRequest $request)
+    {
 
 
-	// Results filtered by query
-	function search($data, $form, $request) {
-		$limit = true;
-		return $this->render(array(
-			'Items' => $this->Items($data),
-			'AdvSearchForm' => $form
-		));
-	}
+        $listClass = $this->getManagedClass();
 
-	public function tag($pageSize = 10) {
-		$request = $this->request;
-		$params = $request->allParams();
+        $start = ($request->getVar('start')) ? (int)$request->getVar('start') : 0;
 
-		if ($tag = Convert::raw2sql($params['ID'])) {
+        $limit = Config::inst()->get($this->getManagingClass(), 'page_size');
 
-			$items = DetailPage::get()
-				->filter(array(
-					'ParentID' => $this->ID,
-					'Tags.Title' => $tag));
+        $context = (method_exists($listClass, 'getCustomSearchContext'))
+            ? singleton($listClass)->getCustomSearchContext()
+            : singleton($listClass)->getDefaultSearchContext();
 
-			$list = PaginatedList::create($items, $this->request);
-			//$list->setPageLength($pageSize);
+        $list = $context->getResults($request->requestVars());
 
-			return $this->customise(array(
-				'Filter' => 'Items tagged with "' . $tag . '"',
-				'Items' => $list
-			));
-		}
-	}
+        $results = PaginatedList::create($list, $this->request);
+        $results->setPageStart($start);
+        $results->setPageLength($limit);
+
+        return $this->customise(array(
+            'Results' => $results
+        ));
+    }
+
+    /**
+     * Search Objects
+     *
+     * @return mixed
+     */
+    public function AdvSearchForm()
+    {
+
+        $searchObject = $this->getManagedClass();
+
+        $context = (method_exists($searchObject, 'getCustomSearchContext'))
+            ? singleton($searchObject)->getCustomSearchContext()
+            : singleton($searchObject)->getDefaultSearchContext();
+        $fields = $context->getSearchFields();
+
+        $actions = new FieldList(
+            new FormAction('search', 'Search')
+        );
+
+        $form = Form::create($this, "AdvSearchForm",
+            $fields,
+            $actions
+        );
+
+        $form
+            ->setFormMethod('get')
+            ->disableSecurityToken()
+            ->setFormAction($this->Link());
+
+        return $form;
+    }
+
+    /**
+     * @param SS_HTTPRequest $request
+     * @return ViewableData_Customised
+     */
+    public function tag(SS_HTTPRequest $request)
+    {
+
+        if ($request->param('ID') && $tag = Convert::raw2sql($request->param('ID'))) {
+
+            $start = ($request->getVar('start')) ? (int)$request->getVar('start') : 0;
+
+            $items = DetailPage::get()
+                ->filter(array(
+                    'ParentID' => $this->ID,
+                    'Tags.Title' => $tag
+                ));
+
+            $list = PaginatedList::create($items, $this->request);
+            $list->setPageStart($start);
+            $list->setPageLength(Config::inst()->get($this->getManagingClass(), 'page_size'));
+
+        } else {
+            $list = false;
+        }
+
+        return $this->customise(array(
+            'Filter' => 'Items tagged with "' . $request->param('ID') . '"',
+            'Items' => $list
+        ));
+
+    }
 
 }
