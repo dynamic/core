@@ -88,7 +88,7 @@
             $date = str_replace('T', '', $date);//remove T
             $date = str_replace('Z', '', $date);//remove Z
             $date = strtotime($date);
-            $date = (!date('I')) ? $date : strtotime('- 1 hour', $date);
+            $date = (date('I')) ? $date : strtotime('- 1 hour', $date);
             $date = $date + date('Z');
             return sfDate::getInstance($date);
         }
