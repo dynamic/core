@@ -7,7 +7,10 @@ class CoreSiteTree extends SiteTreeExtension {
 	);
 
 	public function updateCMSFields(FieldList $fields) {
-		$fields->insertAfter(TextField::create('SubTitle', 'Sub Title'), 'MenuTitle');
+
+		$after = (class_exists('BlogPost') && $this->owner->ClassName == 'BlogPost') ? 'Title' : 'MenuTitle';
+
+		$fields->insertAfter(TextField::create('SubTitle', 'Sub Title'), $after);
 
 		$fields->removeByName('Metadata');
 		$meta = ToggleCompositeField::create('Metadata', _t('SiteTree.MetadataToggle', 'Metadata'),
