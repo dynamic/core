@@ -78,13 +78,11 @@ class NewsHolder_Controller extends HolderPage_Controller {
 	public function archive($request = null){
 		$params = $request->allParams();
 
-		$filter = array();
-
 		if($year = $params['ID']){
 			if($month = $params['OtherID']){
 				$start = $year."-".$month;
 				$monthWord = date('F', strtotime($start));
-				$end = date('Y-m-d', strtotime("last day of $monthWord"));
+				$end = date('Y-m-d', strtotime("last day of $monthWord $year"));
 			}else{
 				$start = "$year-01-01";
 				$end = "$year-12-31";
@@ -95,9 +93,10 @@ class NewsHolder_Controller extends HolderPage_Controller {
 			$to->setValue($end);
 
 			$filter = array(
-				'ParentID' => $this->Data()->ID,
+				'ParentID' => $this->data()->ID,
 				'DateAuthored:GreaterThan' => $from->value,
-				'DateAuthored:LessThan' => $to->value);
+				'DateAuthored:LessThanOrEqual' => $to->value,
+			);
 
 			return $this->customise(array(
 				'Items' => NewsArticle::get()
