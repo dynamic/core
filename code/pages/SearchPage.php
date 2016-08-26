@@ -17,7 +17,7 @@ class SearchPage extends Page implements PermissionProvider
      */
     public function canView($member = null)
     {
-        return parent::canView($member = null);
+        return true;
     }
 
     public function canEdit($member = null)
@@ -53,4 +53,9 @@ class SearchPage_Controller extends Page_Controller
     private static $allowed_actions = array(
         'SearchForm',
     );
+
+    public function SearchForm()
+    {
+        return parent::SearchForm();
+    }
 }
