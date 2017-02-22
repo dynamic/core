@@ -14,14 +14,14 @@
     }
   ],
   "require": {
-    "silverstripe/framework": ">=3.1",
-    "silverstripe/cms": ">=3.1",
-    "dynamic/flexslider": "dev-master",
-    "colymba/gridfield-bulk-editing-tools": "*",
-    "silverstripe/tagfield": "1.1.0",
-    "silverstripe/userforms": "2.0.*",
-    "silverstripe/spamprotection": "2.0.*",
-    "unclecheese/display-logic": "1.2.1"
+    "silverstripe/framework": "^3.1",
+    "silverstripe/cms": "^3.1",
+    "dynamic/flexslider": "^1.0",
+    "colymba/gridfield-bulk-editing-tools": "^2.1",
+    "silverstripe/tagfield": "^1.1",
+    "silverstripe/userforms": "^3.0",
+    "silverstripe/spamprotection": "^2.0",
+    "unclecheese/display-logic": "^1.2"
   },
   "suggest": {
     "undefinedoffset/sortablegridfield": "0.4.*"

@@ -1,5 +1,8 @@
 # core
 [![Build Status](https://magnum.travis-ci.com/dynamic/core.svg?token=ujzpSCh6NsJLpFS5WGnw&branch=master)](https://magnum.travis-ci.com/dynamic/core)
+[![codecov.io](https://codecov.io/github/dynamic/core/coverage.svg?token=d71ul0CuvH&branch=2.0)](https://codecov.io/github/dynamic/core?branch=2.0)
+
+![codecov.io](https://codecov.io/github/dynamic/core/branch.svg?branch=2.0&token=d71ul0CuvH)
 
 core is a [SilverStripe](http://silverstripe.org) module that adds many basic features most simple brochure sites require.
 

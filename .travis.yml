@@ -21,12 +21,12 @@ matrix:
     - env: DB=MYSQL CORE_RELEASE=3.2
     - env: DB=MYSQL CORE_RELEASE=master
   include:
-    - php: 5.6
-      env: DB=MYSQL CORE_RELEASE=3.1 COVERAGE=1
     - php: 5.4
       env: DB=MYSQL CORE_RELEASE=3.1
     - php: 5.5
       env: DB=MYSQL CORE_RELEASE=3.1
+    - php: 5.6
+      env: DB=MYSQL CORE_RELEASE=3.1 COVERAGE=1
     - php: 5.6
       env: DB=MYSQL CORE_RELEASE=3.2
     - php: 5.6

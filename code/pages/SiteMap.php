@@ -9,7 +9,7 @@ class SiteMap extends Page implements PermissionProvider{
 	/**
 	 * @return string
 	 */
-	public function getSitemap(DataList $set = null) {
+	public function getSitemap($set = null) {
 		if(!$set) $set = $this->getRootPages();
 
 		if($set && count($set)) {
