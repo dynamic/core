@@ -1,46 +1,45 @@
 language: php
-php:
- - 5.3
 
-env:
-  matrix:
-   - DB=MYSQL CORE_RELEASE=3.1
-   - DB=PGSQL CORE_RELEASE=3.1
-   - DB=SQLITE CORE_RELEASE=3.1
-  global:
-    - COVERAGE=0
-    - MODULE_PATH=dynamic-core
-    - CODECOV_TOKEN=db9f22c7-fddd-4370-950f-43ea4b9512ea
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - tidy
 
 before_install:
   - pip install --user codecov
 
+env:
+  global:
+    - DB=MYSQL CORE_RELEASE=3.4
+    - COVERAGE=0
+    - MODULE_PATH=dynamic-core
+    - CODECOV_TOKEN=db9f22c7-fddd-4370-950f-43ea4b9512ea
+    - SCRUT_TOKEN=d0cb5cb06d4d296fe4d849c2bd5008934cbf8afe5d256ef146df32d935a783a6
+
 matrix:
+  include:
+    - php: 5.6
+      env: DB=SQLITE
+    - php: 5.6
+      env: DB=PGSQL
+    - php: 5.6
+      env: COVERAGE=1
+    - php: 7.0
+      env: CORE_RELEASE=master
   allow_failures:
     - php: 7.0
-    - env: DB=MYSQL CORE_RELEASE=3.2
-    - env: DB=MYSQL CORE_RELEASE=master
-  include:
-    - php: 5.4
-      env: DB=MYSQL CORE_RELEASE=3.1
-    - php: 5.5
-      env: DB=MYSQL CORE_RELEASE=3.1
-    - php: 5.6
-      env: DB=MYSQL CORE_RELEASE=3.1 COVERAGE=1
-    - php: 5.6
-      env: DB=MYSQL CORE_RELEASE=3.2
-    - php: 5.6
-      env: DB=MYSQL CORE_RELEASE=master
-    - php: 7.0
-      env: DB=MYSQL CORE_RELEASE=3.1
+      env: CORE_RELEASE=master
 
 before_script:
- - phpenv rehash
- - composer self-update || true
- - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
- - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
- - cd ~/builds/ss
+  - phpenv rehash
+  - composer self-update || true
+  - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
+  - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
+  - cd ~/builds/ss
 
+#Execute tests with or without coverage
 script:
   # Execute tests with no coverage.  This is the fastest option
   - "if [ \"$COVERAGE\" = \"0\" ]; then vendor/bin/phpunit $MODULE_PATH/tests/; fi"
@@ -48,10 +47,12 @@ script:
   # Execute tests with coverage.  Do this for a small
   - "if [ \"$COVERAGE\" = \"1\" ]; then vendor/bin/phpunit --coverage-clover=coverage.clover $MODULE_PATH/tests/; fi"
 
+#Upload coverage even if there is a failure
 after_script:
   - "if [ \"$COVERAGE\" = \"1\" ]; then mv coverage.clover ~/build/$TRAVIS_REPO_SLUG/; fi"
   - cd ~/build/$TRAVIS_REPO_SLUG
-  - bash <(curl -s https://codecov.io/bash) -t 9ff11073-5df8-48ab-aa94-af5ce6a9fc86
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - "if [ \"$COVERAGE\" = \"1\" ]; then bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN && travis_retry php ocular.phar code-coverage:upload --format=php-clover --access-token=$SCRUT_TOKEN coverage.clover; fi"
 
 notifications:
   slack:
