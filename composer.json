@@ -1,6 +1,13 @@
 {
   "name": "dynamic/core",
   "description": "The Dynamic Core Module",
+  "authors": [
+    {
+      "name": "Dynamic",
+      "homepage": "http://www.dynamicagency.com",
+      "email": "dev@dynamicagency.com"
+    }
+  ],
   "keywords": [
     "silverstripe",
     "module"
@@ -9,13 +16,14 @@
   "type": "silverstripe-module",
   "repositories": [
     {
-      "type": "vcs",
-      "url": "https://github.com/dynamic/SilverStripe-FlexSlider.git"
+      "type": "composer",
+      "url": "https://dynamicinc:I68blegDd@toran.dynamicagency.com/repo/private/"
     }
   ],
   "require": {
     "silverstripe/framework": "^3.1",
     "silverstripe/cms": "^3.1",
+    "dynamic/core-tools": "^2.0",
     "dynamic/flexslider": "^1.0",
     "colymba/gridfield-bulk-editing-tools": "^2.1",
     "silverstripe/tagfield": "^1.1",
@@ -23,16 +31,14 @@
     "silverstripe/spamprotection": "^2.0",
     "unclecheese/display-logic": "^1.2"
   },
-  "suggest": {
-    "undefinedoffset/sortablegridfield": "0.4.*"
+  "require-dev": {
+    "phpunit/PHPUnit": "^3.7"
   },
-  "authors": [
-    {
-      "name": "Dynamic Inc",
-      "homepage": "http://dynamicagency.com",
-      "email": "dev@dynamicagency.com"
-    }
-  ],
+  "config": {
+    "process-timeout": 600
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "extra": {
     "installer-name": "dynamic-core",
     "branch-alias": {
