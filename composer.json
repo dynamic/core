@@ -34,6 +34,8 @@
     }
   ],
   "extra": {
-    "installer-name": "dynamic-core"
+    "installer-name": "dynamic-core",
+    "branch-alias": {
+      "dev-master": "3.0.x-dev"
   }
 }
