@@ -20,32 +20,36 @@ class PreviewExtensionMigrationTask extends BuildTask
      */
     public function run($request)
     {
-        $this->updateThumbnails();
+        $this->updateObjectThumbnails();
     }
 
     /**
      * migrate all Thumbnail records to PreivewImage.
      */
-    public function updateThumbnails()
+    public function updateObjectThumbnails()
     {
-        $pages = ClassInfo::subclassesFor('SiteTree');
-        unset($pages['SiteTree']);
+        $objects = ClassInfo::subclassesFor('DataObject');
+        unset($objects['DataObject']);
 
         $ct = 0;
-        foreach ($pages as $page) {
-            if (singleton($page)->hasExtension('PreviewExtension')) {
-                $records = $page::get()->filter([
+        foreach ($objects as $object) {
+            if (singleton($object)->hasExtension('PreviewExtension')) {
+                $records = $object::get()->filter([
                     'ThumbnailID:GreaterThan' => 0,
                     'PreviewImageID' => 0,
                 ]);
                 foreach ($records as $record) {
                     $record->PreviewImageID = $record->ThumbnailID;
-                    $record->writeToStage('Stage');
-                    $record->publish('Stage', 'Live');
+                    if (singleton($object) instanceOf SiteTree || singleton($object)->hasExtension('VersionedDataObject')) {
+                        $record->writeToStage('Stage');
+                        $record->publish('Stage', 'Live');
+                    } else {
+                        $record->write();
+                    }
                     ++$ct;
                 }
             }
         }
-        echo '<p>'.$ct.' pages updated.</p>';
+        echo '<p>'.$ct.' objects updated.</p>';
     }
 }
