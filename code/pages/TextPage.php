@@ -1,50 +1,79 @@
 <?php
 
-	class TextPage extends Page implements PermissionProvider{
+class TextPage extends Page implements PermissionProvider
+{
+    /**
+     * @var string
+     */
+    private static $singular_name = 'Text Page';
 
-		private static $singular_name = 'Text Page';
-		private static $plural_name = 'Text Pages';
-		private static $description = 'This page type provides a basic 1 column page supporting the content allowed in the main content zone of the CMS. This page type is primarily used for legal, privates, etc. pages on a site.';
+    /**
+     * @var string
+     */
+    private static $plural_name = 'Text Pages';
 
-		private static $defaults = array(
-			'ShowInMenus' => 0);
+    /**
+     * @var string
+     */
+    private static $description = 'This page type provides a basic 1 column page supporting the content allowed in the main content zone of the CMS. This page type is primarily used for legal, privates, etc. pages on a site.';
 
-        /**
-         * @param Member $member
-         * @return boolean
-         */
-        public function canView($member = null) {
-            return parent::canView($member = null);
+    /**
+     * @var array
+     */
+    private static $defaults = array(
+        'ShowInMenus' => 0);
+
+    /**
+     * @param Member $member
+     * @return boolean
+     */
+    public function canView($member = null)
+    {
+        return parent::canView($member = null);
+    }
+
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canEdit($member = null)
+    {
+        return Permission::check('TextPage_CRUD', 'any', $member);
+    }
+
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canDelete($member = null)
+    {
+        return Permission::check('TextPage_CRUD', 'any', $member);
+    }
+
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canCreate($member = null)
+    {
+        if (SiteMap::get()->first()) {
+            return false;
         }
+        return Permission::check('TextPage_CRUD', 'any', $member);
+    }
 
-        public function canEdit($member = null) {
-            return Permission::check('TextPage_CRUD');
-        }
+    /**
+     * @return array
+     */
+    public function providePermissions()
+    {
+        return array(
+            'TextPage_CRUD' => 'Create, Update and Delete a Text Page'
+        );
+    }
+}
 
-        public function canDelete($member = null) {
-            return Permission::check('TextPage_CRUD');
-        }
+class TextPage_Controller extends Page_Controller
+{
 
-        public function canCreate($member = null) {
-            if (SiteMap::get()->first()) return false;
-            return Permission::check('TextPage_CRUD');
-        }
-
-        public function providePermissions() {
-            return array(
-                //'Location_VIEW' => 'Read a Location',
-                'TextPage_CRUD' => 'Create, Update and Delete a Text Page'
-            );
-        }
-
-	}
-	
-	class TextPage_Controller extends Page_Controller{
-		
-		public function init(){
-			parent::init();
-			
-		}
-		
-		
-	}
+}

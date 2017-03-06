@@ -1,49 +1,69 @@
 <?php
 
-class LandingPage extends SectionPage implements PermissionProvider{
+class LandingPage extends SectionPage implements PermissionProvider
+{
+    /**
+     * @var string
+     */
+    private static $singluar_name = "Landing Page";
 
-	private static $singluar_name = "Landing Page";
-	private static $plural_name = "Landing Pages";
-	private static $description = 'Section Landing Page, displays list of subpages';
+    /**
+     * @var string
+     */
+    private static $plural_name = "Landing Pages";
 
-	public function getCMSFields(){
-		$fields = parent::getCMSFields();
-
-		$this->extend('updateCMSFields', $fields);
-		return $fields;
-	}
+    /**
+     * @var string
+     */
+    private static $description = 'Section Landing Page, displays list of subpages';
 
     /**
      * @param Member $member
      * @return boolean
      */
-    public function canView($member = null) {
+    public function canView($member = null)
+    {
         return parent::canView($member = null);
     }
 
-    public function canEdit($member = null) {
-        return Permission::check('LandingPage_CRUD');
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canEdit($member = null)
+    {
+        return Permission::check('LandingPage_CRUD', 'any', $member);
     }
 
-    public function canDelete($member = null) {
-        return Permission::check('LandingPage_CRUD');
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canDelete($member = null)
+    {
+        return Permission::check('LandingPage_CRUD', 'any', $member);
     }
 
-    public function canCreate($member = null) {
-        return Permission::check('LandingPage_CRUD');
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canCreate($member = null)
+    {
+        return Permission::check('LandingPage_CRUD', 'any', $member);
     }
 
-    public function providePermissions() {
+    /**
+     * @return array
+     */
+    public function providePermissions()
+    {
         return array(
-            //'Location_VIEW' => 'Read a Location',
             'LandingPage_CRUD' => 'Create, Update and Delete a Landing Page'
         );
     }
-
 }
 
-class LandingPage_Controller extends SectionPage_Controller {
-
-
-
+class LandingPage_Controller extends SectionPage_Controller
+{
 }

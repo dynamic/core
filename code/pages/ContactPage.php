@@ -1,42 +1,69 @@
 <?php
 
-class ContactPage extends UserDefinedForm implements PermissionProvider{
+class ContactPage extends UserDefinedForm implements PermissionProvider
+{
+    /**
+     * @var string
+     */
+    private static $singular_name = "Contact Page";
 
-	private static $singular_name = "Contact Page";
-	private static $plural_name = "Contact Pages";
-	private static $description = 'Create a contact form. Includes company contact information and map';
+    /**
+     * @var string
+     */
+    private static $plural_name = "Contact Pages";
 
-	/**
-	 * @param Member $member
-	 * @return boolean
-	 */
-	public function canView($member = null) {
-		return parent::canView($member = null);
-	}
+    /**
+     * @var string
+     */
+    private static $description = 'Create a contact form. Includes company contact information and map';
 
-	public function canEdit($member = null) {
-		return Permission::check('Contact_CRUD');
-	}
+    /**
+     * @param Member $member
+     * @return boolean
+     */
+    public function canView($member = null)
+    {
+        return parent::canView($member = null);
+    }
 
-	public function canDelete($member = null) {
-		return Permission::check('Contact_CRUD');
-	}
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canEdit($member = null)
+    {
+        return Permission::check('Contact_CRUD', 'any', $member);
+    }
 
-	public function canCreate($member = null) {
-		return Permission::check('Contact_CRUD');
-	}
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canDelete($member = null)
+    {
+        return Permission::check('Contact_CRUD', 'any', $member);
+    }
 
-	public function providePermissions() {
-		return array(
-			//'Location_VIEW' => 'Read a Location',
-			'Contact_CRUD' => 'Create, Update and Delete a Contact Page'
-		);
-	}
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canCreate($member = null)
+    {
+        return Permission::check('Contact_CRUD', 'any', $member);
+    }
 
+    /**
+     * @return array
+     */
+    public function providePermissions()
+    {
+        return array(
+            'Contact_CRUD' => 'Create, Update and Delete a Contact Page'
+        );
+    }
 }
 
-class ContactPage_Controller extends UserDefinedForm_Controller {
-
-
-
+class ContactPage_Controller extends UserDefinedForm_Controller
+{
 }

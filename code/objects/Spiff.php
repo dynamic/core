@@ -42,8 +42,6 @@ class Spiff extends DataObject
         $fields->insertBefore($pageLink = TreeDropdownField::create('PageLinkID', 'Link', 'SiteTree'), 'Description');
         $fields->insertBefore($ImageField, 'Description');
 
-        $this->extend('updateCMSFields', $fields);
-
         return $fields;
     }
 
