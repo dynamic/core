@@ -70,8 +70,6 @@ class DetailPage extends Page implements PermissionProvider{
 	    	$LinksField
 	    ));
 
-		$this->extend('updateCMSFields', $fields);
-
 		return $fields;
 	}
 

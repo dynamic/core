@@ -10,14 +10,6 @@
 
 		public static $item_class = array('NewsHolder');
 
-		public function getCMSFields(){
-			$fields = parent::getCMSFields();
-
-
-
-			return $fields;
-		}
-
         /**
          * @param Member $member
          * @return boolean

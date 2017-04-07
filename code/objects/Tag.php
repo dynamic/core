@@ -10,14 +10,6 @@ class Tag extends DataObject {
         'Pages' => 'DetailPage'
     );
 
-    public function getCMSFields() {
-	    $fields = parent::getCMSFields();
-
-
-		$this->extend('updateCMSFields', $fields);
-	    return $fields;
-    }
-
     public function getLink() {
 		$controller = Controller::curr();
 		$class = $controller->Data()->ClassName;

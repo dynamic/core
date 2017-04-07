@@ -43,8 +43,6 @@ class NewsArticle extends HolderItem implements PermissionProvider{
 		$fields->addFieldToTab('Root.Main', $dateTimeField = new DatetimeField('DateAuthored'), 'Content');
 		$dateTimeField->getDateField()->setConfig('showcalendar', true);
 
-		$this->extend('updateCMSFields', $fields);
-
 		return $fields;
 	}
 

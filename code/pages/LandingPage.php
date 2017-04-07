@@ -6,13 +6,6 @@ class LandingPage extends SectionPage implements PermissionProvider{
 	private static $plural_name = "Landing Pages";
 	private static $description = 'Section Landing Page, displays list of subpages';
 
-	public function getCMSFields(){
-		$fields = parent::getCMSFields();
-
-		$this->extend('updateCMSFields', $fields);
-		return $fields;
-	}
-
     /**
      * @param Member $member
      * @return boolean
