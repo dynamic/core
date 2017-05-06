@@ -1,17 +1,30 @@
 <?php
 
-class HolderItem extends DetailPage {
+class HolderItem extends DetailPage
+{
+    /**
+     * @var string
+     */
+    private static $singular_name = "Holder Item";
 
-	public static $listing_page_class = 'HolderPage';
+    /**
+     * @var string
+     */
+    private static $plural_name = "Holder Items";
 
-	private static $defaults = array(
-		'ShowInMenus' => 0
-	);
+    /**
+     * @var string
+     */
+    public static $listing_page_class = 'HolderPage';
 
+    /**
+     * @var array
+     */
+    private static $defaults = array(
+        'ShowInMenus' => 0
+    );
 }
 
-class HolderItem_Controller extends DetailPage_Controller {
-
-
-
+class HolderItem_Controller extends DetailPage_Controller
+{
 }

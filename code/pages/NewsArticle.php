@@ -5,6 +5,21 @@ class NewsArticle extends HolderItem implements PermissionProvider
     /**
      * @var string
      */
+    private static $singular_name = 'News Article';
+
+    /**
+     * @var string
+     */
+    private static $plural_name = 'News Articles';
+
+    /**
+     * @var string
+     */
+    private static $description = 'Article for the News section';
+
+    /**
+     * @var string
+     */
     public static $listing_page_class = 'NewsHolder';
 
     /**
