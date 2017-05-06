@@ -3,6 +3,21 @@
 class DetailPage extends Page implements PermissionProvider
 {
     /**
+     * @var string
+     */
+    private static $singular_name = "Detail Page";
+
+    /**
+     * @var string
+     */
+    private static $plural_name = "Detail Pages";
+
+    /**
+     * @var string
+     */
+    private static $description = "Rich content page, includes images and slides";
+
+    /**
      * @var array
      */
     private static $has_one = array(

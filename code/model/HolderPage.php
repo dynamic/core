@@ -1,92 +1,136 @@
 <?php
 
-class HolderPage extends Page {
+class HolderPage extends Page
+{
+    /**
+     * @var string
+     */
+    private static $singular_name = "Group Page";
 
-	public static $item_class = 'HolderItem';
+    /**
+     * @var string
+     */
+    private static $plural_name = "Group Pages";
 
-	// tag list for sidebar
-	public function getTags() {
+    /**
+     * @var string
+     */
+    private static $hide_ancestor = "HolderPage";
 
-		$hit = Tag::get()
-			->filter(array(
-				'Pages.ID:GreaterThan'=>0,
-				'Pages.ClassName' => $this->stat('item_class'),
-				'Pages.ID.ParentID' => $this->ID))
-			->sort('Title')
-			->limit(10);
-		if($hit->Count()==0){
-			$hit = false;
-		}
-		return $hit;
-	}
+    /**
+     * @var string
+     */
+    private static $item_class = 'HolderItem';
 
-	// hide children from menu
-	public function MenuChildren() {
-		return parent::MenuChildren()->exclude('ClassName', 'HolderItem');
-	}
+    /**
+     * tag list for sidebar
+     *
+     * @return bool|DataList|SS_Limitable
+     */
+    public function getTags()
+    {
+        $hit = Tag::get()
+            ->filter(array(
+                'Pages.ID:GreaterThan'=>0,
+                'Pages.ClassName' => $this->stat('item_class'),
+                'Pages.ID.ParentID' => $this->ID))
+            ->sort('Title')
+            ->limit(10);
+        if ($hit->Count()==0) {
+            $hit = false;
+        }
+        return $hit;
+    }
 
-	public function getDefaultRSSLink() {
-		return $this->Link('rss');
-	}
+    /**
+     * hide children from menu
+     *
+     * @return mixed
+     */
+    public function MenuChildren()
+    {
+        return parent::MenuChildren()->exclude('ClassName', 'HolderItem');
+    }
 
+    /**
+     * @return string
+     */
+    public function getDefaultRSSLink()
+    {
+        return $this->Link('rss');
+    }
 }
 
-class HolderPage_Controller extends Page_Controller {
+class HolderPage_Controller extends Page_Controller
+{
+    /**
+     *
+     */
+    public function init()
+    {
+        RSSFeed::linkToFeed($this->Link('rss') . '.xml', $this->Data()->Title.' rss feed');
+        parent::init();
+    }
 
-	public function init() {
-		RSSFeed::linkToFeed($this->Link('rss') . '.xml', $this->Data()->Title.' rss feed');
-		parent::init();
-	}
+    /**
+     * @var array
+     */
+    private static $allowed_actions = array(
+        'tag',
+        'rss'
+    );
 
-	private static $allowed_actions = array(
-		'tag',
-		'rss'
-	);
+    /**
+     * @param array $filter
+     * @param int $pageSize
+     * @return static
+     */
+    public function Items($filter = array(), $pageSize = 10)
+    {
+        $filter['ParentID'] = $this->Data()->ID;
+        $class =  $this->Data()->stat('item_class');
 
-	public function Items($filter = array(), $pageSize = 10) {
+        // get all records from $class using $filter
+        $items = $class::get()->filter($filter);
 
-		$filter['ParentID'] = $this->Data()->ID;
-		$class =  $this->Data()->stat('item_class');
+        $list = PaginatedList::create($items, $this->request);
+        $list->setPageLength($pageSize);
 
-		// get all records from $class using $filter
-		$items = $class::get()->filter($filter);
+        return $list;
+    }
 
-		$list = PaginatedList::create($items, $this->request);
-		$list->setPageLength($pageSize);
+    /**
+     * @return HolderPage_Controller|ViewableData_Customised
+     */
+    public function tag()
+    {
+        $request = $this->request;
+        $params = $request->allParams();
 
-		return $list;
+        if ($tag = Convert::raw2sql(urldecode($params['ID']))) {
+            $filter = array('Tags.Title' => $tag);
 
-	}
+            return $this->customise(array(
+                'Message' => 'showing entries tagged "' . $tag . '"',
+                'Items' => $this->Items($filter)
+            ));
+        }
 
-	public function tag() {
+        return $this->Items();
+    }
 
-		$request = $this->request;
-		$params = $request->allParams();
-
-		if ($tag = Convert::raw2sql(urldecode($params['ID']))) {
-
-			$filter = array('Tags.Title' => $tag);
-
-			return $this->customise(array(
-				'Message' => 'showing entries tagged "' . $tag . '"',
-				'Items' => $this->Items($filter)
-			));
-
-		}
-
-		return $this->Items();
-
-	}
-
-	public function rss() {
-		$title = $this->Data()->Title;
-		$description = "$title rss feed";
-		$rss = new RSSFeed(
-			$this->Items(),
-			$this->Link('rss'),
-			$this->Data()->Title,
-			$description);
-		return $rss->outputToBrowser();
-	}
-
+    /**
+     * @return HTMLText
+     */
+    public function rss()
+    {
+        $title = $this->Data()->Title;
+        $description = "$title rss feed";
+        $rss = new RSSFeed(
+            $this->Items(),
+            $this->Link('rss'),
+            $this->Data()->Title,
+            $description);
+        return $rss->outputToBrowser();
+    }
 }
