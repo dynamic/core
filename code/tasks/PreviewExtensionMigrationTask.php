@@ -6,10 +6,12 @@ class PreviewExtensionMigrationTask extends BuildTask
      * @var string
      */
     protected $title = 'Preview Extension Migration';
+
     /**
      * @var string
      */
     protected $description = 'Migration task - migrate Thumbnail to PreviewImage';
+
     /**
      * @var bool
      */

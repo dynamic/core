@@ -1,113 +1,151 @@
 <?php
 
-class DetailPage extends Page implements PermissionProvider{
+class DetailPage extends Page implements PermissionProvider
+{
+    /**
+     * @var array
+     */
+    private static $has_one = array(
+        'Image' => 'Image'
+    );
 
-	private static $has_one = array(
-		'Image' => 'Image'
-	);
+    /**
+     * @var array
+     */
+    private static $many_many = array(
+        'Tags' => 'Tag',
+        'Links' => 'LinkObject'
+    );
 
-	private static $many_many = array(
-		'Tags' => 'Tag',
-		'Links' => 'LinkObject'
-	);
+    /**
+     * @var array
+     */
+    private static $many_many_extraFields = array(
+        'Links' => array(
+            'SortOrder' => 'Int'
+        )
+    );
 
-	private static $many_many_extraFields = array(
-		'Links' => array(
-			'SortOrder' => 'Int'
-		)
-	);
+    /**
+     * @var array
+     */
+    private static $searchable_fields = array(
+        'Title',
+        'Tags.ID'
+    );
 
-	private static $searchable_fields = array(
-		'Title',
-		'Tags.ID'
-	);
+    /**
+     * exclude child pages from Menu
+     *
+     * @return mixed
+     */
+    public function MenuChildren()
+    {
+        return parent::MenuChildren()->exclude('ClassName', 'NewsArticle');
+    }
 
-	// exclude child pages from Menu
-	public function MenuChildren() {
-		return parent::MenuChildren()->exclude('ClassName', 'NewsArticle');
-	}
+    /**
+     * @return FieldList
+     */
+    public function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
 
-	public function getCMSFields() {
-		$fields = parent::getCMSFields();
+        $ImageField = UploadField::create('Image', 'Main Image');
+        $ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
+        $ImageField->setFolderName('Uploads/DetailMain');
+        $ImageField->setConfig('allowedMaxFileNumber', 1);
+        if ($this->stat('customImageRightTitle')) {
+            $ImageField->setRightTitle($this->stat('customImageRightTitle'));
+        } else {
+            $ImageField->setRightTitle('Large image displayed near the top of the page');
+        }
 
-		// Tag Field
-		$TagField = TagField::create('Tags', null, Tag::get(), $this->Tags());
-		$TagField->setCanCreate(true);
-		$fields->addFieldToTab('Root.Main', $TagField, 'Content');
+        $fields->addFieldsToTab('Root.Images', array(
+            $ImageField
+        ));
 
-		// Images
-		//$fields->insertBefore(new Tab('Images'), 'Slides');
+        if ($this->ID) {
+            // Tag Field
+            $TagField = TagField::create('Tags', 'Tags', Tag::get(), $this->Tags());
+            $TagField->setCanCreate(true);
+            $fields->addFieldToTab('Root.Main', $TagField, 'Content');
 
-		$ImageField = UploadField::create('Image', 'Main Image');
-		$ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-		$ImageField->setFolderName('Uploads/DetailMain');
-		$ImageField->setConfig('allowedMaxFileNumber', 1);
-		if($this->stat('customImageRightTitle')){
-			$ImageField->setRightTitle($this->stat('customImageRightTitle'));
-		}else{
-			$ImageField->setRightTitle('Large image displayed near the top of the page');
-		}
-
-		$fields->addFieldsToTab('Root.Images', array(
-			$ImageField
-		));
-
-	    // Side Bar
-	    // Links
-		$gridFieldConfig = GridFieldConfig_RelationEditor::create();
-		if(class_exists('GridFieldManyRelationHandler')){
-			$gridFieldConfig->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
-			if(class_exists('GridFieldSortableRows')) {
-                $gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"), 'GridFieldManyRelationHandler');
+            // Side Bar Links
+            $gridFieldConfig = GridFieldConfig_RelationEditor::create();
+            if (class_exists('GridFieldAddExistingSearchButton')) {
+                $gridFieldConfig->removeComponentsByType('GridFieldAddExistingAutocompleter');
+                $gridFieldConfig->addComponent(new GridFieldAddExistingSearchButton());
             }
-			$gridFieldConfig->removeComponentsByType('GridFieldAddExistingAutocompleter');
-		}else{
-			if (class_exists('GridFieldSortableRows')) $gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"));
-		}
-	    $LinksField = GridField::create("Links", "Links", $this->Links()->sort('SortOrder'), $gridFieldConfig);
+            if (class_exists('GridFieldSortableRows')) {
+                $gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"));
+            }
+            $LinksField = GridField::create("Links", "Links", $this->Links()->sort('SortOrder'), $gridFieldConfig);
 
-	    $fields->addFieldsToTab('Root.SideBar', array(
-	    	$LinksField
-	    ));
+            $fields->addFieldsToTab('Root.SideBar', array(
+                $LinksField
+            ));
+        }
 
-		return $fields;
-	}
+        return $fields;
+    }
 
-	public function getLinks(){
-		return $this->getManyManyComponents('Links')->sort('SortOrder');
-	}
+    /**
+     * @return DataList
+     */
+    public function getPageLinks()
+    {
+        return $this->Links()->sort('SortOrder');
+    }
 
     /**
      * @param Member $member
      * @return boolean
      */
-    public function canView($member = null) {
+    public function canView($member = null)
+    {
         return parent::canView($member = null);
     }
 
-    public function canEdit($member = null) {
-        return Permission::check('DetailPage_CRUD');
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canEdit($member = null)
+    {
+        return Permission::check('DetailPage_CRUD', 'any', $member);
     }
 
-    public function canDelete($member = null) {
-        return Permission::check('DetailPage_CRUD');
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canDelete($member = null)
+    {
+        return Permission::check('DetailPage_CRUD', 'any', $member);
     }
 
-    public function canCreate($member = null) {
-        return Permission::check('DetailPage_CRUD');
+    /**
+     * @param null $member
+     * @return bool|int
+     */
+    public function canCreate($member = null)
+    {
+        return Permission::check('DetailPage_CRUD', 'any', $member);
     }
 
-    public function providePermissions() {
+    /**
+     * @return array
+     */
+    public function providePermissions()
+    {
         return array(
-            //'Location_VIEW' => 'Read a Location',
             'DetailPage_CRUD' => 'Create, Update and Delete a Detail Page'
         );
     }
-
 }
 
-class DetailPage_Controller extends Page_Controller {
-
-
+class DetailPage_Controller extends Page_Controller
+{
 
 }

@@ -1,49 +1,96 @@
 <?php
 
-class DetailPageTest extends DC_Test{
+class DetailPageTest extends SapphireTest
+{
+    /**
+     * @var string
+     */
+    protected static $fixture_file = 'dynamic-core/tests/DynamicCoreTest.yml';
 
-    protected static $use_draft_site = true;
-
-    function setUp(){
-        parent::setUp();
+    /**
+     *
+     */
+    public function testGetCMSFields()
+    {
+        $object = $this->objFromFixture('DetailPage', 'page1');
+        $fields = $object->getCMSFields();
+        $this->assertInstanceOf('FieldList', $fields);
     }
 
-    function testDetailPage(){}
-
-    /*function testDetailPageCreation(){
-
-        $this->logInWithPermission('Product_CANCRUD');
-        $default = $this->objFromFixture('ProductCategory', 'default');
-        $default->write();
-        $product1 = $this->objFromFixture('ProductPage', 'product1');
-
-        $product1->doPublish();
-        $this->assertTrue($product1->isPublished());
-
+    /**
+     *
+     */
+    public function testGetPageLinks()
+    {
+        $object = $this->objFromFixture('DetailPage', 'page1');
+        $this->assertEquals($object->getPageLinks(), $object->Links()->sort('SortOrder'));
     }
 
-    function testDetailPageDeletion(){
+    /**
+     *
+     */
+    public function testCanView()
+    {
+        $object = $this->objFromFixture('DetailPage', 'page1');
 
-        $this->logInWithPermission('Product_CANCRUD');
-        $product2 = $this->objFromFixture('ProductPage', 'product2');
-        $productID = $product2->ID;
+        $admin = $this->objFromFixture('Member', 'admin');
+        $this->assertTrue($object->canView($admin));
 
-        $product2->doPublish();
-        $this->assertTrue($product2->isPublished());
+        $member = $this->objFromFixture('Member', 'default');
+        $this->assertTrue($object->canView($member));
+    }
 
-        $versions = DB::query('Select * FROM "ProductPage_versions" WHERE "RecordID" = '. $productID);
-        $versionsPostPublish = array();
-        foreach($versions as $versionRow) $versionsPostPublish[] = $versionRow;
+    /**
+     *
+     */
+    public function testCanEdit()
+    {
+        $object = $this->objFromFixture('DetailPage', 'page1');
 
-        $product2->delete();
-        $this->assertTrue(!$product2->isPublished());
+        $admin = $this->objFromFixture('Member', 'admin');
+        $this->assertTrue($object->canEdit($admin));
 
-        $versions = DB::query('Select * FROM "ProductPage_versions" WHERE "RecordID" = '. $productID);
-        $versionsPostDelete = array();
-        foreach($versions as $versionRow) $versionsPostDelete[] = $versionRow;
+        $member = $this->objFromFixture('Member', 'default');
+        $this->assertFalse($object->canEdit($member));
+    }
 
-        $this->assertTrue($versionsPostPublish == $versionsPostDelete);
+    /**
+     *
+     */
+    public function testCanDelete()
+    {
+        $object = $this->objFromFixture('DetailPage', 'page1');
 
-    }*/
+        $admin = $this->objFromFixture('Member', 'admin');
+        $this->assertTrue($object->canDelete($admin));
 
+        $member = $this->objFromFixture('Member', 'default');
+        $this->assertFalse($object->canDelete($member));
+    }
+
+    /**
+     *
+     */
+    public function testCanCreate()
+    {
+        $object = $this->objFromFixture('DetailPage', 'page1');
+
+        $admin = $this->objFromFixture('Member', 'admin');
+        $this->assertTrue($object->canCreate($admin));
+
+        $member = $this->objFromFixture('Member', 'default');
+        $this->assertFalse($object->canCreate($member));
+    }
+
+    /**
+     *
+     */
+    public function testProvidePermissions()
+    {
+        $object = singleton('DetailPage');
+        $expected = array(
+            'DetailPage_CRUD' => 'Create, Update and Delete a Detail Page',
+        );
+        $this->assertEquals($expected, $object->providePermissions());
+    }
 }
