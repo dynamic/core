@@ -3,7 +3,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dynamic/core/badges/quality-score.png?b=master&s=def7f99b770fb60dce2320ad226733817b62b743)](https://scrutinizer-ci.com/g/dynamic/core/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/dynamic/core/badges/coverage.png?b=master&s=6eb131287352509a481bf5b9e7ee6c965e56ab00)](https://scrutinizer-ci.com/g/dynamic/core/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/dynamic/core/badges/build.png?b=master&s=7988b4a6f697b3a7e9a17588bc2e93be1b96c136)](https://scrutinizer-ci.com/g/dynamic/core/build-status/master)
-[![codecov](https://codecov.io/gh/dynamic/core/branch/2.0/graph/badge.svg?token=d71ul0CuvH)](https://codecov.io/gh/dynamic/core)
+[![codecov](https://codecov.io/gh/dynamic/core/branch/master/graph/badge.svg?token=d71ul0CuvH)](https://codecov.io/gh/dynamic/core)
 
 
 Core is a [SilverStripe](http://silverstripe.org) module that adds many basic features most simple brochure sites require.
