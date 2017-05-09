@@ -43,3 +43,6 @@ FormPage:
     Title: Form Page 1
   form2:
     Title: Another Form Page
+LandingPage:
+  default:
+    Title: 'Landing Page'
