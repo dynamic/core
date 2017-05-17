@@ -2,16 +2,25 @@
 
 class FooterLinksLegacy extends DataExtension
 {
+    /**
+     * @var array
+     */
     private static $many_many = array(
         'FooterLinks' => 'SiteTree'
     );
 
+    /**
+     * @var array
+     */
     private static $many_many_extraFields = array(
         'FooterLinks' => array(
             'SortOrder' => 'Int'
         )
     );
 
+    /**
+     * @param FieldList $fields
+     */
     public function updateCMSFields(FieldList $fields)
     {
         $config = GridFieldConfig_RelationEditor::create();
@@ -24,5 +33,13 @@ class FooterLinksLegacy extends DataExtension
         $fields->addFieldsToTab("Root.Footer", array(
             $FooterGridField
         ));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFooterLinkList()
+    {
+        return $this->owner->FooterLinks()->sort('SortOrder');
     }
 }
