@@ -15,4 +15,4 @@ if (class_exists('Addressable')) {
 }
 
 // set image upload max size
-define('CORE_IMAGE_FILE_SIZE_LIMIT', '512000');
+define('CORE_IMAGE_FILE_SIZE_LIMIT', 512000);
