@@ -105,7 +105,7 @@ class NewsMigrationTask extends BuildTask
 	 * @param DataList|bool $oldTags
 	 * @param $count
 	 */
-	private function addTags(SiteTree $page, DataList $oldTags, &$count)
+	private function addTags(SiteTree $page, $oldTags, &$count)
 	{
 		if (!$oldTags) {
 			return;
