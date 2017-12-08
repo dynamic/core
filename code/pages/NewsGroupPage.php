@@ -1,5 +1,6 @@
 <?php
 
+// TODO - re-write for blog
 class NewsGroupPage extends HolderPage implements PermissionProvider
 {
     /**
