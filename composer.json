@@ -19,7 +19,7 @@
     "dynamic/flexslider": "^1.0",
     "colymba/gridfield-bulk-editing-tools": "^2.1",
     "silverstripe/tagfield": "^1.1",
-    "silverstripe/userforms": "^3.0",
+    "silverstripe/userforms": "^3.0 || ^4.0",
     "silverstripe/spamprotection": "^2.0",
     "unclecheese/display-logic": "^1.2"
   },
