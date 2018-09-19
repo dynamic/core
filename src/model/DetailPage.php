@@ -6,6 +6,7 @@ use Dynamic\Core\Object\Tag;
 use Dynamic\Core\Object\LinkObject;
 use Dynamic\Core\Page\NewsArticle;
 use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Assets\Image;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Security\Permission;
@@ -35,7 +36,7 @@ class DetailPage extends \Page implements PermissionProvider
      * @var array
      */
     private static $has_one = array(
-        'Image' => 'Image'
+        'Image' => Image::class
     );
 
     /**
@@ -85,7 +86,7 @@ class DetailPage extends \Page implements PermissionProvider
         $ImageField = UploadField::create('Image', 'Main Image');
         $ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
         $ImageField->setFolderName('Uploads/DetailMain');
-        $ImageField->setConfig('allowedMaxFileNumber', 1);
+        //$ImageField->setConfig('allowedMaxFileNumber', 1);
         if ($this->stat('customImageRightTitle')) {
             $ImageField->setRightTitle($this->stat('customImageRightTitle'));
         } else {

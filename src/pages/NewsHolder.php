@@ -50,6 +50,11 @@ class NewsHolder extends HolderPage implements PermissionProvider
     private static $hide_ancestor = HolderPage::class;
 
     /**
+     * @var string
+     */
+    private static $table_name = 'NewsHolder';
+
+    /**
      * News Archives
      *
      * @return GroupedList

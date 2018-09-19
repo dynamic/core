@@ -34,6 +34,11 @@ class HolderPage extends \Page
     private static $item_class = HolderItem::class;
 
     /**
+     * @var string 
+     */
+    private static $table_name = 'HolderPage';
+
+    /**
      * tag list for sidebar
      *
      * @return bool|DataList|SS_Limitable

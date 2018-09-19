@@ -25,6 +25,11 @@ class ContactPage extends UserDefinedForm implements PermissionProvider
     private static $description = 'Create a contact form. Includes company contact information and map';
 
     /**
+     * @var string
+     */
+    private static $table_name = 'ContactPage';
+
+    /**
      * @param Member $member
      * @return boolean
      */

@@ -25,6 +25,11 @@ class LandingPage extends SectionPage implements PermissionProvider
     private static $description = 'Section Landing Page, displays list of subpages';
 
     /**
+     * @var string
+     */
+    private static $table_name = 'LandingPage';
+
+    /**
      * @param Member $member
      * @return boolean
      */

@@ -56,6 +56,11 @@ class CollectionPage extends \Page implements PermissionProvider
     private static $page_size = 10;
 
     /**
+     * @var string
+     */
+    private static $table_name = 'CollectionPage';
+
+    /**
      * @return string
      */
     public static function getManagedDetail()

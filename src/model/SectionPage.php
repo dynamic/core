@@ -29,6 +29,11 @@ class SectionPage extends \Page implements PermissionProvider
     private static $hide_ancestor = SectionPage::class;
 
     /**
+     * @var string 
+     */
+    private static $table_name = 'SectionPage';
+
+    /**
      * @param Member $member
      * @return boolean
      */

@@ -38,6 +38,11 @@ class NewsGroupPage extends HolderPage implements PermissionProvider
     private static $item_class = array(NewsHolder::class);
 
     /**
+     * @var string
+     */
+    private static $table_name = 'NewsGroupPage';
+
+    /**
      * @param Member $member
      * @return boolean
      */

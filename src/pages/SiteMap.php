@@ -24,6 +24,11 @@ class SiteMap extends \Page implements PermissionProvider
     private static $description = "Displays a Site Map from your site's content";
 
     /**
+     * @var string
+     */
+    private static $table_name = 'SiteMap';
+
+    /**
      * @return string
      */
     public function getSitemap($set = null)

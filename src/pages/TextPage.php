@@ -29,6 +29,11 @@ class TextPage extends \Page implements PermissionProvider
         'ShowInMenus' => 0);
 
     /**
+     * @var string
+     */
+    private static $table_name = 'TextPage';
+
+    /**
      * @param Member $member
      * @return boolean
      */

@@ -24,6 +24,11 @@ class BasicPage extends DetailPage implements PermissionProvider
      */
     private static $description = "Rich content page, includes large image area";
 
+    /**
+     * @var string
+     */
+    private static $table_name = 'BasicPage';
+
 
     /**
      * @param Member $member

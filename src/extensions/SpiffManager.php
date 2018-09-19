@@ -12,21 +12,33 @@ use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 
 class SpiffManager extends DataExtension
 {
+    /**
+     * @var array
+     */
     private static $many_many = array(
         'Spiffs' => Spiff::class,
     );
 
+    /**
+     * @var array
+     */
     private static $many_many_extraFields = array(
         'Spiffs' => array(
             'SortOrder' => 'Int',
         )
     );
 
+    /**
+     * @return mixed
+     */
     public function getSpiffList()
     {
         return $this->owner->Spiffs()->sort('SortOrder');
     }
 
+    /**
+     * @param FieldList $fields
+     */
     public function updateCMSFields(FieldList $fields)
     {
         $config = GridFieldConfig_RelationEditor::create();

@@ -30,6 +30,11 @@ class FormPage extends UserDefinedForm implements PermissionProvider
     private static $description = 'Create and display a form to store visitor submissions';
 
     /**
+     * @var string
+     */
+    private static $table_name = 'FormPage';
+
+    /**
      * @param Member $member
      * @return boolean
      */

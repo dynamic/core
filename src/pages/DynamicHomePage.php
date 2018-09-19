@@ -25,6 +25,11 @@ class DynamicHomePage extends SectionPage implements PermissionProvider
     private static $description = 'Website homepage, includes slides and spiffs';
 
     /**
+     * @var string
+     */
+    private static $table_name = 'DynamicHomePage';
+
+    /**
      * @var array
      */
     private static $defaults = array(
