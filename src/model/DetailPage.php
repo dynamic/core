@@ -63,6 +63,8 @@ class DetailPage extends \Page implements PermissionProvider
         'Tags.ID'
     );
 
+    private static $table_name = 'DetailPage';
+
     /**
      * exclude child pages from Menu
      *

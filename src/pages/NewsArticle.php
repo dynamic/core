@@ -48,6 +48,8 @@ class NewsArticle extends HolderItem implements PermissionProvider
      */
     private static $hide_ancestor = HolderItem::class;
 
+    private static $table_name = 'NewsArticle';
+
     /**
      * @var array
      */

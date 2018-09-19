@@ -38,7 +38,7 @@ class SpiffManager extends DataExtension
             $config->addComponent(new GridFieldAddExistingSearchButton());
         }
         $spiffs = $this->owner->Spiffs()
-            ->filter(array('ClassName' => Spiff::class))
+            //->filter(array('ClassName' => Spiff::class))
             ->sort('SortOrder')
         ;
         $SpiffGridField = GridField::create('Spiffs', 'Spiffs', $spiffs, $config);

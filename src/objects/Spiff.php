@@ -40,6 +40,8 @@ class Spiff extends DataObject
     );
     */
 
+    private static $table_name = 'Spiff';
+
     public function getCMSFields()
     {
         $this->beforeUpdateCMSFields(function ($fields) {

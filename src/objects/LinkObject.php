@@ -26,6 +26,8 @@ class LinkObject extends DataObject
         'Pages' => 'Page'
     );
 
+    private static $table_name = 'LinkObject';
+
     private static $singular_name = 'Link';
     private static $plural_name = 'Links';
 
