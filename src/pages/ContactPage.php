@@ -2,11 +2,10 @@
 
 namespace Dynamic\Core\Page;
 
-use UserDefinedForm;
-use PermissionProvider;
-use Permission;
-use UserDefinedForm_Controller;
-
+use SilverStripe\Security\Permission;
+use SilverStripe\Security\PermissionProvider;
+use SilverStripe\UserForms\Control\UserDefinedFormController;
+use SilverStripe\UserForms\Model\UserDefinedForm;
 
 class ContactPage extends UserDefinedForm implements PermissionProvider
 {
@@ -29,7 +28,7 @@ class ContactPage extends UserDefinedForm implements PermissionProvider
      * @param Member $member
      * @return boolean
      */
-    public function canView($member = null)
+    public function canView($member = null, $context = [])
     {
         return parent::canView($member = null);
     }
@@ -38,7 +37,7 @@ class ContactPage extends UserDefinedForm implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canEdit($member = null)
+    public function canEdit($member = null, $context = [])
     {
         return Permission::check('Contact_CRUD', 'any', $member);
     }
@@ -47,7 +46,7 @@ class ContactPage extends UserDefinedForm implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canDelete($member = null)
+    public function canDelete($member = null, $context = [])
     {
         return Permission::check('Contact_CRUD', 'any', $member);
     }
@@ -56,7 +55,7 @@ class ContactPage extends UserDefinedForm implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         return Permission::check('Contact_CRUD', 'any', $member);
     }
@@ -72,6 +71,6 @@ class ContactPage extends UserDefinedForm implements PermissionProvider
     }
 }
 
-class ContactPage_Controller extends UserDefinedForm_Controller
+class ContactPage_Controller extends UserDefinedFormController
 {
 }

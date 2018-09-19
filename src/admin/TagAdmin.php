@@ -2,12 +2,13 @@
 
 namespace Dynamic\Core\Admin;
 
-use ModelAdmin;
+use SilverStripe\Admin\ModelAdmin;
+use Dynamic\Core\Object\Tag;
 
+class TagAdmin extends ModelAdmin
+{
 
-class TagAdmin extends ModelAdmin {
-
-	private static $url_segment = 'tags';
-	private static $menu_title = 'Tags';
-	private static $managed_models = array('Tag');
+    private static $url_segment = 'tags';
+    private static $menu_title = 'Tags';
+    private static $managed_models = array(Tag::class);
 }

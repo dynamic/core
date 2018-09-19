@@ -2,19 +2,18 @@
 
 namespace Dynamic\Core\Model;
 
-use Page;
-use PermissionProvider;
-use Tag;
-use Permission;
-use Page_Controller;
-use PaginatedList;
-use FieldList;
-use FormAction;
-use Form;
-use Convert;
+use Dynamic\Core\Model\CollectionPage;
+use Dynamic\Core\Model\DetailPage;
+use Dynamic\Core\Object\Tag;
+use SilverStripe\Core\Convert;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\Form;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\ORM\PaginatedList;
+use SilverStripe\Security\Permission;
+use SilverStripe\Security\PermissionProvider;
 
-
-class CollectionPage extends Page implements PermissionProvider
+class CollectionPage extends \Page implements PermissionProvider
 {
     /**
      * @var string
@@ -34,22 +33,22 @@ class CollectionPage extends Page implements PermissionProvider
     /**
      * @var string
      */
-    private static $hide_ancestor = "CollectionPage";
+    private static $hide_ancestor = CollectionPage::class;
 
     /**
      * @var array
      */
-    private static $allowed_children = ["DetailPage"];
+    private static $allowed_children = [DetailPage::class];
 
     /**
      * @var string
      */
-    private static $default_child = "DetailPage";
+    private static $default_child = DetailPage::class;
 
     /**
      * @var string
      */
-    private static $managed_detail = 'DetailPage';
+    private static $managed_detail = DetailPage::class;
 
     /**
      * @var int
@@ -94,7 +93,7 @@ class CollectionPage extends Page implements PermissionProvider
      * @param Member $member
      * @return boolean
      */
-    public function canView($member = null)
+    public function canView($member = null, $context = [])
     {
         return parent::canView($member = null);
     }
@@ -103,7 +102,7 @@ class CollectionPage extends Page implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canEdit($member = null)
+    public function canEdit($member = null, $context = [])
     {
         return Permission::check('CollectionPage_CRUD', 'any', $member);
     }
@@ -112,7 +111,7 @@ class CollectionPage extends Page implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canDelete($member = null)
+    public function canDelete($member = null, $context = [])
     {
         return Permission::check('CollectionPage_CRUD', 'any', $member);
     }
@@ -121,7 +120,7 @@ class CollectionPage extends Page implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         return Permission::check('CollectionPage_CRUD', 'any', $member);
     }
@@ -138,7 +137,7 @@ class CollectionPage extends Page implements PermissionProvider
     }
 }
 
-class CollectionPage_Controller extends Page_Controller
+class CollectionPage_Controller extends \PageController
 {
     /**
      * @var array
@@ -191,7 +190,9 @@ class CollectionPage_Controller extends Page_Controller
             new FormAction('search', 'Search')
         );
 
-        $form = Form::create($this, 'AdvSearchForm',
+        $form = Form::create(
+            $this,
+            'AdvSearchForm',
             $fields,
             $actions
         );

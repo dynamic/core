@@ -3,14 +3,15 @@
 namespace Dynamic\Core\Model;
 
 use Page;
-use Tag;
-use Page_Controller;
-use RSSFeed;
-use PaginatedList;
-use Convert;
 
+use Dynamic\Core\Model\HolderPage;
+use Dynamic\Core\Model\HolderItem;
+use Dynamic\Core\Object\Tag;
+use SilverStripe\Control\RSS\RSSFeed;
+use SilverStripe\Core\Convert;
+use SilverStripe\ORM\PaginatedList;
 
-class HolderPage extends Page
+class HolderPage extends \Page
 {
     /**
      * @var string
@@ -25,12 +26,12 @@ class HolderPage extends Page
     /**
      * @var string
      */
-    private static $hide_ancestor = "HolderPage";
+    private static $hide_ancestor = HolderPage::class;
 
     /**
      * @var string
      */
-    private static $item_class = 'HolderItem';
+    private static $item_class = HolderItem::class;
 
     /**
      * tag list for sidebar
@@ -59,7 +60,7 @@ class HolderPage extends Page
      */
     public function MenuChildren()
     {
-        return parent::MenuChildren()->exclude('ClassName', 'HolderItem');
+        return parent::MenuChildren()->exclude('ClassName', HolderItem::class);
     }
 
     /**
@@ -71,7 +72,7 @@ class HolderPage extends Page
     }
 }
 
-class HolderPage_Controller extends Page_Controller
+class HolderPage_Controller extends \PageController
 {
     /**
      *
@@ -140,7 +141,8 @@ class HolderPage_Controller extends Page_Controller
             $this->Items(),
             $this->Link('rss'),
             $this->Data()->Title,
-            $description);
+            $description
+        );
         return $rss->outputToBrowser();
     }
 }

@@ -2,13 +2,10 @@
 
 namespace Dynamic\Core\Page;
 
-use Page;
-use PermissionProvider;
-use Permission;
-use Page_Controller;
+use SilverStripe\Security\Permission;
+use SilverStripe\Security\PermissionProvider;
 
-
-class SearchPage extends Page implements PermissionProvider
+class SearchPage extends \Page implements PermissionProvider
 {
     /**
      * @var string
@@ -37,7 +34,7 @@ class SearchPage extends Page implements PermissionProvider
      *
      * @return bool
      */
-    public function canView($member = null)
+    public function canView($member = null, $context = [])
     {
         return true;
     }
@@ -46,7 +43,7 @@ class SearchPage extends Page implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canEdit($member = null)
+    public function canEdit($member = null, $context = [])
     {
         return Permission::check('SearchPage_CRUD', 'any', $member);
     }
@@ -55,7 +52,7 @@ class SearchPage extends Page implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canDelete($member = null)
+    public function canDelete($member = null, $context = [])
     {
         return Permission::check('SearchPage_CRUD', 'any', $member);
     }
@@ -64,7 +61,7 @@ class SearchPage extends Page implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         if (self::get()->first()) {
             return false;
@@ -84,7 +81,7 @@ class SearchPage extends Page implements PermissionProvider
     }
 }
 
-class SearchPage_Controller extends Page_Controller
+class SearchPage_Controller extends \PageController
 {
     /**
      * @var array

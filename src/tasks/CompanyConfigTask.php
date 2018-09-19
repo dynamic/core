@@ -2,9 +2,8 @@
 
 namespace Dynamic\Core\Task;
 
-use BuildTask;
-use SiteConfig;
-
+use SilverStripe\Dev\BuildTask;
+use SilverStripe\SiteConfig\SiteConfig;
 
 class CompanyConfigTask extends BuildTask
 {

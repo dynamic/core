@@ -2,14 +2,14 @@
 
 namespace Dynamic\Core\ORM;
 
-use DataExtension;
-use Permission;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Security\Permission;
 
+class VirtualPageExtension extends DataExtension
+{
 
-	class VirtualPageExtension extends DataExtension{
-
-		public function canCreate($member = null){
-			return Permission::check('ADMIN');
-		}
-
-	}
+    public function canCreate($member = null)
+    {
+        return Permission::check('ADMIN');
+    }
+}

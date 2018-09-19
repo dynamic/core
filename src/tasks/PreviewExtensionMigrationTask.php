@@ -2,10 +2,9 @@
 
 namespace Dynamic\Core\Task;
 
-use BuildTask;
-use ClassInfo;
-use SiteTree;
-
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Core\ClassInfo;
+use SilverStripe\Dev\BuildTask;
 
 class PreviewExtensionMigrationTask extends BuildTask
 {
@@ -49,7 +48,7 @@ class PreviewExtensionMigrationTask extends BuildTask
                 ]);
                 foreach ($records as $record) {
                     $record->PreviewImageID = $record->ThumbnailID;
-                    if (singleton($object) instanceOf SiteTree || singleton($object)->hasExtension('VersionedDataObject')) {
+                    if (singleton($object) instanceof SiteTree || singleton($object)->hasExtension('VersionedDataObject')) {
                         $record->writeToStage('Stage');
                         $record->publish('Stage', 'Live');
                     } else {

@@ -2,14 +2,14 @@
 
 namespace Dynamic\Core\Page;
 
-use HolderItem;
-use PermissionProvider;
-use SS_Datetime;
-use TextField;
-use DatetimeField;
-use Permission;
-use HolderItem_Controller;
-
+use Dynamic\Core\Page\NewsHolder;
+use Dynamic\Core\Model\HolderItem;
+use Dynamic\Core\Model\HolderItem_Controller;
+use SilverStripe\Forms\DatetimeField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\FieldType\DBDatetime;
+use SilverStripe\Security\Permission;
+use SilverStripe\Security\PermissionProvider;
 
 class NewsArticle extends HolderItem implements PermissionProvider
 {
@@ -31,12 +31,12 @@ class NewsArticle extends HolderItem implements PermissionProvider
     /**
      * @var string
      */
-    public static $listing_page_class = 'NewsHolder';
+    public static $listing_page_class = NewsHolder::class;
 
     /**
      * @var string
      */
-    private static $default_parent = 'NewsHolder';
+    private static $default_parent = NewsHolder::class;
 
     /**
      * @var bool
@@ -46,13 +46,13 @@ class NewsArticle extends HolderItem implements PermissionProvider
     /**
      * @var string
      */
-    private static $hide_ancestor = "HolderItem";
+    private static $hide_ancestor = HolderItem::class;
 
     /**
      * @var array
      */
     private static $db = array(
-        'DateAuthored' => 'SS_Datetime',
+        'DateAuthored' => 'DBDatetime',
         'Author' => 'Varchar(255)',
         'Featured' => 'Boolean'
     );
@@ -80,7 +80,7 @@ class NewsArticle extends HolderItem implements PermissionProvider
         parent::populateDefaults();
 
         if (!isset($this->DateAuthored) || $this->DateAuthored === null) {
-            $this->DateAuthored = SS_Datetime::now()->Format('Y-m-d H:i:s');
+            $this->DateAuthored = DBDatetime::now()->Format('Y-m-d H:i:s');
         }
     }
 
@@ -126,7 +126,7 @@ class NewsArticle extends HolderItem implements PermissionProvider
      * @param Member $member
      * @return boolean
      */
-    public function canView($member = null)
+    public function canView($member = null, $context = [])
     {
         return parent::canView($member = null);
     }
@@ -135,7 +135,7 @@ class NewsArticle extends HolderItem implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canEdit($member = null)
+    public function canEdit($member = null, $context = [])
     {
         return Permission::check('News_CRUD', 'any', $member);
     }
@@ -144,7 +144,7 @@ class NewsArticle extends HolderItem implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canDelete($member = null)
+    public function canDelete($member = null, $context = [])
     {
         return Permission::check('News_CRUD', 'any', $member);
     }
@@ -153,7 +153,7 @@ class NewsArticle extends HolderItem implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         return Permission::check('News_CRUD', 'any', $member);
     }

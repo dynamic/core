@@ -2,16 +2,25 @@
 
 namespace Dynamic\Core\Admin;
 
-use ModelAdmin;
+use Dynamic\Core\Object\Spiff;
+use SilverStripe\Admin\ModelAdmin;
 
+class SpiffAdmin extends ModelAdmin
+{
+    /**
+     * @var array
+     */
+    private static $managed_models = array(
+      Spiff::class
+    );
 
-class SpiffAdmin extends ModelAdmin {
+    /**
+     * @var string
+     */
+    private static $url_segment = 'spiffs';
 
-  private static $managed_models = array(
-      'Spiff'
-   );
-
-  private static $url_segment = 'spiffs';
-  private static $menu_title = 'Spiffs';
-
+    /**
+     * @var string
+     */
+    private static $menu_title = 'Spiffs';
 }

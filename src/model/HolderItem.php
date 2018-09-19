@@ -2,8 +2,7 @@
 
 namespace Dynamic\Core\Model;
 
-
-
+use Dynamic\Core\Model\HolderPage;
 
 class HolderItem extends DetailPage
 {
@@ -20,7 +19,7 @@ class HolderItem extends DetailPage
     /**
      * @var string
      */
-    public static $listing_page_class = 'HolderPage';
+    public static $listing_page_class = HolderPage::class;
 
     /**
      * @var array

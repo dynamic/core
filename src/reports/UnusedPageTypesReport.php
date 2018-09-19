@@ -2,21 +2,23 @@
 
 namespace Dynamic\Core\Report;
 
-use SS_Report;
-use ClassInfo;
-use ArrayList;
-use ArrayData;
+use Nette\Utils\ArrayList;
+use SilverStripe\Core\ClassInfo;
+use SilverStripe\Reports\Report;
+use SilverStripe\View\ArrayData;
 
-
-class UnusedPageTypesReport extends SS_Report {
+class UnusedPageTypesReport extends Report
+{
 
     // the name of the report
-    public function title() {
+    public function title()
+    {
         return 'Unused Page Types';
     }
 
     // what we want the report to return
-    public function sourceRecords($params = null) {
+    public function sourceRecords($params = null)
+    {
         //return Page::get()->sort('Title');
 
         $relations = ClassInfo::subclassesFor('Page');
@@ -32,7 +34,8 @@ class UnusedPageTypesReport extends SS_Report {
     }
 
     // which fields on that object we want to show
-    public function columns() {
+    public function columns()
+    {
         $fields = array(
             'Title' => 'Title'
         );

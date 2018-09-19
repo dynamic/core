@@ -2,13 +2,13 @@
 
 namespace Dynamic\Core\Page;
 
-use HolderPage;
-use PermissionProvider;
-use GroupedList;
-use SS_Datetime;
-use Permission;
-use HolderPage_Controller;
-
+use Dynamic\Core\Page\NewsArticle;
+use Dynamic\Core\Model\HolderPage;
+use Dynamic\Core\Model\HolderPage_Controller;
+use SilverStripe\ORM\FieldType\DBDatetime;
+use SilverStripe\ORM\GroupedList;
+use SilverStripe\Security\Permission;
+use SilverStripe\Security\PermissionProvider;
 
 class NewsHolder extends HolderPage implements PermissionProvider
 {
@@ -32,22 +32,22 @@ class NewsHolder extends HolderPage implements PermissionProvider
      *
      * @var string
      */
-    public static $item_class = 'NewsArticle';
+    private static $item_class = NewsArticle::class;
 
     /**
      * @var array
      */
-    private static $allowed_children = array('NewsArticle');
+    private static $allowed_children = array(NewsArticle::class);
 
     /**
      * @var string
      */
-    private static $default_child = 'NewsArticle';
+    private static $default_child = NewsArticle::class;
 
     /**
      * @var string
      */
-    private static $hide_ancestor = "HolderPage";
+    private static $hide_ancestor = HolderPage::class;
 
     /**
      * News Archives
@@ -59,7 +59,7 @@ class NewsHolder extends HolderPage implements PermissionProvider
         return GroupedList::create(NewsArticle::get()
             ->filter(array(
                 'ParentID'=>$this->Data()->ID,
-                'DateAuthored:LessThan' => SS_Datetime::now()->Format('Y-m-d')))
+                'DateAuthored:LessThan' => DBDatetime::now()->Format('Y-m-d')))
             ->sort('DateAuthored', 'DESC'));
     }
 
@@ -91,7 +91,7 @@ class NewsHolder extends HolderPage implements PermissionProvider
      * @param Member $member
      * @return boolean
      */
-    public function canView($member = null)
+    public function canView($member = null, $context = [])
     {
         return parent::canView($member = null);
     }
@@ -100,7 +100,7 @@ class NewsHolder extends HolderPage implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canEdit($member = null)
+    public function canEdit($member = null, $context = [])
     {
         return Permission::check('NewsHolderPage_CRUD', 'any', $member);
     }
@@ -109,7 +109,7 @@ class NewsHolder extends HolderPage implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canDelete($member = null)
+    public function canDelete($member = null, $context = [])
     {
         return Permission::check('NewsHolderPage_CRUD', 'any', $member);
     }
@@ -118,7 +118,7 @@ class NewsHolder extends HolderPage implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         return Permission::check('NewsHolderPage_CRUD', 'any', $member);
     }
@@ -162,9 +162,9 @@ class NewsHolder_Controller extends HolderPage_Controller
                 $start = "$year-01-01";
                 $end = "$year-12-31";
             }
-            $from = SS_Datetime::create();
+            $from = DBDatetime::create();
             $from->setValue($start);
-            $to = SS_Datetime::create();
+            $to = DBDatetime::create();
             $to->setValue($end);
 
             $filter = array(

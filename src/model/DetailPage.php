@@ -2,20 +2,19 @@
 
 namespace Dynamic\Core\Model;
 
-use Page;
-use PermissionProvider;
-use UploadField;
-use TagField;
-use Tag;
-use GridFieldConfig_RelationEditor;
-use GridFieldAddExistingSearchButton;
-use GridFieldSortableRows;
-use GridField;
-use Permission;
-use Page_Controller;
+use Dynamic\Core\Object\Tag;
+use Dynamic\Core\Object\LinkObject;
+use Dynamic\Core\Page\NewsArticle;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
+use SilverStripe\Security\Permission;
+use SilverStripe\Security\PermissionProvider;
+use SilverStripe\TagField\TagField;
+use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
+use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 
-
-class DetailPage extends Page implements PermissionProvider
+class DetailPage extends \Page implements PermissionProvider
 {
     /**
      * @var string
@@ -43,8 +42,8 @@ class DetailPage extends Page implements PermissionProvider
      * @var array
      */
     private static $many_many = array(
-        'Tags' => 'Tag',
-        'Links' => 'LinkObject'
+        'Tags' => Tag::class,
+        'Links' => LinkObject::class
     );
 
     /**
@@ -71,7 +70,7 @@ class DetailPage extends Page implements PermissionProvider
      */
     public function MenuChildren()
     {
-        return parent::MenuChildren()->exclude('ClassName', 'NewsArticle');
+        return parent::MenuChildren()->exclude('ClassName', NewsArticle::class);
     }
 
     /**
@@ -132,7 +131,7 @@ class DetailPage extends Page implements PermissionProvider
      * @param Member $member
      * @return boolean
      */
-    public function canView($member = null)
+    public function canView($member = null, $context = [])
     {
         return parent::canView($member = null);
     }
@@ -141,7 +140,7 @@ class DetailPage extends Page implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canEdit($member = null)
+    public function canEdit($member = null, $context = [])
     {
         return Permission::check('DetailPage_CRUD', 'any', $member);
     }
@@ -150,7 +149,7 @@ class DetailPage extends Page implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canDelete($member = null)
+    public function canDelete($member = null, $context = [])
     {
         return Permission::check('DetailPage_CRUD', 'any', $member);
     }
@@ -159,7 +158,7 @@ class DetailPage extends Page implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         return Permission::check('DetailPage_CRUD', 'any', $member);
     }
@@ -175,7 +174,7 @@ class DetailPage extends Page implements PermissionProvider
     }
 }
 
-class DetailPage_Controller extends Page_Controller
+class DetailPage_Controller extends \PageController
 {
 
 }

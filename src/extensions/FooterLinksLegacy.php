@@ -2,12 +2,10 @@
 
 namespace Dynamic\Core\ORM;
 
-use DataExtension;
-use FieldList;
-use GridFieldConfig_RelationEditor;
-use GridFieldSortableRows;
-use GridField;
-
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
+use SilverStripe\ORM\DataExtension;
+use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 
 class FooterLinksLegacy extends DataExtension
 {

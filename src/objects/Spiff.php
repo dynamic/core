@@ -2,10 +2,12 @@
 
 namespace Dynamic\Core\Object;
 
-use DataObject;
-use TreeDropdownField;
-use UploadField;
-
+use Dynamic\Core\Model\SectionPage;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Assets\Image;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Forms\TreeDropdownField;
+use SilverStripe\ORM\DataObject;
 
 class Spiff extends DataObject
 {
@@ -16,12 +18,12 @@ class Spiff extends DataObject
     );
 
     private static $has_one = array(
-        'Image' => 'Image',
-        'PageLink' => 'SiteTree',
+        'Image' => Image::class,
+        'PageLink' => SiteTree::class,
     );
 
     private static $belongs_many_many = array(
-        'SectionPages' => 'SectionPage',
+        'SectionPages' => SectionPage::class,
     );
 
     private static $default_sort = 'Name ASC';
@@ -31,10 +33,12 @@ class Spiff extends DataObject
         'Name' => 'Title',
     );
 
+    /*
     private static $searchable_fields = array(
         'Name' => 'Name',
         'Title' => 'Title',
     );
+    */
 
     public function getCMSFields()
     {
@@ -70,7 +74,9 @@ class Spiff extends DataObject
 
     public function getHeadline()
     {
-        if ($this->Title) return $this->Title;
+        if ($this->Title) {
+            return $this->Title;
+        }
         return false;
     }
 
@@ -81,19 +87,19 @@ class Spiff extends DataObject
     }
 
     // Set permissions, allow all users to access in ModelAdmin
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         return true;
     }
-    public function canView($member = null)
+    public function canView($member = null, $context = [])
     {
         return true;
     }
-    public function canEdit($member = null)
+    public function canEdit($member = null, $context = [])
     {
         return true;
     }
-    public function canDelete($member = null)
+    public function canDelete($member = null, $context = [])
     {
         return true;
     }

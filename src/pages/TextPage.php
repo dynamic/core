@@ -2,13 +2,10 @@
 
 namespace Dynamic\Core\Page;
 
-use Page;
-use PermissionProvider;
-use Permission;
-use Page_Controller;
+use SilverStripe\Security\Permission;
+use SilverStripe\Security\PermissionProvider;
 
-
-class TextPage extends Page implements PermissionProvider
+class TextPage extends \Page implements PermissionProvider
 {
     /**
      * @var string
@@ -35,7 +32,7 @@ class TextPage extends Page implements PermissionProvider
      * @param Member $member
      * @return boolean
      */
-    public function canView($member = null)
+    public function canView($member = null, $context = [])
     {
         return parent::canView($member = null);
     }
@@ -44,7 +41,7 @@ class TextPage extends Page implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canEdit($member = null)
+    public function canEdit($member = null, $context = [])
     {
         return Permission::check('TextPage_CRUD', 'any', $member);
     }
@@ -53,7 +50,7 @@ class TextPage extends Page implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canDelete($member = null)
+    public function canDelete($member = null, $context = [])
     {
         return Permission::check('TextPage_CRUD', 'any', $member);
     }
@@ -62,7 +59,7 @@ class TextPage extends Page implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         if (SiteMap::get()->first()) {
             return false;
@@ -81,7 +78,7 @@ class TextPage extends Page implements PermissionProvider
     }
 }
 
-class TextPage_Controller extends Page_Controller
+class TextPage_Controller extends \PageController
 {
 
 }

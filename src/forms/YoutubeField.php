@@ -2,7 +2,7 @@
 
 namespace Dynamic\Core\Form;
 
-use TextField;
+use SilverStripe\Forms\TextField;
 
 /**
  * Created by Dynamic Inc.
@@ -11,35 +11,36 @@ use TextField;
  * Time: 9:11 AM
  */
 
-class YoutubeField extends TextField {
+class YoutubeField extends TextField
+{
 
-	public function Type(){
-		return 'link text';
-	}
+    public function Type()
+    {
+        return 'link text';
+    }
 
-	public function validate($validator){
+    public function validate($validator)
+    {
 
-		$this->value = trim($this->value);
+        $this->value = trim($this->value);
 
-		$youtubePattern = '^(?:https?://)?(?:www\.)?(?:youtube\.com|youtu\.be)/watch\?v=([^&]+)';
-		$youtubeSharePattern = '^(?:https?://)?(?:www\.)?(?:youtu\.be)/([^&]+)';
+        $youtubePattern = '^(?:https?://)?(?:www\.)?(?:youtube\.com|youtu\.be)/watch\?v=([^&]+)';
+        $youtubeSharePattern = '^(?:https?://)?(?:www\.)?(?:youtu\.be)/([^&]+)';
 
-		$pregSafePattern = str_replace('/', '\\/', $youtubePattern);
-		$pregSafeSharePattern = str_replace('/', '\\/', $youtubeSharePattern);
+        $pregSafePattern = str_replace('/', '\\/', $youtubePattern);
+        $pregSafeSharePattern = str_replace('/', '\\/', $youtubeSharePattern);
 
-		if($this->value && (
-			!preg_match('/' . $pregSafePattern . '/i', $this->value) &&
-			!preg_match('/' . $pregSafeSharePattern . '/i', $this->value))){
-			$validator->validationError(
-				$this->name,
-				_t('LinkField.VALIDATION', "Please enter a valid Youtube address"),
-				'validation'
-			);
-			return false;
-		}else{
-			return true;
-		}
-
-	}
-
-} 
+        if ($this->value && (
+            !preg_match('/' . $pregSafePattern . '/i', $this->value) &&
+            !preg_match('/' . $pregSafeSharePattern . '/i', $this->value))) {
+            $validator->validationError(
+                $this->name,
+                _t('LinkField.VALIDATION', "Please enter a valid Youtube address"),
+                'validation'
+            );
+            return false;
+        } else {
+            return true;
+        }
+    }
+}

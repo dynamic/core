@@ -2,13 +2,13 @@
 
 namespace Dynamic\Core\Page;
 
-use HolderPage;
-use PermissionProvider;
-use Permission;
-use HolderPage_Controller;
-use ArrayList;
-use PaginatedList;
-
+use Dynamic\Core\Page\NewsHolder;
+use Dynamic\Core\Model\HolderPage;
+use Dynamic\Core\Model\HolderPage_Controller;
+use Nette\Utils\ArrayList;
+use SilverStripe\ORM\PaginatedList;
+use SilverStripe\Security\Permission;
+use SilverStripe\Security\PermissionProvider;
 
 class NewsGroupPage extends HolderPage implements PermissionProvider
 {
@@ -30,18 +30,18 @@ class NewsGroupPage extends HolderPage implements PermissionProvider
     /**
      * @var array
      */
-    private static $allowed_children = array('NewsHolder');
+    private static $allowed_children = array(NewsHolder::class);
 
     /**
      * @var array
      */
-    public static $item_class = array('NewsHolder');
+    private static $item_class = array(NewsHolder::class);
 
     /**
      * @param Member $member
      * @return boolean
      */
-    public function canView($member = null)
+    public function canView($member = null, $context = [])
     {
         return parent::canView($member = null);
     }
@@ -50,7 +50,7 @@ class NewsGroupPage extends HolderPage implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canEdit($member = null)
+    public function canEdit($member = null, $context = [])
     {
         return Permission::check('NewsGroupPage_CRUD', 'any', $member);
     }
@@ -59,7 +59,7 @@ class NewsGroupPage extends HolderPage implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canDelete($member = null)
+    public function canDelete($member = null, $context = [])
     {
         return Permission::check('NewsGroupPage_CRUD', 'any', $member);
     }
@@ -68,7 +68,7 @@ class NewsGroupPage extends HolderPage implements PermissionProvider
      * @param null $member
      * @return bool|int
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         return Permission::check('NewsGroupPage_CRUD', 'any', $member);
     }
