@@ -33,6 +33,7 @@ class NewsArticleTest extends DC_Test
         $news->DateAuthored = date('Y-m-d H:i:s', strtotime('now'));
         $news->Author = 'Dynamic Inc.';
         $news->Featured = false;
+        $news->write();
         $news->doPublish();
         $newsID = $news->ID;
 
@@ -54,6 +55,7 @@ class NewsArticleTest extends DC_Test
         $news->DateAuthored = date('Y-m-d H:i:s', strtotime('now'));
         $news->Author = 'Dynamic Inc.';
         $news->Featured = false;
+        $news->write();
         $news->doPublish();
         $newsID = $news->ID;
 

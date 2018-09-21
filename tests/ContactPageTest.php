@@ -2,6 +2,8 @@
 
 namespace Dynamic\Core\Test;
 
+use Dynamic\Core\Page\ContactPage;
+
 class ContactPageTest extends DC_Test
 {
     protected static $use_draft_site = true;
@@ -14,7 +16,7 @@ class ContactPageTest extends DC_Test
     public function testBasicPageCreation()
     {
         $this->logInWithPermission('Contact_CRUD');
-        $contact = singleton('ContactPage');
+        $contact = singleton(ContactPage::class);
         $this->assertTrue($contact->canCreate());
         $this->logOut();
     }
@@ -22,7 +24,7 @@ class ContactPageTest extends DC_Test
     public function testBasicPageDeletion()
     {
         $this->logInWithPermission('ADMIN');
-        $page = $this->objFromFixture('ContactPage', 'contact1');
+        $page = $this->objFromFixture(ContactPage::class, 'contact1');
         $pageID = $page->ID;
 
         $page->doPublish();

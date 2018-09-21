@@ -3,6 +3,7 @@
 namespace Dynamic\Core\Test;
 
 use DB;
+use Dynamic\Core\Page\FormPage;
 
 
 class FormPageTest extends DC_Test{
@@ -16,7 +17,7 @@ class FormPageTest extends DC_Test{
     function testFormPageCreation(){
 
         $this->logInWithPermission('Form_CRUD');
-        $form = singleton('FormPage');
+        $form = singleton(FormPage::class);
         $this->assertTrue($form->canCreate());
         $this->logOut();
 
@@ -25,7 +26,7 @@ class FormPageTest extends DC_Test{
     function testFormPageDeletion(){
 
         $this->logInWithPermission('ADMIN');
-        $page = $this->objFromFixture('FormPage', 'form1');
+        $page = $this->objFromFixture(FormPage::class, 'form1');
         $pageID = $page->ID;
 
         $page->doPublish();

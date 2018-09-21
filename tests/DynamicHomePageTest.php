@@ -2,8 +2,7 @@
 
 namespace Dynamic\Core\Test;
 
-use DynamicHomePage;
-
+use Dynamic\Core\Page\DynamicHomePage;
 
 class DynamicHomePageTest extends DC_Test{
 

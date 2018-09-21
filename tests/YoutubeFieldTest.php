@@ -17,8 +17,8 @@ class YoutubeFieldTest extends FunctionalTest
 {
     public function testYoutubeLinkSyntax()
     {
-        $this->internalCheck("http://www.youtube.com/watch?v=NTDjLGdQrZk", "Valid, simple", true);
-        $this->internalCheck("http://youtu.be/0YT20C-_BMI", "Valid, share link", true);
+        $this->internalCheck("https://www.youtube.com/watch?v=a6EEAF1gJ2A", "Valid, simple", true);
+        $this->internalCheck("https://youtu.be/a6EEAF1gJ2A", "Valid, share link", true);
         $this->internalCheck("", "Empty link", true);
         $this->internalCheck("invalid", "Invalid, simple", false);
         $this->internalCheck("http://invalid.com/watch?PX0z-vLdc0k", "Invalid, wrong domain", false);

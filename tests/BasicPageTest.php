@@ -25,7 +25,7 @@ class BasicPageTest extends DC_Test
     function testBasicPageDeletion(){
 
         $this->logInWithPermission('ADMIN');
-        $page = $this->objFromFixture('BasicPage', 'basic1');
+        $page = $this->objFromFixture(BasicPage::class, 'basic1');
         $pageID = $page->ID;
 
         $page->doPublish();

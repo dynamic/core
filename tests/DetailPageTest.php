@@ -10,7 +10,7 @@ class DetailPageTest extends SapphireTest
     /**
      * @var string
      */
-    protected static $fixture_file = 'dynamic-core/tests/DynamicCoreTest.yml';
+    protected static $fixture_file = 'DynamicCoreTest.yml';
 
     /**
      *
