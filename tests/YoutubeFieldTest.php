@@ -2,7 +2,6 @@
 
 namespace Dynamic\Core\Test;
 
-use Aws\Api\Validator;
 use Dynamic\Core\Form\YoutubeField;
 use SilverStripe\Control\Controller;
 use SilverStripe\Dev\FunctionalTest;
@@ -11,6 +10,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Validator;
 use SilverStripe\View\SSViewer;
 
 class YoutubeFieldTest extends FunctionalTest
@@ -62,7 +62,7 @@ class YoutubeFieldTest extends FunctionalTest
 
 class YoutubeFieldTest_Validator extends Validator
 {
-    public function validationError($fieldName, $message, $messageType='')
+    public function validationError($fieldName, $message, $messageType='', $cast='')
     {
         throw new \Exception($message);
     }
