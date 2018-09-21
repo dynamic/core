@@ -35,14 +35,16 @@ class YoutubeFieldTest extends FunctionalTest
         try {
             $field->validate($val);
             // If we expect failure and processing gets here without an exception, the test failed
-            //$this->assertTrue($expectSuccess, $checkText . " (/$youtubeLink/ passed validation, but not expected to)");
+            //$this->assertTrue($expectSuccess, $checkText." (/$youtubeLink/ passed validation, but not expected to)");
         } catch (Exception $e) {
             if ($e instanceof PHPUnit_Framework_AssertionFailedError) {
                 throw $e;
-            } // re-throw assertion failure
-            elseif ($expectSuccess) {
-                $this->assertTrue(false,
-                    $checkText . ": " . $e->GetMessage() . " (/$youtubeLink/ did not pass validation, but was expected to)");
+            } elseif ($expectSuccess) {
+                $this->assertTrue(
+                    false,
+                    $checkText . ": " . $e->GetMessage() .
+                        " (/$youtubeLink/ did not pass validation, but was expected to)"
+                );
             }
         }
     }
@@ -61,9 +63,11 @@ class YoutubeFieldTest extends FunctionalTest
     }
 }
 
+// todo: need to revisit
+/*
 class YoutubeFieldTest_Validator extends Validator
 {
-    public function validationError($fieldName, $message, $messageType='', $cast='')
+    public function validationError($fieldName, $message, $messageType = '', $cast = '')
     {
         //throw new \Exception($message);
     }
@@ -130,3 +134,4 @@ class YoutubeFieldTest_Controller extends Controller implements TestOnly
         return new SSViewer('BlankPage');
     }
 }
+*/

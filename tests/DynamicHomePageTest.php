@@ -4,15 +4,18 @@ namespace Dynamic\Core\Test;
 
 use Dynamic\Core\Page\DynamicHomePage;
 
-class DynamicHomePageTest extends DC_Test{
+class DynamicHomePageTest extends DC_Test
+{
 
     protected static $use_draft_site = true;
 
-    function setUp(){
+    public function setUp()
+    {
         parent::setUp();
     }
 
-    function testHomePageCreation(){
+    public function testHomePageCreation()
+    {
 
         $this->logInWithPermission('ADMIN');
 
@@ -24,7 +27,6 @@ class DynamicHomePageTest extends DC_Test{
         $this->assertFalse($page->canCreate());
 
         $this->logOut();
-
     }
 
     /*function testBasicPageDeletion(){
@@ -54,5 +56,4 @@ class DynamicHomePageTest extends DC_Test{
         $this->assertTrue($versionsPostPublish == $versionsPostDelete);
 
     }*/
-
 }

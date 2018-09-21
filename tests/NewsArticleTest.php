@@ -11,7 +11,8 @@ class NewsArticleTest extends DC_Test
 
     protected static $use_draft_site = true;
 
-    function setUp(){
+    public function setUp()
+    {
         parent::setUp();
 
         $holder = NewsHolder::create();
@@ -20,7 +21,8 @@ class NewsArticleTest extends DC_Test
         $holder->doPublish();
     }
 
-    function testNewsArticleCreation(){
+    public function testNewsArticleCreation()
+    {
 
         $this->logInWithPermission('News_CRUD');
         $page = singleton(NewsArticle::class);
@@ -41,10 +43,10 @@ class NewsArticleTest extends DC_Test
         $this->assertTrue($newsID == NewsArticle::get()->first()->ID);
 
         $this->logOut();
-
     }
 
-    function testNewsArticleDeletion(){
+    public function testNewsArticleDeletion()
+    {
 
         $this->logInWithPermission('ADMIN');
 
@@ -64,7 +66,9 @@ class NewsArticleTest extends DC_Test
 
         $versions = DB::query('Select * FROM "NewsArticle_Versions" WHERE "RecordID" = '. $newsID);
         $versionsPostPublish = array();
-        foreach($versions as $versionRow) $versionsPostPublish[] = $versionRow;
+        foreach ($versions as $versionRow) {
+            $versionsPostPublish[] = $versionRow;
+        }
 
         $this->logOut();
         $this->logInWithPermission('News_CRUD');
@@ -76,10 +80,10 @@ class NewsArticleTest extends DC_Test
 
         $versions = DB::query('Select * FROM "NewsArticle_Versions" WHERE "RecordID" = '. $newsID);
         $versionsPostDelete = array();
-        foreach($versions as $versionRow) $versionsPostDelete[] = $versionRow;
+        foreach ($versions as $versionRow) {
+            $versionsPostDelete[] = $versionRow;
+        }
 
         $this->assertTrue($versionsPostPublish == $versionsPostDelete);
-
     }
-
 }

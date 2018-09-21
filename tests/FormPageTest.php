@@ -5,25 +5,27 @@ namespace Dynamic\Core\Test;
 use Dynamic\Core\Page\FormPage;
 use SilverStripe\ORM\DB;
 
-
-class FormPageTest extends DC_Test{
+class FormPageTest extends DC_Test
+{
 
     protected static $use_draft_site = true;
 
-    function setUp(){
+    public function setUp()
+    {
         parent::setUp();
     }
 
-    function testFormPageCreation(){
+    public function testFormPageCreation()
+    {
 
         $this->logInWithPermission('Form_CRUD');
         $form = singleton(FormPage::class);
         $this->assertTrue($form->canCreate());
         $this->logOut();
-
     }
 
-    function testFormPageDeletion(){
+    public function testFormPageDeletion()
+    {
 
         $this->logInWithPermission('ADMIN');
         $page = $this->objFromFixture(FormPage::class, 'form1');
@@ -34,7 +36,9 @@ class FormPageTest extends DC_Test{
 
         $versions = DB::query('Select * FROM "SiteTree_Versions" WHERE "RecordID" = '. $pageID);
         $versionsPostPublish = array();
-        foreach($versions as $versionRow) $versionsPostPublish[] = $versionRow;
+        foreach ($versions as $versionRow) {
+            $versionsPostPublish[] = $versionRow;
+        }
 
         $this->logOut();
         $this->logInWithPermission('Form_CRUD');
@@ -46,10 +50,10 @@ class FormPageTest extends DC_Test{
 
         $versions = DB::query('Select * FROM "SiteTree_Versions" WHERE "RecordID" = '. $pageID);
         $versionsPostDelete = array();
-        foreach($versions as $versionRow) $versionsPostDelete[] = $versionRow;
+        foreach ($versions as $versionRow) {
+            $versionsPostDelete[] = $versionRow;
+        }
 
         $this->assertTrue($versionsPostPublish == $versionsPostDelete);
-
     }
-
 }
