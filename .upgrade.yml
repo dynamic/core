@@ -44,3 +44,14 @@ mappings:
   SpiffLinkableUpdateTask: Dynamic\Core\Task\SpiffLinkableUpdateTask
   CompanyConfigTask: Dynamic\Core\Task\CompanyConfigTask
   PreviewExtensionMigrationTask: Dynamic\Core\Task\PreviewExtensionMigrationTask
+  DynamicHomePageTest: Dynamic\Core\Test\DynamicHomePageTest
+  ContactPageTest: Dynamic\Core\Test\ContactPageTest
+  FormPageTest: Dynamic\Core\Test\FormPageTest
+  YoutubeFieldTest: Dynamic\Core\Test\YoutubeFieldTest
+  YoutubeFieldTest_Validator: Dynamic\Core\Test\YoutubeFieldTest_Validator
+  YoutubeFieldTest_Controller: Dynamic\Core\Test\YoutubeFieldTest_Controller
+  NewsArticleTest: Dynamic\Core\Test\NewsArticleTest
+  LandingPageTest: Dynamic\Core\Test\LandingPageTest
+  DetailPageTest: Dynamic\Core\Test\DetailPageTest
+  DC_Test: Dynamic\Core\Test\DC_Test
+  BasicPageTest: Dynamic\Core\Test\BasicPageTest

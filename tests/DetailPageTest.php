@@ -1,5 +1,10 @@
 <?php
 
+namespace Dynamic\Core\Test;
+
+use Dynamic\Core\Model\DetailPage;
+use SilverStripe\Dev\SapphireTest;
+
 class DetailPageTest extends SapphireTest
 {
     /**
@@ -12,7 +17,7 @@ class DetailPageTest extends SapphireTest
      */
     public function testGetCMSFields()
     {
-        $object = $this->objFromFixture('DetailPage', 'page1');
+        $object = $this->objFromFixture(DetailPage::class, 'page1');
         $fields = $object->getCMSFields();
         $this->assertInstanceOf('FieldList', $fields);
     }
@@ -22,7 +27,7 @@ class DetailPageTest extends SapphireTest
      */
     public function testGetPageLinks()
     {
-        $object = $this->objFromFixture('DetailPage', 'page1');
+        $object = $this->objFromFixture(DetailPage::class, 'page1');
         $this->assertEquals($object->getPageLinks(), $object->Links()->sort('SortOrder'));
     }
 
@@ -31,12 +36,12 @@ class DetailPageTest extends SapphireTest
      */
     public function testCanView()
     {
-        $object = $this->objFromFixture('DetailPage', 'page1');
+        $object = $this->objFromFixture(DetailPage::class, 'page1');
 
-        $admin = $this->objFromFixture('Member', 'admin');
+        $admin = $this->objFromFixture(Member::class, 'admin');
         $this->assertTrue($object->canView($admin));
 
-        $member = $this->objFromFixture('Member', 'default');
+        $member = $this->objFromFixture(Member::class, 'default');
         $this->assertTrue($object->canView($member));
     }
 
@@ -45,12 +50,12 @@ class DetailPageTest extends SapphireTest
      */
     public function testCanEdit()
     {
-        $object = $this->objFromFixture('DetailPage', 'page1');
+        $object = $this->objFromFixture(DetailPage::class, 'page1');
 
-        $admin = $this->objFromFixture('Member', 'admin');
+        $admin = $this->objFromFixture(Member::class, 'admin');
         $this->assertTrue($object->canEdit($admin));
 
-        $member = $this->objFromFixture('Member', 'default');
+        $member = $this->objFromFixture(Member::class, 'default');
         $this->assertFalse($object->canEdit($member));
     }
 
@@ -59,12 +64,12 @@ class DetailPageTest extends SapphireTest
      */
     public function testCanDelete()
     {
-        $object = $this->objFromFixture('DetailPage', 'page1');
+        $object = $this->objFromFixture(DetailPage::class, 'page1');
 
-        $admin = $this->objFromFixture('Member', 'admin');
+        $admin = $this->objFromFixture(Member::class, 'admin');
         $this->assertTrue($object->canDelete($admin));
 
-        $member = $this->objFromFixture('Member', 'default');
+        $member = $this->objFromFixture(Member::class, 'default');
         $this->assertFalse($object->canDelete($member));
     }
 
@@ -73,12 +78,12 @@ class DetailPageTest extends SapphireTest
      */
     public function testCanCreate()
     {
-        $object = $this->objFromFixture('DetailPage', 'page1');
+        $object = $this->objFromFixture(DetailPage::class, 'page1');
 
-        $admin = $this->objFromFixture('Member', 'admin');
+        $admin = $this->objFromFixture(Member::class, 'admin');
         $this->assertTrue($object->canCreate($admin));
 
-        $member = $this->objFromFixture('Member', 'default');
+        $member = $this->objFromFixture(Member::class, 'default');
         $this->assertFalse($object->canCreate($member));
     }
 
@@ -87,7 +92,7 @@ class DetailPageTest extends SapphireTest
      */
     public function testProvidePermissions()
     {
-        $object = singleton('DetailPage');
+        $object = singleton(DetailPage::class);
         $expected = array(
             'DetailPage_CRUD' => 'Create, Update and Delete a Detail Page',
         );

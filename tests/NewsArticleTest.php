@@ -1,6 +1,12 @@
 <?php
 
-class NewsArticleTest extends DC_Test{
+namespace Dynamic\Core\Test;
+
+use Dynamic\Core\Page\NewsArticle;
+use Dynamic\Core\Page\NewsHolder;
+
+class NewsArticleTest extends DC_Test
+{
 
     protected static $use_draft_site = true;
 
@@ -16,7 +22,7 @@ class NewsArticleTest extends DC_Test{
     function testNewsArticleCreation(){
 
         $this->logInWithPermission('News_CRUD');
-        $page = singleton('NewsArticle');
+        $page = singleton(NewsArticle::class);
         $this->assertTrue($page->canCreate());
 
         $holder = NewsHolder::get()->first();

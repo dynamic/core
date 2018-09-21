@@ -1,5 +1,10 @@
 <?php
 
+namespace Dynamic\Core\Test;
+
+use DB;
+
+
 class FormPageTest extends DC_Test{
 
     protected static $use_draft_site = true;

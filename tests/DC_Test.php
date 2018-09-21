@@ -1,8 +1,13 @@
 <?php
 
-class DC_Test extends FunctionalTest{
+namespace Dynamic\Core\Test;
 
-    protected static $fixture_file = 'dynamic-core/tests/DynamicCoreTest.yml';
+use SilverStripe\Dev\FunctionalTest;
+
+class DC_Test extends FunctionalTest
+{
+
+    protected static $fixture_file = 'DynamicCoreTest.yml';
     protected static $disable_themes = true;
     protected static $use_draft_site = false;
 

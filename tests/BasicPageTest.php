@@ -1,6 +1,11 @@
 <?php
 
-class BasicPageTest extends DC_Test{
+namespace Dynamic\Core\Test;
+
+use Dynamic\Core\Page\BasicPage;
+
+class BasicPageTest extends DC_Test
+{
 
     protected static $use_draft_site = true;
 
@@ -11,7 +16,7 @@ class BasicPageTest extends DC_Test{
     function testBasicPageCreation(){
 
         $this->logInWithPermission('Basic_CRUD');
-        $page = singleton('BasicPage');
+        $page = singleton(BasicPage::class);
         $this->assertTrue($page->canCreate());
         $this->logOut();
 

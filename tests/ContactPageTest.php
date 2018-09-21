@@ -1,24 +1,26 @@
 <?php
 
-class ContactPageTest extends DC_Test{
+namespace Dynamic\Core\Test;
 
+class ContactPageTest extends DC_Test
+{
     protected static $use_draft_site = true;
 
-    function setUp(){
+    public function setUp()
+    {
         parent::setUp();
     }
 
-    function testBasicPageCreation(){
-
+    public function testBasicPageCreation()
+    {
         $this->logInWithPermission('Contact_CRUD');
         $contact = singleton('ContactPage');
         $this->assertTrue($contact->canCreate());
         $this->logOut();
-
     }
 
-    function testBasicPageDeletion(){
-
+    public function testBasicPageDeletion()
+    {
         $this->logInWithPermission('ADMIN');
         $page = $this->objFromFixture('ContactPage', 'contact1');
         $pageID = $page->ID;
@@ -28,7 +30,9 @@ class ContactPageTest extends DC_Test{
 
         $versions = DB::query('Select * FROM "SiteTree_versions" WHERE "RecordID" = '. $pageID);
         $versionsPostPublish = array();
-        foreach($versions as $versionRow) $versionsPostPublish[] = $versionRow;
+        foreach ($versions as $versionRow) {
+            $versionsPostPublish[] = $versionRow;
+        }
 
         $this->logOut();
         $this->logInWithPermission('Contact_CRUD');
@@ -39,10 +43,10 @@ class ContactPageTest extends DC_Test{
 
         $versions = DB::query('Select * FROM "SiteTree_versions" WHERE "RecordID" = '. $pageID);
         $versionsPostDelete = array();
-        foreach($versions as $versionRow) $versionsPostDelete[] = $versionRow;
+        foreach ($versions as $versionRow) {
+            $versionsPostDelete[] = $versionRow;
+        }
 
         $this->assertTrue($versionsPostPublish == $versionsPostDelete);
-
     }
-
 }
