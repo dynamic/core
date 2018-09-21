@@ -3,6 +3,7 @@
 namespace Dynamic\Core\Test;
 
 use Dynamic\Core\Page\BasicPage;
+use SilverStripe\ORM\DB;
 
 class BasicPageTest extends DC_Test
 {

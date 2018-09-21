@@ -4,6 +4,8 @@ namespace Dynamic\Core\Test;
 
 use Dynamic\Core\Model\DetailPage;
 use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Security\Member;
 
 class DetailPageTest extends SapphireTest
 {
@@ -19,7 +21,7 @@ class DetailPageTest extends SapphireTest
     {
         $object = $this->objFromFixture(DetailPage::class, 'page1');
         $fields = $object->getCMSFields();
-        $this->assertInstanceOf('FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
     }
 
     /**

@@ -18,6 +18,7 @@ class DynamicHomePageTest extends DC_Test{
 
         $home = DynamicHomePage::create();
         $home->Title = 'Dynamic Home Page';
+        $home->write();
         $home->doPublish();
         $page = DynamicHomePage::get()->first();
         $this->assertFalse($page->canCreate());

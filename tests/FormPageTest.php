@@ -2,8 +2,8 @@
 
 namespace Dynamic\Core\Test;
 
-use DB;
 use Dynamic\Core\Page\FormPage;
+use SilverStripe\ORM\DB;
 
 
 class FormPageTest extends DC_Test{

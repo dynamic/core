@@ -2,6 +2,7 @@
 
 namespace Dynamic\Core\Test;
 
+use Dynamic\Core\Page\LandingPage;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Security\Member;
 

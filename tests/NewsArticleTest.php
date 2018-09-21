@@ -4,6 +4,7 @@ namespace Dynamic\Core\Test;
 
 use Dynamic\Core\Page\NewsArticle;
 use Dynamic\Core\Page\NewsHolder;
+use SilverStripe\ORM\DB;
 
 class NewsArticleTest extends DC_Test
 {
