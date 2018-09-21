@@ -1,48 +1,48 @@
-Group:
+SilverStripe\Security\Group:
   administrators:
     Title: Administrators
-Permission:
+SilverStripe\Security\Permission:
   administrators:
     Code: ADMIN
     Type: 1
-    Group: =>Group.administrators
-Member:
+    Group: =>SilverStripe\Security\Group.administrators
+SilverStripe\Security\Member:
   admin:
     FirstName: Default
     Surname: Admin
     Email: admin@dynamicagency.com
-    Groups: =>Group.administrators
+    Groups: =>SilverStripe\Security\Group.administrators
   default:
     FirstName: Default
     Surname: User
     Email: user@dynamicagency.com
-DetailPage:
+Dynamic\Core\Model\DetailPage:
   page1:
     Title: Detail 1
     URLSegment: detail-1
   page2:
     Title: About Us
     URLSegment: about-us
-BasicPage:
+Dynamic\Core\Page\BasicPage:
   basic1:
     Title: Basic Page 1
   basic2:
     Title: Another Basic Page
-ContactPage:
+Dynamic\Core\Page\ContactPage:
   contact1:
     Title: Contact Page 1
   contact2:
     Title: Another Contact Page
-DynamicHomePage:
+Dynamic\Core\Page\DynamicHomePage:
   newhome1:
     Title: Dynamic Home Page
   newhome2:
     Title: Yet Another Instance
-FormPage:
+Dynamic\Core\Page\FormPage:
   form1:
     Title: Form Page 1
   form2:
     Title: Another Form Page
-LandingPage:
+Dynamic\Core\Page\LandingPage:
   default:
     Title: 'Landing Page'

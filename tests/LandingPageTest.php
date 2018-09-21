@@ -1,23 +1,29 @@
 <?php
 
+namespace Dynamic\Core\Test;
+
+use Dynamic\Core\Page\LandingPage;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Security\Member;
+
 class LandingPageTest extends SapphireTest
 {
     /**
      * @var string
      */
-    protected static $fixture_file = 'dynamic-core/tests/DynamicCoreTest.yml';
+    protected static $fixture_file = 'DynamicCoreTest.yml';
 
     /**
      *
      */
     public function testCanView()
     {
-        $object = $this->objFromFixture('LandingPage', 'default');
+        $object = $this->objFromFixture(LandingPage::class, 'default');
 
-        $admin = $this->objFromFixture('Member', 'admin');
+        $admin = $this->objFromFixture(Member::class, 'admin');
         $this->assertTrue($object->canView($admin));
 
-        $member = $this->objFromFixture('Member', 'default');
+        $member = $this->objFromFixture(Member::class, 'default');
         $this->assertTrue($object->canView($member));
     }
 
@@ -26,12 +32,12 @@ class LandingPageTest extends SapphireTest
      */
     public function testCanEdit()
     {
-        $object = $this->objFromFixture('LandingPage', 'default');
+        $object = $this->objFromFixture(LandingPage::class, 'default');
 
-        $admin = $this->objFromFixture('Member', 'admin');
+        $admin = $this->objFromFixture(Member::class, 'admin');
         $this->assertTrue($object->canEdit($admin));
 
-        $member = $this->objFromFixture('Member', 'default');
+        $member = $this->objFromFixture(Member::class, 'default');
         $this->assertFalse($object->canEdit($member));
     }
 
@@ -40,12 +46,12 @@ class LandingPageTest extends SapphireTest
      */
     public function testCanDelete()
     {
-        $object = $this->objFromFixture('LandingPage', 'default');
+        $object = $this->objFromFixture(LandingPage::class, 'default');
 
-        $admin = $this->objFromFixture('Member', 'admin');
+        $admin = $this->objFromFixture(Member::class, 'admin');
         $this->assertTrue($object->canDelete($admin));
 
-        $member = $this->objFromFixture('Member', 'default');
+        $member = $this->objFromFixture(Member::class, 'default');
         $this->assertFalse($object->canDelete($member));
     }
 
@@ -54,12 +60,12 @@ class LandingPageTest extends SapphireTest
      */
     public function testCanCreate()
     {
-        $object = $this->objFromFixture('LandingPage', 'default');
+        $object = $this->objFromFixture(LandingPage::class, 'default');
 
-        $admin = $this->objFromFixture('Member', 'admin');
+        $admin = $this->objFromFixture(Member::class, 'admin');
         $this->assertTrue($object->canCreate($admin));
 
-        $member = $this->objFromFixture('Member', 'default');
+        $member = $this->objFromFixture(Member::class, 'default');
         $this->assertFalse($object->canCreate($member));
     }
 
@@ -68,7 +74,7 @@ class LandingPageTest extends SapphireTest
      */
     public function testProvidePermissions()
     {
-        $object = singleton('LandingPage');
+        $object = singleton(LandingPage::class);
         $expected = array(
             'LandingPage_CRUD' => 'Create, Update and Delete a Landing Page',
         );

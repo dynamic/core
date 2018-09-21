@@ -1,25 +1,32 @@
 <?php
 
-class DynamicHomePageTest extends DC_Test{
+namespace Dynamic\Core\Test;
+
+use Dynamic\Core\Page\DynamicHomePage;
+
+class DynamicHomePageTest extends DC_Test
+{
 
     protected static $use_draft_site = true;
 
-    function setUp(){
+    public function setUp()
+    {
         parent::setUp();
     }
 
-    function testHomePageCreation(){
+    public function testHomePageCreation()
+    {
 
         $this->logInWithPermission('ADMIN');
 
         $home = DynamicHomePage::create();
         $home->Title = 'Dynamic Home Page';
+        $home->write();
         $home->doPublish();
         $page = DynamicHomePage::get()->first();
         $this->assertFalse($page->canCreate());
 
         $this->logOut();
-
     }
 
     /*function testBasicPageDeletion(){
@@ -49,5 +56,4 @@ class DynamicHomePageTest extends DC_Test{
         $this->assertTrue($versionsPostPublish == $versionsPostDelete);
 
     }*/
-
 }
