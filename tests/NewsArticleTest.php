@@ -71,7 +71,7 @@ class NewsArticleTest extends DC_Test
         $this->assertTrue($news->canDelete());
 
         $news->delete();
-        $this->assertTrue(!$news->isPublished());
+        $this->assertFalse($news->isPublished());
 
         $versions = DB::query('Select * FROM "NewsArticle_Versions" WHERE "RecordID" = '. $newsID);
         $versionsPostDelete = array();

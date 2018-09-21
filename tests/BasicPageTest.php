@@ -41,7 +41,7 @@ class BasicPageTest extends DC_Test
         $this->assertTrue($page->canDelete());
 
         $page->delete();
-        $this->assertTrue(!$page->isPublished());
+        $this->assertFalse($page->isPublished());
 
         $versions = DB::query('Select * FROM "SiteTree_Versions" WHERE "RecordID" = '. $pageID);
         $versionsPostDelete = array();
