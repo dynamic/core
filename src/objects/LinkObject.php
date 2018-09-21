@@ -2,6 +2,7 @@
 
 namespace Dynamic\Core\Object;
 
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\Tab;
@@ -18,11 +19,11 @@ class LinkObject extends DataObject
     );
 
     private static $has_one = array(
-        'PageLink' => 'SiteTree'
+        'PageLink' => SiteTree::class
     );
 
     private static $belongs_many_many = array(
-        'Pages' => 'Page'
+        'Pages' => \Page::class
     );
 
     private static $table_name = 'LinkObject';
