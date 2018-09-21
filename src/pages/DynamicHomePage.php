@@ -85,7 +85,3 @@ class DynamicHomePage extends SectionPage implements PermissionProvider
         );
     }
 }
-
-class DynamicHomePage_Controller extends SectionPage_Controller
-{
-}

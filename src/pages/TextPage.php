@@ -20,7 +20,8 @@ class TextPage extends \Page implements PermissionProvider
     /**
      * @var string
      */
-    private static $description = 'This page type provides a basic 1 column page supporting the content allowed in the main content zone of the CMS. This page type is primarily used for legal, privates, etc. pages on a site.';
+    private static $description = 'This page type provides a basic 1 column page supporting the content allowed in 
+        the main content zone of the CMS. This page type is primarily used for legal, privates, etc. pages on a site.';
 
     /**
      * @var array
@@ -81,9 +82,4 @@ class TextPage extends \Page implements PermissionProvider
             'TextPage_CRUD' => 'Create, Update and Delete a Text Page'
         );
     }
-}
-
-class TextPage_Controller extends \PageController
-{
-
 }

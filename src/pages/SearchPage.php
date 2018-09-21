@@ -85,21 +85,3 @@ class SearchPage extends \Page implements PermissionProvider
         );
     }
 }
-
-class SearchPage_Controller extends \PageController
-{
-    /**
-     * @var array
-     */
-    private static $allowed_actions = array(
-        'SearchForm',
-    );
-
-    /**
-     * @return mixed
-     */
-    public function SearchForm()
-    {
-        return parent::SearchForm();
-    }
-}

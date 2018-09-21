@@ -118,7 +118,3 @@ class SiteMap extends \Page implements PermissionProvider
         );
     }
 }
-
-class SiteMap_Controller extends \PageController
-{
-}

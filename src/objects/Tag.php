@@ -26,7 +26,8 @@ class Tag extends DataObject
 
         if ($class == DetailPage::class || is_subclass_of($class, DetailPage::class)) {
             if ($controller->Data()->Parent()->Parent()) {
-                return $controller->Data()->Parent()->Parent()->URLSegment.'/'.$controller->Data()->Parent()->URLSegment.'/tag/'.htmlentities($this->Title);
+                return $controller->Data()->Parent()->Parent()->URLSegment.'/'.$controller->Data()->Parent()
+                    ->URLSegment.'/tag/'.htmlentities($this->Title);
             } else {
                 return $controller->Data()->Parent()->URLSegment."/tag/".htmlentities($this->Title);
             }

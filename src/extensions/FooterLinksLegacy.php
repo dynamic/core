@@ -35,7 +35,12 @@ class FooterLinksLegacy extends DataExtension
             $config->addComponent(new GridFieldSortableRows("SortOrder"));
         }
 
-        $FooterGridField = GridField::create("FooterLinks", "Footer Links", $this->owner->FooterLinks()->sort('SortOrder'), $config);
+        $FooterGridField = GridField::create(
+            "FooterLinks",
+            "Footer Links",
+            $this->owner->FooterLinks()->sort('SortOrder'),
+            $config
+        );
 
         $fields->addFieldsToTab("Root.Footer", array(
             $FooterGridField

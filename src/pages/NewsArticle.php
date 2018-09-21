@@ -170,7 +170,3 @@ class NewsArticle extends HolderItem implements PermissionProvider
         );
     }
 }
-
-class NewsArticle_Controller extends HolderItem_Controller
-{
-}

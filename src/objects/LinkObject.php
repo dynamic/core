@@ -12,7 +12,6 @@ use SilverStripe\ORM\DataObject;
 
 class LinkObject extends DataObject
 {
-
     private static $db = array(
         'Name' => 'Varchar(255)',
         'URL' => 'Varchar(255)'
@@ -71,19 +70,22 @@ class LinkObject extends DataObject
     }
 
     // Set permissions, allow all users to access in ModelAdmin
-    function canCreate($member = null, $context = [])
+    public function canCreate($member = null, $context = [])
     {
         return true;
     }
-    function canView($member = null, $context = [])
+
+    public function canView($member = null, $context = [])
     {
         return true;
     }
-    function canEdit($member = null, $context = [])
+
+    public function canEdit($member = null, $context = [])
     {
         return true;
     }
-    function canDelete($member = null, $context = [])
+
+    public function canDelete($member = null, $context = [])
     {
         return true;
     }

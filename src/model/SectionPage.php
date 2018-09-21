@@ -29,7 +29,7 @@ class SectionPage extends \Page implements PermissionProvider
     private static $hide_ancestor = SectionPage::class;
 
     /**
-     * @var string 
+     * @var string
      */
     private static $table_name = 'SectionPage';
 
@@ -78,8 +78,4 @@ class SectionPage extends \Page implements PermissionProvider
             'SectionPage_CRUD' => 'Create, Update and Delete a Section Page'
         );
     }
-}
-
-class SectionPage_Controller extends \PageController
-{
 }

@@ -33,7 +33,3 @@ class HolderItem extends DetailPage
      */
     private static $table_name = 'HolderItem';
 }
-
-class HolderItem_Controller extends DetailPage_Controller
-{
-}

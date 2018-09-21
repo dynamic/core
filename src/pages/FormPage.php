@@ -80,7 +80,3 @@ class FormPage extends UserDefinedForm implements PermissionProvider
         );
     }
 }
-
-class FormPage_Controller extends UserDefinedFormController
-{
-}

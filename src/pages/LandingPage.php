@@ -75,7 +75,3 @@ class LandingPage extends SectionPage implements PermissionProvider
         );
     }
 }
-
-class LandingPage_Controller extends SectionPage_Controller
-{
-}

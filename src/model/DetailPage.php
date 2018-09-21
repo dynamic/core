@@ -176,8 +176,3 @@ class DetailPage extends \Page implements PermissionProvider
         );
     }
 }
-
-class DetailPage_Controller extends \PageController
-{
-
-}

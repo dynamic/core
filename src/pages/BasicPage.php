@@ -76,8 +76,3 @@ class BasicPage extends DetailPage implements PermissionProvider
         );
     }
 }
-
-class BasicPage_Controller extends DetailPage_Controller
-{
-
-}

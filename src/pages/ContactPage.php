@@ -75,7 +75,3 @@ class ContactPage extends UserDefinedForm implements PermissionProvider
         );
     }
 }
-
-class ContactPage_Controller extends UserDefinedFormController
-{
-}
