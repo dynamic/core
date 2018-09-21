@@ -3,6 +3,7 @@
 namespace Dynamic\Core\Test;
 
 use Dynamic\Core\Page\ContactPage;
+use SilverStripe\ORM\DB;
 
 class ContactPageTest extends DC_Test
 {
@@ -30,7 +31,7 @@ class ContactPageTest extends DC_Test
         $page->doPublish();
         $this->assertTrue($page->isPublished());
 
-        $versions = DB::query('Select * FROM "SiteTree_versions" WHERE "RecordID" = '. $pageID);
+        $versions = DB::query('Select * FROM "SiteTree_Versions" WHERE "RecordID" = '. $pageID);
         $versionsPostPublish = array();
         foreach ($versions as $versionRow) {
             $versionsPostPublish[] = $versionRow;
@@ -43,7 +44,7 @@ class ContactPageTest extends DC_Test
         $page->delete();
         $this->assertTrue(!$page->isPublished());
 
-        $versions = DB::query('Select * FROM "SiteTree_versions" WHERE "RecordID" = '. $pageID);
+        $versions = DB::query('Select * FROM "SiteTree_Versions" WHERE "RecordID" = '. $pageID);
         $versionsPostDelete = array();
         foreach ($versions as $versionRow) {
             $versionsPostDelete[] = $versionRow;

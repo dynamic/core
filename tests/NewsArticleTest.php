@@ -62,7 +62,7 @@ class NewsArticleTest extends DC_Test
 
         $this->assertTrue($news->isPublished());
 
-        $versions = DB::query('Select * FROM "NewsArticle_versions" WHERE "RecordID" = '. $newsID);
+        $versions = DB::query('Select * FROM "NewsArticle_Versions" WHERE "RecordID" = '. $newsID);
         $versionsPostPublish = array();
         foreach($versions as $versionRow) $versionsPostPublish[] = $versionRow;
 
@@ -73,7 +73,7 @@ class NewsArticleTest extends DC_Test
         $news->delete();
         $this->assertTrue(!$news->isPublished());
 
-        $versions = DB::query('Select * FROM "NewsArticle_versions" WHERE "RecordID" = '. $newsID);
+        $versions = DB::query('Select * FROM "NewsArticle_Versions" WHERE "RecordID" = '. $newsID);
         $versionsPostDelete = array();
         foreach($versions as $versionRow) $versionsPostDelete[] = $versionRow;
 
