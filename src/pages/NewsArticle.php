@@ -95,7 +95,6 @@ class NewsArticle extends HolderItem implements PermissionProvider
 
         $fields->addFieldToTab('Root.Main', TextField::create('Author'), 'Content');
         $fields->addFieldToTab('Root.Main', $dateTimeField = new DatetimeField('DateAuthored'), 'Content');
-        $dateTimeField->getDateField()->setConfig('showcalendar', true);
 
         return $fields;
     }
