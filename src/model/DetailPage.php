@@ -59,6 +59,13 @@ class DetailPage extends \Page implements PermissionProvider
     /**
      * @var array
      */
+    private static $owns = [
+        'Image',
+    ];
+
+    /**
+     * @var array
+     */
     private static $searchable_fields = array(
         'Title',
         'Tags.ID'

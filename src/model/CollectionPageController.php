@@ -2,6 +2,9 @@
 
 namespace Dynamic\Core\Model;
 
+use SilverStripe\Core\Convert;
+use SilverStripe\ORM\PaginatedList;
+
 class CollectionPageController extends \PageController
 {
     /**
