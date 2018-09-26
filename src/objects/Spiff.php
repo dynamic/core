@@ -46,7 +46,7 @@ class Spiff extends DataObject
     {
         $this->beforeUpdateCMSFields(function ($fields) {
             $fields->insertBefore(
-                TreeDropdownField::create('PageLinkID', 'Link', 'SiteTree'),
+                TreeDropdownField::create('PageLinkID', 'Link', SiteTree::class),
                 'Description'
             );
         });
@@ -56,7 +56,6 @@ class Spiff extends DataObject
         $ImageField = new UploadField('Image', 'Image');
         $ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
         $ImageField->setFolderName('Uploads/Spiffs');
-        $ImageField->setConfig('allowedMaxFileNumber', 1);
         $ImageField->getValidator()->setAllowedMaxFileSize(CORE_IMAGE_FILE_SIZE_LIMIT);
         $fields->insertBefore($ImageField, 'Description');
 
