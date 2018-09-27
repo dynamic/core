@@ -24,7 +24,7 @@ class SectionPage extends \Page implements PermissionProvider
     private static $description = "Section Landing Page, uses Flexslider and Spiffs";
 
     /**
-     * @var array 
+     * @var array
      */
     private static $many_many = [
         'Spiffs' => Spiff::class,
