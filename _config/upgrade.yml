@@ -1,13 +1,16 @@
+---
+Name: core-upgrade
+---
 SilverStripe\ORM\DatabaseAdmin:
   classname_value_remapping:
-    HolderItem: Dynamic\Core\Model\HolderItem
-    HolderPage: Dynamic\Core\Model\HolderPage
-    DetailPage: Dynamic\Core\Model\DetailPage
-    SectionPage: Dynamic\Core\Model\SectionPage
-    CollectionPage: Dynamic\Core\Model\CollectionPage
-    LinkObject: Dynamic\Core\Object\LinkObject
-    Tag: Dynamic\Core\Object\Tag
-    Spiff: Dynamic\Core\Object\Spiff
+    HolderItem: Dynamic\Core\Page\HolderItem
+    HolderPage: Dynamic\Core\Page\HolderPage
+    DetailPage: Dynamic\Core\Page\DetailPage
+    SectionPage: Dynamic\Core\Page\SectionPage
+    CollectionPage: Dynamic\Core\Page\CollectionPage
+    LinkObject: Dynamic\Core\Model\LinkObject
+    Tag: Dynamic\Core\Model\Tag
+    Spiff: Dynamic\Core\Model\Spiff
     TextPage: Dynamic\Core\Page\TextPage
     DynamicHomePage: Dynamic\Core\Page\DynamicHomePage
     FormPage: Dynamic\Core\Page\FormPage

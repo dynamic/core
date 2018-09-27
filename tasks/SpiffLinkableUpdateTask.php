@@ -2,7 +2,7 @@
 
 namespace Dynamic\Core\Task;
 
-use Dynamic\Core\Object\Spiff;
+use Dynamic\Core\Model\Spiff;
 use SilverStripe\Dev\BuildTask;
 
 /**
