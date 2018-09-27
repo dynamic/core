@@ -2,6 +2,7 @@
 
 namespace Dynamic\Core\Page;
 
+use Dynamic\Core\Model\Spiff;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\PermissionProvider;
 
@@ -21,6 +22,13 @@ class SectionPage extends \Page implements PermissionProvider
      * @var string
      */
     private static $description = "Section Landing Page, uses Flexslider and Spiffs";
+
+    /**
+     * @var array 
+     */
+    private static $many_many = [
+        'Spiffs' => Spiff::class,
+    ];
 
     /**
      * @var string
