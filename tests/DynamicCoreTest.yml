@@ -60,3 +60,6 @@ Dynamic\Core\Model\Spiff:
 Dynamic\Core\Model\Tag:
   default:
     Name: "Tag One"
+Dynamic\Core\Page\CollectionPage:
+  default:
+    Title: "Collection Page"
