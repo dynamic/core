@@ -2,7 +2,7 @@
 
 namespace Dynamic\Core\Page;
 
-class HolderItem_Controller extends DetailPageController
+class HolderItemController extends DetailPageController
 {
 
 }

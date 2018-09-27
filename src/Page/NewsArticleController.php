@@ -2,9 +2,9 @@
 
 namespace Dynamic\Core\Page;
 
-use Dynamic\Core\Page\HolderItem_Controller;
+use Dynamic\Core\Page\HolderItemController;
 
-class NewsArticleController extends HolderItem_Controller
+class NewsArticleController extends HolderItemController
 {
 
 }

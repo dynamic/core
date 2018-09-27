@@ -6,40 +6,40 @@ mappings:
   VirtualPageExtension: Dynamic\Core\ORM\VirtualPageExtension
   YoutubeField: Dynamic\Core\Form\YoutubeField
   HolderItem: Dynamic\Core\Page\HolderItem
-  HolderItem_Controller: Dynamic\Core\Page\HolderItem_Controller
+  HolderItem_Controller: Dynamic\Core\Page\HolderItemController
   HolderPage: Dynamic\Core\Page\HolderPage
-  HolderPage_Controller: Dynamic\Core\Page\HolderPage_Controller
+  HolderPage_Controller: Dynamic\Core\Page\HolderPageController
   DetailPage: Dynamic\Core\Page\DetailPage
-  DetailPage_Controller: Dynamic\Core\Page\DetailPage_Controller
+  DetailPage_Controller: Dynamic\Core\Page\DetailPageController
   SectionPage: Dynamic\Core\Page\SectionPage
-  SectionPage_Controller: Dynamic\Core\Page\SectionPage_Controller
+  SectionPage_Controller: Dynamic\Core\Page\SectionPageController
   CollectionPage: Dynamic\Core\Page\CollectionPage
-  CollectionPage_Controller: Dynamic\Core\Page\CollectionPage_Controller
-  LinkObject: Dynamic\Core\Tag\LinkObject
-  Tag: Dynamic\Core\Tag\Tag
-  Spiff: Dynamic\Core\Tag\Spiff
+  CollectionPage_Controller: Dynamic\Core\Page\CollectionPageController
+  LinkObject: Dynamic\Core\Model\LinkObject
+  Tag: Dynamic\Core\Model\Tag
+  Spiff: Dynamic\Core\Model\Spiff
   TextPage: Dynamic\Core\Page\TextPage
-  TextPage_Controller: Dynamic\Core\Page\TextPage_Controller
+  TextPage_Controller: Dynamic\Core\Page\TextPageController
   DynamicHomePage: Dynamic\Core\Page\DynamicHomePage
-  DynamicHomePage_Controller: Dynamic\Core\Page\DynamicHomePage_Controller
+  DynamicHomePage_Controller: Dynamic\Core\Page\DynamicHomePageController
   FormPage: Dynamic\Core\Page\FormPage
-  FormPage_Controller: Dynamic\Core\Page\FormPage_Controller
+  FormPage_Controller: Dynamic\Core\Page\FormPageController
   NewsHolder: Dynamic\Core\Page\NewsHolder
-  NewsHolder_Controller: Dynamic\Core\Page\NewsHolder_Controller
+  NewsHolder_Controller: Dynamic\Core\Page\NewsHolderController
   LandingPage: Dynamic\Core\Page\LandingPage
-  LandingPage_Controller: Dynamic\Core\Page\LandingPage_Controller
+  LandingPage_Controller: Dynamic\Core\Page\LandingPageController
   NewsArticle: Dynamic\Core\Page\NewsArticle
-  NewsArticle_Controller: Dynamic\Core\Page\NewsArticle_Controller
+  NewsArticle_Controller: Dynamic\Core\Page\NewsArticleController
   BasicPage: Dynamic\Core\Page\BasicPage
-  BasicPage_Controller: Dynamic\Core\Page\BasicPage_Controller
+  BasicPage_Controller: Dynamic\Core\Page\BasicPageController
   ContactPage: Dynamic\Core\Page\ContactPage
-  ContactPage_Controller: Dynamic\Core\Page\ContactPage_Controller
+  ContactPage_Controller: Dynamic\Core\Page\ContactPageController
   SiteMap: Dynamic\Core\Page\SiteMap
-  SiteMap_Controller: Dynamic\Core\Page\SiteMap_Controller
+  SiteMap_Controller: Dynamic\Core\Page\SiteMapController
   NewsGroupPage: Dynamic\Core\Page\NewsGroupPage
-  NewsGroupPage_Controller: Dynamic\Core\Page\NewsGroupPage_Controller
+  NewsGroupPage_Controller: Dynamic\Core\Page\NewsGroupPageController
   SearchPage: Dynamic\Core\Page\SearchPage
-  SearchPage_Controller: Dynamic\Core\Page\SearchPage_Controller
+  SearchPage_Controller: Dynamic\Core\Page\SearchPageController
   UnusedPageTypesReport: Dynamic\Core\Report\UnusedPageTypesReport
   SpiffLinkableUpdateTask: Dynamic\Core\Task\SpiffLinkableUpdateTask
   CompanyConfigTask: Dynamic\Core\Task\CompanyConfigTask
@@ -49,7 +49,7 @@ mappings:
   FormPageTest: Dynamic\Core\Test\FormPageTest
   YoutubeFieldTest: Dynamic\Core\Test\YoutubeFieldTest
   YoutubeFieldTest_Validator: Dynamic\Core\Test\YoutubeFieldTest_Validator
-  YoutubeFieldTest_Controller: Dynamic\Core\Test\YoutubeFieldTest_Controller
+  YoutubeFieldTest_Controller: Dynamic\Core\Test\YoutubeFieldTestController
   NewsArticleTest: Dynamic\Core\Test\NewsArticleTest
   LandingPageTest: Dynamic\Core\Test\LandingPageTest
   DetailPageTest: Dynamic\Core\Test\DetailPageTest
