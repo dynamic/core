@@ -18,7 +18,7 @@ class LinkObjectTest extends SapphireTest
      */
     public function testGetCMSFields()
     {
-        $object = $this->objFromFixture(LinkObject::class, 'page1');
+        $object = $this->objFromFixture(LinkObject::class, 'default');
         $fields = $object->getCMSFields();
         $this->assertInstanceOf(FieldList::class, $fields);
     }
