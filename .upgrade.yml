@@ -5,19 +5,19 @@ mappings:
   SpiffManager: Dynamic\Core\ORM\SpiffManager
   VirtualPageExtension: Dynamic\Core\ORM\VirtualPageExtension
   YoutubeField: Dynamic\Core\Form\YoutubeField
-  HolderItem: Dynamic\Core\Model\HolderItem
-  HolderItem_Controller: Dynamic\Core\Model\HolderItem_Controller
-  HolderPage: Dynamic\Core\Model\HolderPage
-  HolderPage_Controller: Dynamic\Core\Model\HolderPage_Controller
-  DetailPage: Dynamic\Core\Model\DetailPage
-  DetailPage_Controller: Dynamic\Core\Model\DetailPage_Controller
-  SectionPage: Dynamic\Core\Model\SectionPage
-  SectionPage_Controller: Dynamic\Core\Model\SectionPage_Controller
-  CollectionPage: Dynamic\Core\Model\CollectionPage
-  CollectionPage_Controller: Dynamic\Core\Model\CollectionPage_Controller
-  LinkObject: Dynamic\Core\Object\LinkObject
-  Tag: Dynamic\Core\Object\Tag
-  Spiff: Dynamic\Core\Object\Spiff
+  HolderItem: Dynamic\Core\Page\HolderItem
+  HolderItem_Controller: Dynamic\Core\Page\HolderItem_Controller
+  HolderPage: Dynamic\Core\Page\HolderPage
+  HolderPage_Controller: Dynamic\Core\Page\HolderPage_Controller
+  DetailPage: Dynamic\Core\Page\DetailPage
+  DetailPage_Controller: Dynamic\Core\Page\DetailPage_Controller
+  SectionPage: Dynamic\Core\Page\SectionPage
+  SectionPage_Controller: Dynamic\Core\Page\SectionPage_Controller
+  CollectionPage: Dynamic\Core\Page\CollectionPage
+  CollectionPage_Controller: Dynamic\Core\Page\CollectionPage_Controller
+  LinkObject: Dynamic\Core\Tag\LinkObject
+  Tag: Dynamic\Core\Tag\Tag
+  Spiff: Dynamic\Core\Tag\Spiff
   TextPage: Dynamic\Core\Page\TextPage
   TextPage_Controller: Dynamic\Core\Page\TextPage_Controller
   DynamicHomePage: Dynamic\Core\Page\DynamicHomePage

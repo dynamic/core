@@ -16,7 +16,7 @@ SilverStripe\Security\Member:
     FirstName: Default
     Surname: User
     Email: user@dynamicagency.com
-Dynamic\Core\Model\DetailPage:
+Dynamic\Core\Page\DetailPage:
   page1:
     Title: Detail 1
     URLSegment: detail-1
@@ -46,3 +46,11 @@ Dynamic\Core\Page\FormPage:
 Dynamic\Core\Page\LandingPage:
   default:
     Title: 'Landing Page'
+Dynamic\Core\Page\NewsArticle:
+  article1:
+    Title: "News Article One"
+  article2:
+    Title: "News Article Two"
+Dynamic\Core\Model\LinkObject:
+  default:
+    Name: "Link One"

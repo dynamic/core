@@ -3,7 +3,7 @@
 namespace Dynamic\Core\Admin;
 
 use SilverStripe\Admin\ModelAdmin;
-use Dynamic\Core\Object\Tag;
+use Dynamic\Core\Model\Tag;
 
 class TagAdmin extends ModelAdmin
 {

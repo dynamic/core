@@ -2,7 +2,7 @@
 
 namespace Dynamic\Core\Admin;
 
-use Dynamic\Core\Object\Spiff;
+use Dynamic\Core\Model\Spiff;
 use SilverStripe\Admin\ModelAdmin;
 
 class SpiffAdmin extends ModelAdmin
