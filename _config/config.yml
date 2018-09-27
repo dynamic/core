@@ -59,3 +59,7 @@ NewsArticle:
   description: 'Article for the News section'
 LeftAndMain:
   extra_requirements_css: [dynamic-core/css/leftandmainextracss.css]
+
+Injector:
+  GridField:
+    class: GridFieldForReadonly
