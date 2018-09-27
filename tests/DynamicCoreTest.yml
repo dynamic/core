@@ -54,3 +54,9 @@ Dynamic\Core\Page\NewsArticle:
 Dynamic\Core\Model\LinkObject:
   default:
     Name: "Link One"
+Dynamic\Core\Model\Spiff:
+  default:
+    Name: "Spiff One"
+Dynamic\Core\Model\Tag:
+  default:
+    Name: "Tag One"

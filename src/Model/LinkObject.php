@@ -60,7 +60,7 @@ class LinkObject extends DataObject
                     'Main',
                     new TextField('Name'),
                     new HeaderField('LinkTitle', 'Choose destination'),
-                    new TreeDropdownField('PageLinkID', 'Page', 'SiteTree'),
+                    new TreeDropdownField('PageLinkID', 'Page', SiteTree::class),
                     new HeaderField('LinkOr', 'OR', 4),
                     new TextField('URL', 'URL (include http:// if external)')
                 )
