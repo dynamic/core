@@ -17,7 +17,7 @@ class Tag extends DataObject
         'Pages' => DetailPage::class
     );
 
-    private static $table_name = 'CoreTag';
+    private static $table_name = 'Tag';
 
     public function getLink()
     {
