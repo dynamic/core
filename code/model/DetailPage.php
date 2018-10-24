@@ -28,49 +28,52 @@ class DetailPage extends Page implements PermissionProvider{
 	}
 
 	public function getCMSFields() {
-		$fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            // Tag Field
+            $TagField = TagField::create('Tags', null, Tag::get(), $this->Tags());
+            $TagField->setCanCreate(true);
+            $fields->addFieldToTab('Root.Main', $TagField, 'Content');
 
-		// Tag Field
-		$TagField = TagField::create('Tags', null, Tag::get(), $this->Tags());
-		$TagField->setCanCreate(true);
-		$fields->addFieldToTab('Root.Main', $TagField, 'Content');
+            // Images
+            //$fields->insertBefore(new Tab('Images'), 'Slides');
 
-		// Images
-		//$fields->insertBefore(new Tab('Images'), 'Slides');
-
-		$ImageField = UploadField::create('Image', 'Main Image');
-		$ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-		$ImageField->setFolderName('Uploads/DetailMain');
-		$ImageField->setConfig('allowedMaxFileNumber', 1);
-		if($this->stat('customImageRightTitle')){
-			$ImageField->setRightTitle($this->stat('customImageRightTitle'));
-		}else{
-			$ImageField->setRightTitle('Large image displayed near the top of the page');
-		}
-
-		$fields->addFieldsToTab('Root.Images', array(
-			$ImageField
-		));
-
-	    // Side Bar
-	    // Links
-		$gridFieldConfig = GridFieldConfig_RelationEditor::create();
-		if(class_exists('GridFieldManyRelationHandler')){
-			$gridFieldConfig->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
-			if(class_exists('GridFieldSortableRows')) {
-                $gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"), 'GridFieldManyRelationHandler');
+            $ImageField = UploadField::create('Image', 'Main Image');
+            $ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
+            $ImageField->setFolderName('Uploads/DetailMain');
+            $ImageField->setConfig('allowedMaxFileNumber', 1);
+            if ($this->stat('customImageRightTitle')) {
+                $ImageField->setRightTitle($this->stat('customImageRightTitle'));
+            } else {
+                $ImageField->setRightTitle('Large image displayed near the top of the page');
             }
-			$gridFieldConfig->removeComponentsByType('GridFieldAddExistingAutocompleter');
-		}else{
-			if (class_exists('GridFieldSortableRows')) $gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"));
-		}
-	    $LinksField = GridField::create("Links", "Links", $this->Links()->sort('SortOrder'), $gridFieldConfig);
 
-	    $fields->addFieldsToTab('Root.SideBar', array(
-	    	$LinksField
-	    ));
+            $fields->addFieldsToTab('Root.Images', array(
+                $ImageField
+            ));
 
-		return $fields;
+            // Side Bar
+            // Links
+            $gridFieldConfig = GridFieldConfig_RelationEditor::create();
+            if (class_exists('GridFieldManyRelationHandler')) {
+                $gridFieldConfig->addComponent(new GridFieldManyRelationHandler(), 'GridFieldPaginator');
+                if (class_exists('GridFieldSortableRows')) {
+                    $gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"),
+                        'GridFieldManyRelationHandler');
+                }
+                $gridFieldConfig->removeComponentsByType('GridFieldAddExistingAutocompleter');
+            } else {
+                if (class_exists('GridFieldSortableRows')) {
+                    $gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"));
+                }
+            }
+            $LinksField = GridField::create("Links", "Links", $this->Links()->sort('SortOrder'), $gridFieldConfig);
+
+            $fields->addFieldsToTab('Root.SideBar', array(
+                $LinksField
+            ));
+        });
+
+		return parent::getCMSFields();
 	}
 
 	public function getLinks(){
