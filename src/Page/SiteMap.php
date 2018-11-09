@@ -29,6 +29,13 @@ class SiteMap extends \Page implements PermissionProvider
     private static $table_name = 'SiteMap';
 
     /**
+     * @var array
+     */
+    private static $casting = [
+        "Sitemap" => 'HTMLText',
+    ];
+
+    /**
      * @return string
      */
     public function getSitemap($set = null)
