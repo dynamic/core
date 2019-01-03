@@ -21,7 +21,7 @@
     }
   ],
   "require": {
-    "silverstripe/recipe-cms": "4.2.1@stable",
+    "silverstripe/recipe-cms": "^4.0",
     "silverstripe/recipe-plugin": "^1.2",
     "silverstripe/vendor-plugin": "^1.0@dev",
     "dynamic/core-tools": "^4.0",
