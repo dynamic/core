@@ -23,6 +23,13 @@ class SectionPage extends Page implements PermissionProvider
     private static $hide_ancestor = "SectionPage";
 
     /**
+     * @var array
+     */
+    private static $many_many = [
+        'Spiffs' => Spiff::class,
+    ];
+
+    /**
      * @param Member $member
      * @return boolean
      */
@@ -63,9 +70,9 @@ class SectionPage extends Page implements PermissionProvider
      */
     public function providePermissions()
     {
-        return array(
-            'SectionPage_CRUD' => 'Create, Update and Delete a Section Page'
-        );
+        return [
+            'SectionPage_CRUD' => 'Create, Update and Delete a Section Page',
+        ];
     }
 }
 

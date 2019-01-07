@@ -40,6 +40,8 @@ class Spiff extends DataObject
 
         $fields = parent::getCMSFields();
 
+        $fields->removeByName('SectionPages');
+
         $ImageField = new UploadField('Image', 'Image');
         $ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
         $ImageField->setFolderName('Uploads/Spiffs');
