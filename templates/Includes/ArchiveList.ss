@@ -5,7 +5,7 @@
 			<% loop Children %>
 				<% if First %>
 					<li>
-						<a href="{$Top.Link}archive/{$DateAuthored.Format(Y)}/{$DateAuthored.Format(m)}">
+						<a href="{$Top.Link}archive/{$DateAuthored.Format('Y/MM')}">
 							$MonthCreated
 						</a>
 						({$TotalItems})
