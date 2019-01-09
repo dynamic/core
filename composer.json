@@ -33,7 +33,12 @@
   },
   "require-dev": {
     "phpunit/PHPUnit": "^5.7",
-    "squizlabs/php_codesniffer": "*"
+    "squizlabs/php_codesniffer": "*",
+    "phpmd/phpmd": "^2.6",
+    "sebastian/phpcpd": "^3.0",
+    "phploc/phploc": "^4.0",
+    "pdepend/pdepend": "^2.5",
+    "theseer/phpdox": "^0.11.0"
   },
   "config": {
     "process-timeout": 600
