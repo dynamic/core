@@ -2,12 +2,13 @@
 
 namespace Dynamic\Core\Page;
 
+use SilverStripe\ORM\HiddenClass;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\PermissionProvider;
 use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\UserForms\Model\UserDefinedForm;
 
-class ContactPage extends UserDefinedForm implements PermissionProvider
+class ContactPage extends UserDefinedForm implements PermissionProvider, HiddenClass
 {
     /**
      * @var string

@@ -13,12 +13,12 @@ SilverStripe\ORM\DatabaseAdmin:
     Spiff: Dynamic\Core\Model\Spiff
     TextPage: Dynamic\Core\Page\TextPage
     DynamicHomePage: Dynamic\Core\Page\DynamicHomePage
-    FormPage: Dynamic\Core\Page\FormPage
+    FormPage: SilverStripe\UserForms\Model\UserDefinedForm
     NewsHolder: Dynamic\Core\Page\NewsHolder
     LandingPage: Dynamic\Core\Page\LandingPage
     NewsArticle: Dynamic\Core\Page\NewsArticle
     BasicPage: Dynamic\Core\Page\BasicPage
-    ContactPage: Dynamic\Core\Page\ContactPage
+    ContactPage: SilverStripe\UserForms\Model\UserDefinedForm
     SiteMap: Dynamic\Core\Page\SiteMap
     NewsGroupPage: Dynamic\Core\Page\NewsGroupPage
     SearchPage: Dynamic\Core\Page\SearchPage
