@@ -3,6 +3,7 @@
 namespace Dynamic\Core\Page;
 
 use Dynamic\Core\Page\HolderPageController;
+use SilverStripe\ORM\FieldType\DBDatetime;
 
 class NewsHolderController extends HolderPageController
 {
@@ -25,13 +26,14 @@ class NewsHolderController extends HolderPageController
 
         if ($year = $params['ID']) {
             if ($month = $params['OtherID']) {
-                $start = $year."-".$month;
+                $start = $year."-".$month."-01";
                 $monthWord = date('F', strtotime($start));
-                $end = date('Y-m-d', strtotime("last day of $monthWord $year"));
+                $end = date('y-m-dd', strtotime("last day of $monthWord $year"));
             } else {
                 $start = "$year-01-01";
                 $end = "$year-12-31";
             }
+
             $from = DBDatetime::create();
             $from->setValue($start);
             $to = DBDatetime::create();
@@ -39,8 +41,8 @@ class NewsHolderController extends HolderPageController
 
             $filter = array(
                 'ParentID' => $this->data()->ID,
-                'DateAuthored:GreaterThan' => $from->value,
-                'DateAuthored:LessThanOrEqual' => $to->value,
+                'DateAuthored:GreaterThan' => $from->getValue(),
+                'DateAuthored:LessThanOrEqual' => $to->getValue(),
             );
 
             return $this->customise(array(

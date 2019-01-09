@@ -63,7 +63,7 @@ class NewsHolder extends HolderPage implements PermissionProvider
         return GroupedList::create(NewsArticle::get()
             ->filter(array(
                 'ParentID'=>$this->Data()->ID,
-                'DateAuthored:LessThan' => DBDatetime::now()->Format('Y-m-d')))
+                'DateAuthored:LessThan' => DBDatetime::now()->Format('y-MM-dd')))
             ->sort('DateAuthored', 'DESC'));
     }
 

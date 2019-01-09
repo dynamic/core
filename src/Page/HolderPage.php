@@ -48,7 +48,7 @@ class HolderPage extends \Page
             ->filter(array(
                 'Pages.ID:GreaterThan'=>0,
                 'Pages.ClassName' => $this->stat('item_class'),
-                'Pages.ID.ParentID' => $this->ID))
+                'Pages.ParentID' => $this->ID))
             ->sort('Title')
             ->limit(10);
         if ($hit->Count()==0) {

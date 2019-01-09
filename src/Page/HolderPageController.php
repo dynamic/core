@@ -2,6 +2,9 @@
 
 namespace Dynamic\Core\Page;
 
+use SilverStripe\Control\RSS\RSSFeed;
+use SilverStripe\ORM\PaginatedList;
+
 class HolderPageController extends \PageController
 {
     /**
