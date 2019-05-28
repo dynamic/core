@@ -12,30 +12,8 @@ pipeline {
 
     stage('PHPUnit') {
       steps {
-        sh 'vendor/bin/phpunit --coverage-clover=build/logs/clover.xml --log-junit=build/logs/junit.xml --coverage-xml=build/logs/coverage'
+        sh 'vendor/bin/phpunit --log-junit=build/logs/junit.xml --coverage-xml=build/logs/coverage'
       }
-    }
-
-	/*
-    stage('Coverage') {
-      steps {
-        publishHTML (target: [
-		  allowMissing: false,
-		  alwaysLinkToLastBuild: false,
-		  keepAll: true,
-		  reportDir: 'build/coverage',
-		  reportFiles: 'index.html',
-		  reportName: "Coverage Report"
-	    ])
-      }
-    }
-    */
-
-    stage("Publish Clover") {
-      steps {
-        step([$class: 'CloverPublisher', cloverReportDir: 'build/logs', cloverReportFileName: 'clover.xml'])
-      }
-
     }
 
 	stage('Checkstyle Report') {
@@ -100,7 +78,6 @@ pipeline {
 	    junit 'build/logs/*.xml'
 	    recordIssues enabledForFailure: true, tool: checkStyle(pattern: '**/logs/checkstyle.xml')
 		recordIssues enabledForFailure: true, tool: cpd(pattern: '**/logs/pmd-cpd.xml')
-		recordIssues enabledForFailure: true, tool: pmd(pattern: '**/logs/pmd.xml')
 	  }
   }
 }

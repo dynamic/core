@@ -30,7 +30,8 @@ class Spiff extends DataObject
 
     private static $summary_fields = array(
         'Image.CMSThumbnail' => 'Image',
-        'Name' => 'Title',
+        'Name' => 'Name',
+        'Title' => 'Title',
     );
 
     /*
@@ -71,14 +72,6 @@ class Spiff extends DataObject
         }
 
         return $result;
-    }
-
-    public function getHeadline()
-    {
-        if ($this->Title) {
-            return $this->Title;
-        }
-        return false;
     }
 
     // return Spiff View
