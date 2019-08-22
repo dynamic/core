@@ -25,7 +25,7 @@
     "silverstripe/recipe-plugin": "^1.2",
     "silverstripe/vendor-plugin": "^1.0@dev",
     "dynamic/core-tools": "^4.0",
-    "dynamic/flexslider": "^3.0",
+    "dynamic/flexslider": "^3.0 || ^4.0",
     "silverstripe/tagfield": "^2.1",
     "silverstripe/userforms": "^5.2",
     "silverstripe/spamprotection": "^3.0",
