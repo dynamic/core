@@ -10,8 +10,8 @@ if (class_exists('SpamProtectorManager') && class_exists('MathSpamProtector')) {
 
 // Addressable
 if (class_exists('Addressable')) {
-	Object::add_extension('SiteConfig', 'Addressable');
-	Object::add_extension('SiteConfig', 'Geocodable');
+	SiteConfig::add_extension('Addressable');
+	SiteConfig::add_extension('Geocodable');
 }
 
 // set image upload max size
