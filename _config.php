@@ -1,13 +1,13 @@
 <?php
 
 // enable site search
-use SilverStripe\ORM\Search\FulltextSearchable;
+//use SilverStripe\ORM\Search\FulltextSearchable;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\SpamProtection\SpamProtector;
 use Symbiote\Addressable\Addressable;
 use Symbiote\Addressable\Geocodable;
 
-FulltextSearchable::enable();
+//FulltextSearchable::enable();
 
 // SPAM protection
 if (class_exists('SpamProtectorManager') && class_exists('MathSpamProtector')) {
