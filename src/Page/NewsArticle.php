@@ -93,12 +93,12 @@ class NewsArticle extends HolderItem implements PermissionProvider
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->addFieldToTab('Root.Main', TextField::create('Author'), 'Content');
+            $fields->addFieldToTab('Root.Main', $dateTimeField = new DatetimeField('DateAuthored'), 'Content');
+        });
 
-        $fields->addFieldToTab('Root.Main', TextField::create('Author'), 'Content');
-        $fields->addFieldToTab('Root.Main', $dateTimeField = new DatetimeField('DateAuthored'), 'Content');
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     /***
