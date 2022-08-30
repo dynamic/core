@@ -5,6 +5,7 @@ namespace Dynamic\Core\Page;
 use Dynamic\Core\Page\NewsHolder;
 use Dynamic\Core\Page\HolderItem;
 use SilverStripe\Forms\DatetimeField;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\FieldType\DBDatetime;
 use SilverStripe\Security\Permission;
