@@ -7,6 +7,7 @@ use Dynamic\Core\Model\LinkObject;
 use Dynamic\Core\Page\NewsArticle;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Security\Permission;
@@ -88,45 +89,45 @@ class DetailPage extends \Page implements PermissionProvider
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
-
-        $ImageField = UploadField::create('Image', 'Main Image');
-        $ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-        $ImageField->setFolderName('Uploads/DetailMain');
-        //$ImageField->setConfig('allowedMaxFileNumber', 1);
-        if ($this->stat('customImageRightTitle')) {
-            $ImageField->setRightTitle($this->stat('customImageRightTitle'));
-        } else {
-            $ImageField->setRightTitle('Large image displayed near the top of the page');
-        }
-
-        $fields->addFieldsToTab('Root.Images', array(
-            $ImageField
-        ));
-
-        if ($this->ID) {
-            // Tag Field
-            $TagField = TagField::create('Tags', 'Tags', Tag::get(), $this->Tags());
-            $TagField->setCanCreate(true);
-            $fields->addFieldToTab('Root.Main', $TagField, 'Content');
-
-            // Side Bar Links
-            $gridFieldConfig = GridFieldConfig_RelationEditor::create();
-            if (class_exists('GridFieldAddExistingSearchButton')) {
-                $gridFieldConfig->removeComponentsByType('GridFieldAddExistingAutocompleter');
-                $gridFieldConfig->addComponent(new GridFieldAddExistingSearchButton());
+        $this->beforeUpdateCMSFields(function(FieldList $fields){
+            $ImageField = UploadField::create('Image', 'Main Image');
+            $ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
+            $ImageField->setFolderName('Uploads/DetailMain');
+            //$ImageField->setConfig('allowedMaxFileNumber', 1);
+            if ($this->stat('customImageRightTitle')) {
+                $ImageField->setRightTitle($this->stat('customImageRightTitle'));
+            } else {
+                $ImageField->setRightTitle('Large image displayed near the top of the page');
             }
-            if (class_exists('GridFieldSortableRows')) {
-                $gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"));
-            }
-            $LinksField = GridField::create("Links", "Links", $this->Links()->sort('SortOrder'), $gridFieldConfig);
 
-            $fields->addFieldsToTab('Root.SideBar', array(
-                $LinksField
+            $fields->addFieldsToTab('Root.Images', array(
+                $ImageField
             ));
-        }
 
-        return $fields;
+            if ($this->ID) {
+                // Tag Field
+                $TagField = TagField::create('Tags', 'Tags', Tag::get(), $this->Tags());
+                $TagField->setCanCreate(true);
+                $fields->addFieldToTab('Root.Main', $TagField, 'Content');
+
+                // Side Bar Links
+                $gridFieldConfig = GridFieldConfig_RelationEditor::create();
+                if (class_exists('GridFieldAddExistingSearchButton')) {
+                    $gridFieldConfig->removeComponentsByType('GridFieldAddExistingAutocompleter');
+                    $gridFieldConfig->addComponent(new GridFieldAddExistingSearchButton());
+                }
+                if (class_exists('GridFieldSortableRows')) {
+                    $gridFieldConfig->addComponent(new GridFieldSortableRows("SortOrder"));
+                }
+                $LinksField = GridField::create("Links", "Links", $this->Links()->sort('SortOrder'), $gridFieldConfig);
+
+                $fields->addFieldsToTab('Root.SideBar', array(
+                    $LinksField
+                ));
+            }
+        });
+
+        return parent::getCMSFields();
     }
 
     /**
