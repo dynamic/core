@@ -112,7 +112,12 @@ class SiteMap extends \Page implements PermissionProvider
         if (SiteMap::get()->first()) {
             return false;
         }
-        return Permission::check('SiteMapPage_CRUD', 'any', $member);
+
+        if ($canCreate = Permission::check('SiteMapPage_CRUD', 'any', $member)) {
+            return parent::canCreate($member, $context);
+        }
+
+        return false;
     }
 
     /**

@@ -63,7 +63,11 @@ class ContactPage extends UserDefinedForm implements PermissionProvider, HiddenC
      */
     public function canCreate($member = null, $context = [])
     {
-        return Permission::check('Contact_CRUD', 'any', $member);
+        if ($canCreate = Permission::check('Contact_CRUD', 'any', $member)) {
+            return parent::canCreate($member, $context);
+        }
+
+        return false;
     }
 
     /**

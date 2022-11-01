@@ -68,7 +68,11 @@ class FormPage extends UserDefinedForm implements PermissionProvider, HiddenClas
      */
     public function canCreate($member = null, $context = [])
     {
-        return Permission::check('Form_CRUD', 'any', $member);
+        if ($canCreate = Permission::check('Form_CRUD', 'any', $member)) {
+            return parent::canCreate($member, $context);
+        }
+
+        return false;
     }
 
     /**

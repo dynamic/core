@@ -126,7 +126,11 @@ class CollectionPage extends \Page implements PermissionProvider
      */
     public function canCreate($member = null, $context = [])
     {
-        return Permission::check('CollectionPage_CRUD', 'any', $member);
+        if ($canCreate = Permission::check('CollectionPage_CRUD', 'any', $member)) {
+            return parent::canCreate($member, $context);
+        }
+
+        return false;
     }
 
     /**

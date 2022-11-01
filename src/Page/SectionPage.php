@@ -73,7 +73,11 @@ class SectionPage extends \Page implements PermissionProvider
      */
     public function canCreate($member = null, $context = [])
     {
-        return Permission::check('SectionPage_CRUD', 'any', $member);
+        if ($canCreate = Permission::check('SectionPage_CRUD', 'any', $member)) {
+            return parent::canCreate($member, $context);
+        }
+
+        return false;
     }
 
     /**
