@@ -70,7 +70,12 @@ class TextPage extends \Page implements PermissionProvider
         if (SiteMap::get()->first()) {
             return false;
         }
-        return Permission::check('TextPage_CRUD', 'any', $member);
+
+        if ($canCreate = Permission::check('TextPage_CRUD', 'any', $member)) {
+            return parent::canCreate($member, $context);
+        }
+
+        return false;
     }
 
     /**

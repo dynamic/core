@@ -62,7 +62,11 @@ class BasicPage extends DetailPage implements PermissionProvider
      */
     public function canCreate($member = null, $context = [])
     {
-        return Permission::check('Basic_CRUD', 'any', $member);
+        if ($canCreate = Permission::check('Basic_CRUD', 'any', $member)) {
+            return parent::canCreate($member, $context);
+        }
+
+        return false;
     }
 
     /**

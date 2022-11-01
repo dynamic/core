@@ -72,7 +72,11 @@ class SearchPage extends \Page implements PermissionProvider
             return false;
         }
 
-        return Permission::check('SearchPage_CRUD', 'any', $member);
+        if ($canCreate = Permission::check('SearchPage_CRUD', 'any', $member)) {
+            return parent::canCreate($member, $context);
+        }
+
+        return false;
     }
 
     /**

@@ -71,7 +71,12 @@ class DynamicHomePage extends SectionPage implements PermissionProvider
         if (DynamicHomePage::get()->first()) {
             return false;
         }
-        return Permission::check('DynamicHomePage_CRUD', 'any', $member);
+
+        if ($canCreate = Permission::check('DynamicHomePage_CRUD', 'any', $member)) {
+            return parent::canCreate($member, $context);
+        }
+
+        return false;
     }
 
     /**
